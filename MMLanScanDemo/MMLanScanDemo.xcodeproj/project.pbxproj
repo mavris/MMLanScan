@@ -1,0 +1,421 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		279335C71D5D1CB9001DFE84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335C61D5D1CB9001DFE84 /* main.m */; };
+		279335CA1D5D1CB9001DFE84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335C91D5D1CB9001DFE84 /* AppDelegate.m */; };
+		279335D01D5D1CB9001DFE84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 279335CE1D5D1CB9001DFE84 /* Main.storyboard */; };
+		279335D21D5D1CB9001DFE84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 279335D11D5D1CB9001DFE84 /* Assets.xcassets */; };
+		279335D51D5D1CB9001DFE84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 279335D31D5D1CB9001DFE84 /* LaunchScreen.storyboard */; };
+		279335DE1D5D1CE5001DFE84 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335DD1D5D1CE5001DFE84 /* MainVC.m */; };
+		279335E71D5D2066001DFE84 /* DeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335E61D5D2066001DFE84 /* DeviceCell.m */; };
+		279335F61D5D2129001DFE84 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335E91D5D2129001DFE84 /* Device.m */; };
+		279335F71D5D2129001DFE84 /* LANProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335EB1D5D2129001DFE84 /* LANProperties.m */; };
+		279335F81D5D2129001DFE84 /* MMLANScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335ED1D5D2129001DFE84 /* MMLANScanner.m */; };
+		279335F91D5D2129001DFE84 /* MacFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335EF1D5D2129001DFE84 /* MacFinder.m */; };
+		279335FA1D5D2129001DFE84 /* PingResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335F11D5D2129001DFE84 /* PingResult.m */; };
+		279335FB1D5D2129001DFE84 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335F31D5D2129001DFE84 /* SimplePing.m */; };
+		279335FC1D5D2129001DFE84 /* SimplePingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335F51D5D2129001DFE84 /* SimplePingHelper.m */; };
+		279336081D5D2BDC001DFE84 /* NetworkCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 279336071D5D2BDC001DFE84 /* NetworkCalculator.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		279335C21D5D1CB9001DFE84 /* MMLanScanDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMLanScanDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		279335C61D5D1CB9001DFE84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		279335C81D5D1CB9001DFE84 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		279335C91D5D1CB9001DFE84 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		279335CF1D5D1CB9001DFE84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		279335D11D5D1CB9001DFE84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		279335D41D5D1CB9001DFE84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		279335D61D5D1CB9001DFE84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		279335DC1D5D1CE5001DFE84 /* MainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainVC.h; sourceTree = "<group>"; };
+		279335DD1D5D1CE5001DFE84 /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainVC.m; sourceTree = "<group>"; };
+		279335E51D5D2066001DFE84 /* DeviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCell.h; sourceTree = "<group>"; };
+		279335E61D5D2066001DFE84 /* DeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCell.m; sourceTree = "<group>"; };
+		279335E81D5D2129001DFE84 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Device.h; path = ../../MMLanScan/Device.h; sourceTree = "<group>"; };
+		279335E91D5D2129001DFE84 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Device.m; path = ../../MMLanScan/Device.m; sourceTree = "<group>"; };
+		279335EA1D5D2129001DFE84 /* LANProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LANProperties.h; path = ../../MMLanScan/LANProperties.h; sourceTree = "<group>"; };
+		279335EB1D5D2129001DFE84 /* LANProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LANProperties.m; path = ../../MMLanScan/LANProperties.m; sourceTree = "<group>"; };
+		279335EC1D5D2129001DFE84 /* MMLANScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMLANScanner.h; path = ../../MMLanScan/MMLANScanner.h; sourceTree = "<group>"; };
+		279335ED1D5D2129001DFE84 /* MMLANScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMLANScanner.m; path = ../../MMLanScan/MMLANScanner.m; sourceTree = "<group>"; };
+		279335EE1D5D2129001DFE84 /* MacFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacFinder.h; path = ../../MMLanScan/MacFinder.h; sourceTree = "<group>"; };
+		279335EF1D5D2129001DFE84 /* MacFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MacFinder.m; path = ../../MMLanScan/MacFinder.m; sourceTree = "<group>"; };
+		279335F01D5D2129001DFE84 /* PingResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PingResult.h; path = ../../MMLanScan/PingResult.h; sourceTree = "<group>"; };
+		279335F11D5D2129001DFE84 /* PingResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PingResult.m; path = ../../MMLanScan/PingResult.m; sourceTree = "<group>"; };
+		279335F21D5D2129001DFE84 /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimplePing.h; path = ../../MMLanScan/SimplePing.h; sourceTree = "<group>"; };
+		279335F31D5D2129001DFE84 /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimplePing.m; path = ../../MMLanScan/SimplePing.m; sourceTree = "<group>"; };
+		279335F41D5D2129001DFE84 /* SimplePingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimplePingHelper.h; path = ../../MMLanScan/SimplePingHelper.h; sourceTree = "<group>"; };
+		279335F51D5D2129001DFE84 /* SimplePingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimplePingHelper.m; path = ../../MMLanScan/SimplePingHelper.m; sourceTree = "<group>"; };
+		279335FD1D5D216E001DFE84 /* if_arp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = if_arp.h; path = ../../MMLanScan/if_arp.h; sourceTree = "<group>"; };
+		279335FE1D5D216E001DFE84 /* if_ether.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = if_ether.h; path = ../../MMLanScan/if_ether.h; sourceTree = "<group>"; };
+		279335FF1D5D216E001DFE84 /* if_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = if_types.h; path = ../../MMLanScan/if_types.h; sourceTree = "<group>"; };
+		279336031D5D24BB001DFE84 /* route.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = route.h; path = ../../MMLanScan/route.h; sourceTree = "<group>"; };
+		279336061D5D2BDC001DFE84 /* NetworkCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkCalculator.h; path = ../../MMLanScan/NetworkCalculator.h; sourceTree = "<group>"; };
+		279336071D5D2BDC001DFE84 /* NetworkCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkCalculator.m; path = ../../MMLanScan/NetworkCalculator.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		279335BF1D5D1CB9001DFE84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		279335B91D5D1CB9001DFE84 = {
+			isa = PBXGroup;
+			children = (
+				279335C41D5D1CB9001DFE84 /* MMLanScan */,
+				279335C31D5D1CB9001DFE84 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		279335C31D5D1CB9001DFE84 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				279335C21D5D1CB9001DFE84 /* MMLanScanDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		279335C41D5D1CB9001DFE84 /* MMLanScan */ = {
+			isa = PBXGroup;
+			children = (
+				279336021D5D2182001DFE84 /* Objects */,
+				279336001D5D2171001DFE84 /* Libraries */,
+				279335E11D5D1F27001DFE84 /* Cells */,
+				279335DF1D5D1DB9001DFE84 /* Storyboards */,
+				279335C51D5D1CB9001DFE84 /* Supporting Files */,
+				279335DC1D5D1CE5001DFE84 /* MainVC.h */,
+				279335DD1D5D1CE5001DFE84 /* MainVC.m */,
+			);
+			name = MMLanScan;
+			path = MMLanScanDemo;
+			sourceTree = "<group>";
+		};
+		279335C51D5D1CB9001DFE84 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				279335D11D5D1CB9001DFE84 /* Assets.xcassets */,
+				279335D61D5D1CB9001DFE84 /* Info.plist */,
+				279335C61D5D1CB9001DFE84 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		279335DF1D5D1DB9001DFE84 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				279335CE1D5D1CB9001DFE84 /* Main.storyboard */,
+				279335D31D5D1CB9001DFE84 /* LaunchScreen.storyboard */,
+				279335E01D5D1DC6001DFE84 /* AppDelegate */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		279335E01D5D1DC6001DFE84 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				279335C81D5D1CB9001DFE84 /* AppDelegate.h */,
+				279335C91D5D1CB9001DFE84 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		279335E11D5D1F27001DFE84 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				279335E51D5D2066001DFE84 /* DeviceCell.h */,
+				279335E61D5D2066001DFE84 /* DeviceCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		279336001D5D2171001DFE84 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				279336011D5D2177001DFE84 /* Headers */,
+				279335EA1D5D2129001DFE84 /* LANProperties.h */,
+				279335EB1D5D2129001DFE84 /* LANProperties.m */,
+				279335EC1D5D2129001DFE84 /* MMLANScanner.h */,
+				279335ED1D5D2129001DFE84 /* MMLANScanner.m */,
+				279335EE1D5D2129001DFE84 /* MacFinder.h */,
+				279335EF1D5D2129001DFE84 /* MacFinder.m */,
+				279335F21D5D2129001DFE84 /* SimplePing.h */,
+				279335F31D5D2129001DFE84 /* SimplePing.m */,
+				279335F41D5D2129001DFE84 /* SimplePingHelper.h */,
+				279335F51D5D2129001DFE84 /* SimplePingHelper.m */,
+				279336061D5D2BDC001DFE84 /* NetworkCalculator.h */,
+				279336071D5D2BDC001DFE84 /* NetworkCalculator.m */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		279336011D5D2177001DFE84 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				279336031D5D24BB001DFE84 /* route.h */,
+				279335FD1D5D216E001DFE84 /* if_arp.h */,
+				279335FE1D5D216E001DFE84 /* if_ether.h */,
+				279335FF1D5D216E001DFE84 /* if_types.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		279336021D5D2182001DFE84 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				279335F01D5D2129001DFE84 /* PingResult.h */,
+				279335F11D5D2129001DFE84 /* PingResult.m */,
+				279335E81D5D2129001DFE84 /* Device.h */,
+				279335E91D5D2129001DFE84 /* Device.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		279335C11D5D1CB9001DFE84 /* MMLanScanDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 279335D91D5D1CB9001DFE84 /* Build configuration list for PBXNativeTarget "MMLanScanDemo" */;
+			buildPhases = (
+				279335BE1D5D1CB9001DFE84 /* Sources */,
+				279335BF1D5D1CB9001DFE84 /* Frameworks */,
+				279335C01D5D1CB9001DFE84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MMLanScanDemo;
+			productName = MMLanScan;
+			productReference = 279335C21D5D1CB9001DFE84 /* MMLanScanDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		279335BA1D5D1CB9001DFE84 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Miksoft;
+				TargetAttributes = {
+					279335C11D5D1CB9001DFE84 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 279335BD1D5D1CB9001DFE84 /* Build configuration list for PBXProject "MMLanScanDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 279335B91D5D1CB9001DFE84;
+			productRefGroup = 279335C31D5D1CB9001DFE84 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				279335C11D5D1CB9001DFE84 /* MMLanScanDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		279335C01D5D1CB9001DFE84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				279335D51D5D1CB9001DFE84 /* LaunchScreen.storyboard in Resources */,
+				279335D21D5D1CB9001DFE84 /* Assets.xcassets in Resources */,
+				279335D01D5D1CB9001DFE84 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		279335BE1D5D1CB9001DFE84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				279335DE1D5D1CE5001DFE84 /* MainVC.m in Sources */,
+				279335CA1D5D1CB9001DFE84 /* AppDelegate.m in Sources */,
+				279335F61D5D2129001DFE84 /* Device.m in Sources */,
+				279335FA1D5D2129001DFE84 /* PingResult.m in Sources */,
+				279335FC1D5D2129001DFE84 /* SimplePingHelper.m in Sources */,
+				279335F91D5D2129001DFE84 /* MacFinder.m in Sources */,
+				279336081D5D2BDC001DFE84 /* NetworkCalculator.m in Sources */,
+				279335F81D5D2129001DFE84 /* MMLANScanner.m in Sources */,
+				279335FB1D5D2129001DFE84 /* SimplePing.m in Sources */,
+				279335C71D5D1CB9001DFE84 /* main.m in Sources */,
+				279335F71D5D2129001DFE84 /* LANProperties.m in Sources */,
+				279335E71D5D2066001DFE84 /* DeviceCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		279335CE1D5D1CB9001DFE84 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				279335CF1D5D1CB9001DFE84 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		279335D31D5D1CB9001DFE84 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				279335D41D5D1CB9001DFE84 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		279335D71D5D1CB9001DFE84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		279335D81D5D1CB9001DFE84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		279335DA1D5D1CB9001DFE84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "$(SRCROOT)/MMLanScanDemo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.miksoft.MMLanScanDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		279335DB1D5D1CB9001DFE84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "$(SRCROOT)/MMLanScanDemo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.miksoft.MMLanScanDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		279335BD1D5D1CB9001DFE84 /* Build configuration list for PBXProject "MMLanScanDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				279335D71D5D1CB9001DFE84 /* Debug */,
+				279335D81D5D1CB9001DFE84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		279335D91D5D1CB9001DFE84 /* Build configuration list for PBXNativeTarget "MMLanScanDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				279335DA1D5D1CB9001DFE84 /* Debug */,
+				279335DB1D5D1CB9001DFE84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 279335BA1D5D1CB9001DFE84 /* Project object */;
+}
