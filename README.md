@@ -56,7 +56,7 @@ MMLanScan works like the classic network scanner. It first ping every host in th
 ###Libraries used to built MMLanScan
 - Apples [SimplePing] (https://developer.apple.com/library/mac/samplecode/SimplePing/Introduction/Intro.html) 
 - Chris Hulbert's [SimplePingHelper] (https://github.com/chrishulbert/SimplePingHelper) 
-- My MacFinder
+- My [MacFinder] (https://github.com/mavris/MacFinder)
 - Inspired from [LAN-Scan] (https://github.com/mongizaidi/LAN-Scan) 
 
 ###Technical Stuff
