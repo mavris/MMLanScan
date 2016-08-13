@@ -8,9 +8,9 @@ MMLanScan is an open source project for iOS that helps you scan your network and
 ![image](LanScan.gif)
 
 ###Features
-+ Scan and finds available hosts in your network
++ Scans and finds available hosts in your network
 + Shows IP Address
-+ Show MAC Address
++ Shows MAC Address
 + Scan any subnet (not only /24)
 
 ###Installation
@@ -66,7 +66,8 @@ Do not update SimplePingHelper since is modified to work with MMLanScan
 ###TODO
 If anyone would like to help:
 - Convert the [OUI] (https://standards.ieee.org/develop/regauth/oui/oui.txt) text in a dictionary so we can map MAC Address with vendor (Hint: The Regex to catch the first line with MAC Address and vendor: ```[A-F0-9]{2}-[A-F0-9]{2}-[A-F0-9]{2}\s*\(hex\)\s*[A-Za-z\.\, \-]+```)
-- Make it work in a background thread. Apple's SimplePing has issues when it comes to GCD (it's build on C libraries and it seems their callbacks won't work with GCD)
+- Make it work in a background thread. Apple's SimplePing has issues when it comes to GCD (it's built on C libraries and it seems their callbacks won't work with GCD)
+- Get hostname from IP address method is not working
 
 ###Performance Tips
 If you experience UI issues (UI not responsive) try to change the value of ```const float interval = 0.3;``` in MMLANScanner
