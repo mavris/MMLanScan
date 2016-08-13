@@ -248,7 +248,7 @@
     
 }
 
-//Check if the binary ip is equal with another binary IP
+//Check if the binary IP is equal with another binary IP
 +(BOOL)isEqualBinary:(NSArray*)binArray1 :(NSArray*)binArray2{
     
     for (int i=0; i < [binArray1 count]; i++) {

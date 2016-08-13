@@ -77,12 +77,8 @@
 }
 
 #pragma mark LAN Scanner delegate method
--(void)lanScanDidFindNewAddressWithIP:(NSString *)ipAddress MACAddress:(NSString *)macAddress andHostname:(NSString *)hostname{
-    
-    Device *device = [[Device alloc] init];
-    device.macAddress = macAddress;
-    device.ipAddress = ipAddress;
-    
+-(void)lanScanDidFindNewDevice:(Device*)device{
+        
     //Check if the Device is already added
     if (![self.connectedDevices containsObject:device]) {
        
@@ -91,7 +87,6 @@
     
     [self.tableV reloadData];
 }
-//[A-F0-9]{2}-[A-F0-9]{2}-[A-F0-9]{2}\s*\(hex\)\s*[A-Za-z\.\, \-]+
 
 -(void)lanScanDidFinishScanning{
     

@@ -22,8 +22,12 @@
 
 @end
 
+//Ping interval
+const float interval = 0.3;
+
 @implementation MMLANScanner
 
+#pragma mark - Initialization method
 -(instancetype)initWithDelegate:(id<MMLANScannerDelegate>)delegate {
 
     self =[super init];
@@ -35,11 +39,14 @@
     
     return self;
 }
+
+#pragma mark - Start/Stop ping
 -(void)start {
 
     self.dv = [LANProperties localIPAddress];
     
     if (!self.dv) {
+        
         [self.delegate lanScanDidFailedToScan];
         return;
     }
@@ -48,10 +55,18 @@
     self.numOfHostsToPing = [self.ipsToPing count];
     self.currentHost=-1;
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.03 target:self selector:@selector(pingAddress) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(pingAddress) userInfo:nil repeats:YES];
 }
 
+-(void)stop {
+    if (self.timer) {
+        [self.timer invalidate];
+    }
+}
+
+#pragma mark - Ping method
 -(void)pingAddress{
+    
     self.currentHost++;
    
     [self.delegate lanScanProgressPinged:self.currentHost+1 from:self.numOfHostsToPing];
@@ -61,22 +76,23 @@
     [SimplePingHelper ping:address target:self sel:@selector(pingResult:) andCount:self.currentHost];
     
     if (self.currentHost==self.numOfHostsToPing-1) {
+        
         [self.timer invalidate];
     }
 }
 
+#pragma mark - Ping Result callback
 - (void)pingResult:(PingResult*)pr {
     
     
     Device *curDevice = [[Device alloc]init];
-
     curDevice.ipAddress=pr.ipAddress;
     curDevice.macAddress =[[MacFinder ip2mac:curDevice.ipAddress] uppercaseString];
 
     
     if (curDevice.macAddress || pr.success) {
         
-        [self.delegate lanScanDidFindNewAddressWithIP:curDevice.ipAddress MACAddress:curDevice.macAddressLabel andHostname:@""];
+        [self.delegate lanScanDidFindNewDevice:curDevice];
     }
     
     if (pr.ipCount==self.numOfHostsToPing-1) {
@@ -85,10 +101,4 @@
     }
 }
 
-
--(void)stop {
-    if (self.timer) {
-        [self.timer invalidate];
-    }
-}
 @end
