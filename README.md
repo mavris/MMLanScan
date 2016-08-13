@@ -65,7 +65,7 @@ Do not update SimplePingHelper since is modified to work with MMLanScan
 
 ###TODO
 If anyone would like to help:
-- Convert the [OUI] (https://standards.ieee.org/develop/regauth/oui/oui.txt) text in a dictionary so we can map MAC Address with vendor Hint: The Regex to catch the first line with MAC Address and vendor: ```[A-F0-9]{2}-[A-F0-9]{2}-[A-F0-9]{2}\s*\(hex\)\s*[A-Za-z\.\, \-]+```
+- Convert the [OUI] (https://standards.ieee.org/develop/regauth/oui/oui.txt) text in a dictionary so we can map MAC Address with vendor (Hint: The Regex to catch the first line with MAC Address and vendor: ```[A-F0-9]{2}-[A-F0-9]{2}-[A-F0-9]{2}\s*\(hex\)\s*[A-Za-z\.\, \-]+```)
 - Make it work in a background thread. Apple's SimplePing has issues when it comes to GCD (it's build on C libraries and it seems their callbacks won't work with GCD)
 
 ###Performance Tips
