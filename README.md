@@ -26,7 +26,6 @@ Import MMLANScanner in your controller
 Add the MMLANScannerDelegate to your controller
 ```
 @interface YourViewController () <MMLANScannerDelegate>
-
 ```
 
 Declare a property
@@ -44,7 +43,7 @@ self.connectedDevices = [[NSMutableArray alloc] init];
 
 Implement the delegates methods to receive events
 ```
-- (void)lanScanDidFindNewAddressWithIP:(NSString*)ipAddress MACAddress:(NSString*)macAddress andHostname:(NSString*)hostname;
+- (void)lanScanDidFindNewDevice:(Device*)device;
 - (void)lanScanDidFinishScanning;
 - (void)lanScanProgressPinged:(NSInteger)pingedHosts from:(NSInteger)overallHosts;
 - (void)lanScanDidFailedToScan;
