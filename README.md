@@ -70,6 +70,11 @@ If anyone would like to help:
 
 ###Performance Tips
 If you experience UI issues (UI not responsive) try to change the value of ```const float interval = 0.3;``` in MMLANScanner
+
+###More Details
+
+Visit my [article] (https://medium.com/rocknnull/ios-a-new-lan-network-scanner-library-has-been-born-f218f1a416a5#.sryxaq3b1) for MMLanScan for more details
+
 ###Authors
 * Michael Mavris
 
