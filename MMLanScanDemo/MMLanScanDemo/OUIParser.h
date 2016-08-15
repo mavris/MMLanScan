@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface OUIParser : NSObject
--(void)parseOUI;
++(void)parseOUIWithSourceFilePath:(NSString*)sourceFilePath andOutputFilePath:(NSString*)outputFilePath;
 @end

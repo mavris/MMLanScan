@@ -30,8 +30,9 @@
 - (void)viewDidLoad {
    
     [super viewDidLoad];
-//    OUIParser *op = [[OUIParser alloc]init];
-//    [op parseOUI];
+    
+    //This is not a production code. Run this command only if you have a new OUI.txt file to parse. After parsing the default location of data.plist will be on DocumentsDirectory. Then you can add the new data.plist to your project and build it. 
+    //[OUIParser parseOUIWithSourceFilePath:nil andOutputFilePath:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

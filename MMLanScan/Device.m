@@ -23,9 +23,20 @@
 -(NSString*)macAddressLabel {
 
     if (_macAddress) {
+        
         return _macAddress;
     }
     
     return @"N/A";
+}
+
+-(NSString*)brand {
+
+    if(_brand==nil|| _brand == NULL || _brand==(id)[NSNull null]){
+        
+        return @"";
+    }
+    
+    return _brand;
 }
 @end

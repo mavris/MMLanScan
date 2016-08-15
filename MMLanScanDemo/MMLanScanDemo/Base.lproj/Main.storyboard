@@ -49,15 +49,14 @@
                                                         <constraint firstAttribute="height" constant="21" id="XIA-vd-HIf"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="XIA-vd-HIf"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="8" width="277" height="21"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="XIA-vd-HIf"/>
                                                         </mask>
@@ -66,12 +65,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A1:B2:C3:D4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PwU-Be-Kdf">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brand" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="RC7-2V-jAq">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" constant="120" id="KfW-I9-scu"/>
                                                         <constraint firstAttribute="height" constant="21" id="n60-Iq-Djt"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -79,12 +79,13 @@
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
+                                                            <exclude reference="KfW-I9-scu"/>
                                                             <exclude reference="n60-Iq-Djt"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="293" y="19" width="99" height="21"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
+                                                            <include reference="KfW-I9-scu"/>
                                                             <include reference="n60-Iq-Djt"/>
                                                         </mask>
                                                     </variation>
@@ -109,9 +110,6 @@
                                                     <exclude reference="RC7-2V-jAq"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="5Kd-to-DNT"/>
-                                                    <exclude reference="QRQ-Fz-Uyq"/>
-                                                    <exclude reference="btm-QN-tSo"/>
                                                     <exclude reference="JcN-qz-CxF"/>
                                                     <exclude reference="c3g-SI-VLA"/>
                                                     <exclude reference="d4z-FK-k8L"/>
@@ -119,6 +117,9 @@
                                                     <exclude reference="8uH-o5-lW4"/>
                                                     <exclude reference="Kzn-PM-HuU"/>
                                                     <exclude reference="Mvx-p5-9Me"/>
+                                                    <exclude reference="5Kd-to-DNT"/>
+                                                    <exclude reference="QRQ-Fz-Uyq"/>
+                                                    <exclude reference="btm-QN-tSo"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -128,9 +129,6 @@
                                                     <include reference="RC7-2V-jAq"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="5Kd-to-DNT"/>
-                                                    <include reference="QRQ-Fz-Uyq"/>
-                                                    <include reference="btm-QN-tSo"/>
                                                     <include reference="JcN-qz-CxF"/>
                                                     <include reference="c3g-SI-VLA"/>
                                                     <include reference="d4z-FK-k8L"/>
@@ -138,6 +136,9 @@
                                                     <include reference="8uH-o5-lW4"/>
                                                     <include reference="Kzn-PM-HuU"/>
                                                     <include reference="Mvx-p5-9Me"/>
+                                                    <exclude reference="5Kd-to-DNT"/>
+                                                    <include reference="QRQ-Fz-Uyq"/>
+                                                    <include reference="btm-QN-tSo"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

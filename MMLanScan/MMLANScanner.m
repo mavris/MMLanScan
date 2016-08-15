@@ -23,7 +23,7 @@
 @end
 
 //Ping interval
-const float interval = 0.3;
+const float interval = 0.05;
 
 @implementation MMLANScanner
 
@@ -95,7 +95,7 @@ const float interval = 0.3;
     if (curDevice.macAddress || pr.success) {
         
         if (curDevice.macAddress) {
-            NSLog(@"%@",[curDevice.macAddress substringWithRange:NSMakeRange(0, 8)]);
+
             curDevice.brand = [self.brandDictionary objectForKey:[[curDevice.macAddress substringWithRange:NSMakeRange(0, 8)] stringByReplacingOccurrencesOfString:@":" withString:@"-"]];
         }
         
