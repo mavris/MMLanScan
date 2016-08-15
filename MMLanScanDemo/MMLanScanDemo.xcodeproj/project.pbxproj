@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2734A8B21D61C7E0003C94D2 /* OUIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2734A8B11D61C7E0003C94D2 /* OUIParser.m */; };
+		273FF3891D61D5130077E0E0 /* oui.txt in Resources */ = {isa = PBXBuildFile; fileRef = 273FF3881D61D5130077E0E0 /* oui.txt */; };
+		273FF38B1D61D5650077E0E0 /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 273FF38A1D61D5650077E0E0 /* data.plist */; };
 		279335C71D5D1CB9001DFE84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335C61D5D1CB9001DFE84 /* main.m */; };
 		279335CA1D5D1CB9001DFE84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335C91D5D1CB9001DFE84 /* AppDelegate.m */; };
 		279335D01D5D1CB9001DFE84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 279335CE1D5D1CB9001DFE84 /* Main.storyboard */; };
@@ -25,6 +28,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2734A8B01D61C7E0003C94D2 /* OUIParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OUIParser.h; path = ../OUIParser.h; sourceTree = "<group>"; };
+		2734A8B11D61C7E0003C94D2 /* OUIParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OUIParser.m; path = ../OUIParser.m; sourceTree = "<group>"; };
+		273FF3881D61D5130077E0E0 /* oui.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = oui.txt; sourceTree = "<group>"; };
+		273FF38A1D61D5650077E0E0 /* data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
 		279335C21D5D1CB9001DFE84 /* MMLanScanDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMLanScanDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		279335C61D5D1CB9001DFE84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		279335C81D5D1CB9001DFE84 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -96,6 +103,10 @@
 				279335C51D5D1CB9001DFE84 /* Supporting Files */,
 				279335DC1D5D1CE5001DFE84 /* MainVC.h */,
 				279335DD1D5D1CE5001DFE84 /* MainVC.m */,
+				2734A8B01D61C7E0003C94D2 /* OUIParser.h */,
+				2734A8B11D61C7E0003C94D2 /* OUIParser.m */,
+				273FF38A1D61D5650077E0E0 /* data.plist */,
+				273FF3881D61D5130077E0E0 /* oui.txt */,
 			);
 			name = MMLanScan;
 			path = MMLanScanDemo;
@@ -240,6 +251,8 @@
 			files = (
 				279335D51D5D1CB9001DFE84 /* LaunchScreen.storyboard in Resources */,
 				279335D21D5D1CB9001DFE84 /* Assets.xcassets in Resources */,
+				273FF3891D61D5130077E0E0 /* oui.txt in Resources */,
+				273FF38B1D61D5650077E0E0 /* data.plist in Resources */,
 				279335D01D5D1CB9001DFE84 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +271,7 @@
 				279335FC1D5D2129001DFE84 /* SimplePingHelper.m in Sources */,
 				279335F91D5D2129001DFE84 /* MacFinder.m in Sources */,
 				279336081D5D2BDC001DFE84 /* NetworkCalculator.m in Sources */,
+				2734A8B21D61C7E0003C94D2 /* OUIParser.m in Sources */,
 				279335F81D5D2129001DFE84 /* MMLANScanner.m in Sources */,
 				279335FB1D5D2129001DFE84 /* SimplePing.m in Sources */,
 				279335C71D5D1CB9001DFE84 /* main.m in Sources */,

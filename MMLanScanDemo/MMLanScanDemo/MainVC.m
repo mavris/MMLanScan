@@ -11,6 +11,7 @@
 #import "DeviceCell.h"
 #import "LANProperties.h"
 #import "MMLANScanner.h"
+#import "OUIParser.h"
 
 @interface MainVC () <UITableViewDataSource,UITableViewDelegate,MMLANScannerDelegate>
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationBarTitle;
@@ -29,6 +30,8 @@
 - (void)viewDidLoad {
    
     [super viewDidLoad];
+//    OUIParser *op = [[OUIParser alloc]init];
+//    [op parseOUI];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -134,6 +137,7 @@
     
     cell.ipLabel.text = nd.ipAddress;
     cell.macAddressLabel.text = nd.macAddress;
+    cell.brandLabel.text = nd.brand;
     
     return cell;
 }

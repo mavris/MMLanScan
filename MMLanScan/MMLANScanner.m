@@ -19,7 +19,7 @@
 @property (nonatomic,assign) NSInteger numOfHostsToPing;
 @property (nonatomic,assign) NSInteger currentHost;
 @property (nonatomic,strong) NSTimer *timer;
-
+@property (nonatomic,strong) NSDictionary *brandDictionary;
 @end
 
 //Ping interval
@@ -35,6 +35,8 @@ const float interval = 0.3;
     if (self) {
         
         self.delegate=delegate;
+        self.brandDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"]];
+
     }
     
     return self;
@@ -91,6 +93,11 @@ const float interval = 0.3;
 
     
     if (curDevice.macAddress || pr.success) {
+        
+        if (curDevice.macAddress) {
+            NSLog(@"%@",[curDevice.macAddress substringWithRange:NSMakeRange(0, 8)]);
+            curDevice.brand = [self.brandDictionary objectForKey:[[curDevice.macAddress substringWithRange:NSMakeRange(0, 8)] stringByReplacingOccurrencesOfString:@":" withString:@"-"]];
+        }
         
         [self.delegate lanScanDidFindNewDevice:curDevice];
     }

@@ -11,5 +11,6 @@
 @interface DeviceCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *ipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *macAddressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *brandLabel;
 
 @end
