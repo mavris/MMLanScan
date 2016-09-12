@@ -89,34 +89,45 @@
 //Not working
 #pragma mark - Get Host from IP
 +(NSString *)getHostFromIPAddress:(NSString*)ipAddress {
+    struct addrinfo *result = NULL;
+    struct addrinfo hints;
     
-    NSString *nsHostName = nil;
-
-    const char *charIPAddress = [ipAddress UTF8String];
+    memset(&hints, 0, sizeof(hints));
+    hints.ai_flags = AI_NUMERICHOST;
+    hints.ai_family = PF_UNSPEC;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_protocol = 0;
     
-    struct addrinfo *results = NULL;
-    
-    char hostname[NI_MAXHOST] = {0};
-
-    if ( getaddrinfo(charIPAddress, NULL, NULL, &results) != 0 )
-        
+    int errorStatus = getaddrinfo([ipAddress cStringUsingEncoding:NSASCIIStringEncoding], NULL, &hints, &result);
+    if (errorStatus != 0) {
         return nil;
-    
-    for (struct addrinfo *r = results; r; r = r->ai_next) {
-        
-        if (getnameinfo(r->ai_addr, r->ai_addrlen, hostname, sizeof hostname, NULL, 0 , 0) != 0)
-            
-            continue;
-        else {
-            
-            nsHostName = [NSString stringWithFormat:@"%s", hostname];
-            break;
-        }
     }
     
-    freeaddrinfo(results);
+    CFDataRef addressRef = CFDataCreate(NULL, (UInt8 *)result->ai_addr, result->ai_addrlen);
+    if (addressRef == nil) {
+        return nil;
+    }
+    freeaddrinfo(result);
     
-    return nsHostName;
+    CFHostRef hostRef = CFHostCreateWithAddress(kCFAllocatorDefault, addressRef);
+    if (hostRef == nil) {
+        return nil;
+    }
+    CFRelease(addressRef);
+    
+    BOOL succeeded = CFHostStartInfoResolution(hostRef, kCFHostNames, NULL);
+    if (!succeeded) {
+        return nil;
+    }
+    
+    NSMutableArray *hostnames = [NSMutableArray array];
+    
+    CFArrayRef hostnamesRef = CFHostGetNames(hostRef, NULL);
+    for (int currentIndex = 0; currentIndex < [(__bridge NSArray *)hostnamesRef count]; currentIndex++) {
+        [hostnames addObject:[(__bridge NSArray *)hostnamesRef objectAtIndex:currentIndex]];
+    }
+    
+    return hostnames[0];
 }
 
 @end

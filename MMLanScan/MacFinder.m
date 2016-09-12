@@ -76,13 +76,34 @@
             mAddr = nil;
     }
     
+    
+    if (!mAddr) {
+        return nil;
+    }
+    
+    //Fixing the issue with 0 in MAC Address (eg. 00 will be displayed as 0. We fix this here).
+    NSArray *macArray = [mAddr componentsSeparatedByString:@":"];
+    
+    NSMutableString *mutStr = [[NSMutableString alloc] init];
+    
+    for (int i=0; i < [macArray count]; i++) {
+        NSString *str = [macArray objectAtIndex:i];
+        if ([str length]<2) {
+            [mutStr appendString:@"0"];
+        }
+        
+        NSString *strToAppend = i < [macArray count] - 1 ? [NSString stringWithFormat:@"%@:",str] : str;
+        
+        [mutStr appendString:strToAppend];
+    }
+    
     if (found_entry == 0) {
         
         return nil;
     }
     else {
         
-        return mAddr;
+        return mutStr;
     }
 }
 @end

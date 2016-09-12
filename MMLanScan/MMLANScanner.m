@@ -23,7 +23,7 @@
 @end
 
 //Ping interval
-const float interval = 0.05;
+const float interval = 0.1;
 
 @implementation MMLANScanner
 
@@ -90,7 +90,7 @@ const float interval = 0.05;
     Device *curDevice = [[Device alloc]init];
     curDevice.ipAddress=pr.ipAddress;
     curDevice.macAddress =[[MacFinder ip2mac:curDevice.ipAddress] uppercaseString];
-
+    curDevice.hostname = [LANProperties getHostFromIPAddress:pr.ipAddress];
     
     if (curDevice.macAddress || pr.success) {
         

@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *ipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *macAddressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *brandLabel;
+@property (weak, nonatomic) IBOutlet UILabel *hostnameLabel;
 
 @end
