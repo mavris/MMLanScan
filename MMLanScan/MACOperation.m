@@ -21,7 +21,7 @@
     NSError *errorMessage;
 }
 
--(instancetype)initWithIPToPing:(NSString*)ip andCompletionHandler:(nullable void (^)(NSError  * _Nullable error, NSString  * _Nonnull ip,Device * _Nonnull device))result;{
+-(instancetype)initWithIPToRetrieveMAC:(NSString*)ip andCompletionHandler:(nullable void (^)(NSError  * _Nullable error, NSString  * _Nonnull ip,Device * _Nonnull device))result;{
 
     self = [super init];
     
@@ -38,7 +38,6 @@
 -(void)start {
 
     [super start];
-    // RUN LOOP MAGIC
     [self getMACDetails];
 }
 -(void)finishMAC {
@@ -61,19 +60,11 @@
     self.device.macAddress =[[MacFinder ip2mac:self.device.ipAddress] uppercaseString];
     self.device.hostname = [LANProperties getHostFromIPAddress:self.ipStr];
     
-    if (self.device.macAddress) {
-        
-        if (self.device.macAddress) {
-            
-            //self.device.brand = [self.brandDictionary objectForKey:[[curDevice.macAddress substringWithRange:NSMakeRange(0, 8)] stringByReplacingOccurrencesOfString:@":" withString:@"-"]];
-        }
-        
-    }
-    else {
+    if (!self.device.macAddress) {
+ 
         errorMessage = [NSError errorWithDomain:@"MAC Address Not Exist" code:10 userInfo:nil];
     }
-    //NSLog(@"Finished");
-  //  [self finishedPing];
+
     [self finishMAC];
 }
 

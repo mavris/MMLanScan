@@ -9,5 +9,5 @@
 #import "SimplePing.h"
 @class Device;
 @interface MACOperation: PAOperation
--(instancetype)initWithIPToPing:(nonnull NSString*)ip andCompletionHandler:(nullable void (^)(NSError  * _Nullable error, NSString  * _Nonnull ip,Device * _Nonnull device))result;
+-(nullable instancetype)initWithIPToRetrieveMAC:(nonnull NSString*)ip andCompletionHandler:(nullable void (^)(NSError  * _Nullable error, NSString  * _Nonnull ip,Device * _Nonnull device))result;
 @end

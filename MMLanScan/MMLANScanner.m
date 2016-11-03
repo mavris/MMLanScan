@@ -58,46 +58,53 @@ const float interval = 0.1;
     
     self.ipsToPing = [LANProperties getAllHostsForIP:self.dv.ipAddress andSubnet:self.dv.subnetMask];
 
-    MMLANScanner * __weak weakSelf = self;
-
     self.currentHost=0;
-    for (NSString *str in self.ipsToPing) {
+
+    MMLANScanner * __weak weakSelf = self;
+    
+    for (NSString *ipStr in self.ipsToPing) {
         MMLANScanner* __strong strongSelf = weakSelf;
         
-        PingOperation *po = [[PingOperation alloc]initWithIPToPing:str andCompletionHandler:^(NSError  * _Nullable error, NSString  * _Nonnull ip) {
-            
-            MACOperation *macOp = [[MACOperation alloc] initWithIPToPing:ip andCompletionHandler:^(NSError * _Nullable error, NSString * _Nonnull ip, Device * _Nonnull device) {
-                
-                self.currentHost = self.currentHost + 0.5;
-               
-                if (!error) {
-                    device.brand = [self.brandDictionary objectForKey:[[device.macAddress substringWithRange:NSMakeRange(0, 8)] stringByReplacingOccurrencesOfString:@":" withString:@"-"]];
-                    
-                    dispatch_async (dispatch_get_main_queue(), ^{
-                        [strongSelf.delegate lanScanDidFindNewDevice:device];
-                    });
-                    NSLog(@"Succeed for IP:%@ MAC:%@",ip,device.macAddress);
-                }
-                
-                dispatch_async (dispatch_get_main_queue(), ^{
-                    [strongSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
-                });
-            }];
+        PingOperation *pingOperation = [[PingOperation alloc]initWithIPToPing:ipStr andCompletionHandler:^(NSError  * _Nullable error, NSString  * _Nonnull ip) {
             
             self.currentHost = self.currentHost + 0.5;
-            dispatch_async (dispatch_get_main_queue(), ^{
-                [strongSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
-            });
-           
-            if (!error) {
-                NSLog(@"Succeed for IP:%@",ip);
-            }
 
-            [strongSelf.queue addOperation:macOp];
+            //Letting now the delegate the process
+            dispatch_async (dispatch_get_main_queue(), ^{
+                if ([strongSelf respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
+                    [strongSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
+                }
+            });
             
         }];
         
-        [self.queue addOperation:po];
+        MACOperation *macOperation = [[MACOperation alloc] initWithIPToRetrieveMAC:ipStr andCompletionHandler:^(NSError * _Nullable error, NSString * _Nonnull ip, Device * _Nonnull device) {
+            
+            self.currentHost = self.currentHost + 0.5;
+            
+            if (!error) {
+                //Retrieving brand for the specific MAC Address
+                device.brand = [strongSelf.brandDictionary objectForKey:[[device.macAddress substringWithRange:NSMakeRange(0, 8)] stringByReplacingOccurrencesOfString:@":" withString:@"-"]];
+                
+                //Letting know the delegate that found a new device (on Main Thread)
+                dispatch_async (dispatch_get_main_queue(), ^{
+                    if ([strongSelf respondsToSelector:@selector(lanScanDidFindNewDevice:)]) {
+                        [strongSelf.delegate lanScanDidFindNewDevice:device];
+                    }
+                });
+            }
+            
+            //Letting now the delegate the process
+            dispatch_async (dispatch_get_main_queue(), ^{
+                if ([strongSelf respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
+                    [strongSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
+                }
+            });
+        }];
+
+        [macOperation addDependency:pingOperation];
+        [self.queue addOperation:pingOperation];
+        [self.queue addOperation:macOperation];
         
     }
 
@@ -108,17 +115,16 @@ const float interval = 0.1;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
     if ([keyPath isEqualToString:@"operations"]) {
+        
         if (self.queue.operationCount == 0) {
-            
+            //Letting know the delegate that the request is finished
             dispatch_async (dispatch_get_main_queue(), ^{
                 [self.delegate lanScanDidFinishScanning];
             });
-            
-        } else {
-            // NSLog(@"Remaining %lu",(unsigned long)[qm operationCount]);
-            // Has ops
         }
+        else {}
     }
 }
 -(void)dealloc {

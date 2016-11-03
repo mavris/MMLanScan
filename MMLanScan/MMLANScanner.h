@@ -6,13 +6,13 @@
 //
 
 #import <Foundation/Foundation.h>
+
 @class Device;
-#pragma mark - Delegates
+@protocol MMLANScannerDelegate;
+#pragma mark - MMLANScanner Protocol
 //The delegate protocol for MMLanScanner
 @protocol MMLANScannerDelegate <NSObject>
-
-@optional
-
+@required
 /*!
  @brief This delegate is called each time that MMLANSCanner discovers a new IP
  @param device The device object that contains the IP Address, MAC Address and hostname
@@ -24,24 +24,30 @@
  
  [self.connectedDevices addObject:device];
  }
-}
+ }
  @endcode
  */
 - (void)lanScanDidFindNewDevice:(Device*)device;
 
 /*!
  @brief This delegate is called when the scan has finished
-
+ 
  @code
  -(void)lanScanDidFinishScanning{
  
  [[[UIAlertView alloc] initWithTitle:@"Scan Finished" message:[NSString stringWithFormat:@"Number of devices connected to the Local Area Network : %lu", (unsigned long)self.connectedDevices.count] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
  
-}
+ }
  @endcode
  */
 - (void)lanScanDidFinishScanning;
 
+/*!
+ @brief This delegate is called in case the LAN scan has failed
+ */
+- (void)lanScanDidFailedToScan;
+
+@optional
 /*!
  @brief This delegate is called each time a new host is pinged
  @param pingedHost The number of hosts pinged so far
@@ -55,15 +61,11 @@
  */
 - (void)lanScanProgressPinged:(NSInteger)pingedHosts from:(NSInteger)overallHosts;
 
-/*!
- @brief This delegate is called in case the LAN scan has failed
- */
-- (void)lanScanDidFailedToScan;
-
 @end
 
+
 #pragma mark - Public methods
-@interface MMLANScanner : NSObject <MMLANScannerDelegate>
+@interface MMLANScanner : NSObject
 @property(nonatomic,weak) id<MMLANScannerDelegate> delegate;
 
 -(instancetype)initWithDelegate:(id <MMLANScannerDelegate>)delegate;
