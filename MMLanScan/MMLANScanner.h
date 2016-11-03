@@ -63,9 +63,9 @@
 
 @end
 
-
 #pragma mark - Public methods
 @interface MMLANScanner : NSObject
+
 @property(nonatomic,weak) id<MMLANScannerDelegate> delegate;
 
 -(instancetype)initWithDelegate:(id <MMLANScannerDelegate>)delegate;

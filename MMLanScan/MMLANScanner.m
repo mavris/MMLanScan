@@ -13,17 +13,12 @@
 #import "MACOperation.h"
 
 @interface MMLANScanner ()
-@property (nonatomic,strong) Device *dv;
+@property (nonatomic,strong) Device *device;
 @property (nonatomic,strong) NSArray *ipsToPing;
-@property (nonatomic,assign) NSInteger numOfHostsToPing;
 @property (nonatomic,assign) float currentHost;
-@property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,strong) NSDictionary *brandDictionary;
-@property(nonatomic,strong)NSOperationQueue *queue;
+@property (nonatomic,strong) NSOperationQueue *queue;
 @end
-
-//Ping interval
-const float interval = 0.1;
 
 @implementation MMLANScanner
 
@@ -34,10 +29,17 @@ const float interval = 0.1;
     
     if (self) {
         
+        //Setting the delegate
         self.delegate=delegate;
+        
+        //Initializing the dictionary that holds the Brands name for each MAC Address
         self.brandDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"]];
+        
+        //Initializing the NSOperationQueue
         self.queue = [[NSOperationQueue alloc] init];
+        //Setting the concurrent operations to 50
         [self.queue setMaxConcurrentOperationCount:50];
+        //Add observer to notify the delegate when queue is empty.
         [self.queue addObserver:self forKeyPath:@"operations" options:0 context:nil];
 
     }
@@ -47,39 +49,49 @@ const float interval = 0.1;
 
 #pragma mark - Start/Stop ping
 -(void)start {
-
-    self.dv = [LANProperties localIPAddress];
+    //Getting the local IP
+    self.device = [LANProperties localIPAddress];
     
-    if (!self.dv) {
-        
+    //If IP is null then return
+    if (!self.device) {
         [self.delegate lanScanDidFailedToScan];
         return;
     }
     
-    self.ipsToPing = [LANProperties getAllHostsForIP:self.dv.ipAddress andSubnet:self.dv.subnetMask];
+    //Getting the available IPs to ping based on our network subnet.
+    self.ipsToPing = [LANProperties getAllHostsForIP:self.device.ipAddress andSubnet:self.device.subnetMask];
 
+    //The counter of how much pings have been made
     self.currentHost=0;
 
+    //Making a weak reference to self in order to use it from the completionBlocks in operation.
     MMLANScanner * __weak weakSelf = self;
     
+    //Looping through IPs array
     for (NSString *ipStr in self.ipsToPing) {
+        
+        //Making a strong reference in the weakSelf to make sure that it won't be nil at the time of the execution of the block
         MMLANScanner* __strong strongSelf = weakSelf;
         
+        //The ping operation
         PingOperation *pingOperation = [[PingOperation alloc]initWithIPToPing:ipStr andCompletionHandler:^(NSError  * _Nullable error, NSString  * _Nonnull ip) {
             
+            //Since the first half of the operation is completed we will update our proggress by 0.5
             self.currentHost = self.currentHost + 0.5;
 
             //Letting now the delegate the process
             dispatch_async (dispatch_get_main_queue(), ^{
-                if ([strongSelf respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
+                if ([strongSelf.delegate respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
                     [strongSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
                 }
             });
             
         }];
         
+        //The Find MAC Address for each operation
         MACOperation *macOperation = [[MACOperation alloc] initWithIPToRetrieveMAC:ipStr andCompletionHandler:^(NSError * _Nullable error, NSString * _Nonnull ip, Device * _Nonnull device) {
             
+            //Since the second half of the operation is completed we will update our proggress by 0.5
             self.currentHost = self.currentHost + 0.5;
             
             if (!error) {
@@ -88,7 +100,7 @@ const float interval = 0.1;
                 
                 //Letting know the delegate that found a new device (on Main Thread)
                 dispatch_async (dispatch_get_main_queue(), ^{
-                    if ([strongSelf respondsToSelector:@selector(lanScanDidFindNewDevice:)]) {
+                    if ([strongSelf.delegate respondsToSelector:@selector(lanScanDidFindNewDevice:)]) {
                         [strongSelf.delegate lanScanDidFindNewDevice:device];
                     }
                 });
@@ -96,13 +108,15 @@ const float interval = 0.1;
             
             //Letting now the delegate the process
             dispatch_async (dispatch_get_main_queue(), ^{
-                if ([strongSelf respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
+                if ([strongSelf.delegate respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
                     [strongSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
                 }
             });
         }];
 
+        //Adding dependancy on macOperation. For each IP there 2 operations (macOperation and pingOperation). The dependancy makes sure that macOperation will run after pingOperation
         [macOperation addDependency:pingOperation];
+        //Adding the operations in the queue
         [self.queue addOperation:pingOperation];
         [self.queue addOperation:macOperation];
         
@@ -114,8 +128,10 @@ const float interval = 0.1;
     [self.queue cancelAllOperations];
 }
 
+#pragma mark - NSOperationQueue Observer
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
+   
+    //Observing the NSOperationQueue and as soon as it finished we send a message to delegate
     if ([keyPath isEqualToString:@"operations"]) {
         
         if (self.queue.operationCount == 0) {
@@ -124,10 +140,12 @@ const float interval = 0.1;
                 [self.delegate lanScanDidFinishScanning];
             });
         }
-        else {}
     }
 }
+#pragma mark - Dealloc
 -(void)dealloc {
+    
+    //Removing the observer on dealloc
     [self.queue removeObserver:self forKeyPath:@"operations"];
 }
 @end

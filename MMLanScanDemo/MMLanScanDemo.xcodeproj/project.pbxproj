@@ -164,23 +164,10 @@
 		279336001D5D2171001DFE84 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				27F479D61DCBF1D500672012 /* LAN Scan Libs */,
+				27F479D51DCBF1BA00672012 /* External Libs */,
 				279336011D5D2177001DFE84 /* Headers */,
-				279335EA1D5D2129001DFE84 /* LANProperties.h */,
-				279335EB1D5D2129001DFE84 /* LANProperties.m */,
-				279335EC1D5D2129001DFE84 /* MMLANScanner.h */,
-				279335ED1D5D2129001DFE84 /* MMLANScanner.m */,
-				279335EE1D5D2129001DFE84 /* MacFinder.h */,
-				279335EF1D5D2129001DFE84 /* MacFinder.m */,
-				8224B5BA1DCB7CE900AE606F /* PAOperation.h */,
-				8224B5BB1DCB7CE900AE606F /* PAOperation.m */,
-				8224B5B41DCB7AAC00AE606F /* MACOperation.h */,
-				8224B5B51DCB7AAC00AE606F /* MACOperation.m */,
-				8224B5B61DCB7AAC00AE606F /* PingOperation.h */,
-				8224B5B71DCB7AAC00AE606F /* PingOperation.m */,
-				279335F21D5D2129001DFE84 /* SimplePing.h */,
-				279335F31D5D2129001DFE84 /* SimplePing.m */,
-				279336061D5D2BDC001DFE84 /* NetworkCalculator.h */,
-				279336071D5D2BDC001DFE84 /* NetworkCalculator.m */,
+				27F479D41DCBF19D00672012 /* Operations */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -203,6 +190,43 @@
 				279335E91D5D2129001DFE84 /* Device.m */,
 			);
 			name = Objects;
+			sourceTree = "<group>";
+		};
+		27F479D41DCBF19D00672012 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				8224B5BA1DCB7CE900AE606F /* PAOperation.h */,
+				8224B5BB1DCB7CE900AE606F /* PAOperation.m */,
+				8224B5B41DCB7AAC00AE606F /* MACOperation.h */,
+				8224B5B51DCB7AAC00AE606F /* MACOperation.m */,
+				8224B5B61DCB7AAC00AE606F /* PingOperation.h */,
+				8224B5B71DCB7AAC00AE606F /* PingOperation.m */,
+			);
+			name = Operations;
+			sourceTree = "<group>";
+		};
+		27F479D51DCBF1BA00672012 /* External Libs */ = {
+			isa = PBXGroup;
+			children = (
+				279335EE1D5D2129001DFE84 /* MacFinder.h */,
+				279335EF1D5D2129001DFE84 /* MacFinder.m */,
+				279335F21D5D2129001DFE84 /* SimplePing.h */,
+				279335F31D5D2129001DFE84 /* SimplePing.m */,
+			);
+			name = "External Libs";
+			sourceTree = "<group>";
+		};
+		27F479D61DCBF1D500672012 /* LAN Scan Libs */ = {
+			isa = PBXGroup;
+			children = (
+				279335EA1D5D2129001DFE84 /* LANProperties.h */,
+				279335EB1D5D2129001DFE84 /* LANProperties.m */,
+				279335EC1D5D2129001DFE84 /* MMLANScanner.h */,
+				279335ED1D5D2129001DFE84 /* MMLANScanner.m */,
+				279336061D5D2BDC001DFE84 /* NetworkCalculator.h */,
+				279336071D5D2BDC001DFE84 /* NetworkCalculator.m */,
+			);
+			name = "LAN Scan Libs";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -11,6 +11,8 @@
 #import "LANProperties.h"
 #import "MacFinder.h"
 
+static const float PING_TIMEOUT = 1;
+
 @interface PingOperation ()
 @property (nonatomic,strong) NSString *ipStr;
 @property (nonatomic,strong) NSDictionary *brandDictionary;
@@ -30,6 +32,7 @@
     self = [super init];
     
     if (self) {
+        
         self.name = ip;
         self.ipStr= ip;
         self.simplePing = [SimplePing simplePingWithHostName:ip];
@@ -43,19 +46,20 @@
 -(void)start {
 
     [super start];
-    // RUN LOOP MAGIC
+
     NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
     
-    // run loops don't run if they don't have input sources or timers on them.  So we add a timer that we never intend to fire.
+    // Run loops don't run if they don't have input sources or timers on them.  So we add a timer that we never intend to fire.
     _keepAliveTimer = [NSTimer timerWithTimeInterval:1000000.0 target:self selector:@selector(timeout:) userInfo:nil repeats:NO];
     [runLoop addTimer:_keepAliveTimer forMode:NSDefaultRunLoopMode];
     
+    //Ping method
     [self ping];
     
     NSTimeInterval updateInterval = 0.1f;
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:updateInterval];
-    while (!_stopRunLoop && [runLoop runMode: NSDefaultRunLoopMode beforeDate:loopUntil])
-    {
+    
+    while (!_stopRunLoop && [runLoop runMode: NSDefaultRunLoopMode beforeDate:loopUntil]) {
         loopUntil = [NSDate dateWithTimeIntervalSinceNow:updateInterval];
     }
 
@@ -66,13 +70,14 @@
 }
 - (void)finishedPing {
     
-    // this removes (presumably still the only) timer from the NSRunLoop
+    //Removes timer from the NSRunLoop
     [_keepAliveTimer invalidate];
     _keepAliveTimer = nil;
     
-    // and this will kill the while loop in the start method
+    //Kill the while loop in the start method
     _stopRunLoop = YES;
     
+    //Calling the completion block
     if (self.result) {
         self.result(errorMessage,self.name);
     }
@@ -82,7 +87,7 @@
 
 - (void)timeout:(NSTimer*)timer
 {
-    // this method should never get called.
+    //This method should never get called. (just in case)
     errorMessage = [NSError errorWithDomain:@"Ping Timeout" code:10 userInfo:nil];
     [self finishedPing];
 }
@@ -97,42 +102,40 @@
 
 // When the pinger starts, send the ping immediately
 - (void)simplePing:(SimplePing *)pinger didStartWithAddress:(NSData *)address {
+    
     [pinger sendPingWithData:nil];
-
     //NSLog(@"start");
-
 }
 
 - (void)simplePing:(SimplePing *)pinger didFailWithError:(NSError *)error {
-  //  NSLog(@"failed");
+  
+    //  NSLog(@"failed");
     [pingTimer invalidate];
     errorMessage = error;
     [self finishedPing];
-
-
 }
 
 - (void)simplePing:(SimplePing *)pinger didFailToSendPacket:(NSData *)packet error:(NSError *)error {
+    
     //NSLog(@"failed");
     [pingTimer invalidate];
     errorMessage = error;
     [self finishedPing];
-
-
-    // Eg they're not connected to any network
 }
 
 - (void)simplePing:(SimplePing *)pinger didReceivePingResponsePacket:(NSData *)packet {
+   
     //NSLog(@"success");
     [pingTimer invalidate];
     [self finishedPing];
 }
 
 - (void)simplePing:(SimplePing *)pinger didSendPacket:(NSData *)packet {
-    pingTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired:) userInfo:nil repeats:NO];
+    //This timer will fired pingTimeOut in case the SimplePing don't answer in the specific time
+    pingTimer = [NSTimer scheduledTimerWithTimeInterval:PING_TIMEOUT target:self selector:@selector(pingTimeOut:) userInfo:nil repeats:NO];
 }
 
-- (void)timerFired:(NSTimer *)timer {
+- (void)pingTimeOut:(NSTimer *)timer {
     //NSLog(@"Ping timeout occurred, host not reachable");
     // Move to next host
     errorMessage = [NSError errorWithDomain:@"Ping timeout" code:11 userInfo:nil];

@@ -26,6 +26,7 @@
     self = [super init];
     
     if (self) {
+        
         self.device = [[Device alloc]init];
         self.name = ip;
         self.ipStr= ip;
@@ -44,11 +45,12 @@
    
     if (self.result) {
         self.result(errorMessage,self.name,self.device);
+    }
 
     [self finish];
 }
-}
 -(void)cancel{
+    
     [super cancel];
     [self finish];
 }
