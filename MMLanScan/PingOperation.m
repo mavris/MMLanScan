@@ -94,6 +94,15 @@ static const float PING_TIMEOUT = 1;
 
 -(void)cancel {
     
+    [_keepAliveTimer invalidate];
+    _keepAliveTimer = nil;
+    
+    //Kill the while loop in the start method
+    _stopRunLoop = YES;
+    
+    [pingTimer invalidate];
+
+    
     [super cancel];
     [self finish];
 }

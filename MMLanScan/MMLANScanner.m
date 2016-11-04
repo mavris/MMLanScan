@@ -20,10 +20,7 @@
 @property (nonatomic,strong) NSOperationQueue *queue;
 @end
 
-@implementation MMLANScanner {
-
-    BOOL isRunning;
-}
+@implementation MMLANScanner
 
 #pragma mark - Initialization method
 -(instancetype)initWithDelegate:(id<MMLANScannerDelegate>)delegate {
@@ -31,7 +28,6 @@
     self =[super init];
     
     if (self) {
-        isRunning=NO;
         //Setting the delegate
         self.delegate=delegate;
         
@@ -52,8 +48,6 @@
 
 #pragma mark - Start/Stop ping
 -(void)start {
-    //Avoiding restart run in case of alreay running
-    isRunning=YES;
     
     //Getting the local IP
     self.device = [LANProperties localIPAddress];
@@ -140,9 +134,7 @@
 
 -(void)stop {
     [self.queue cancelAllOperations];
-    [self.queue removeObserver:self forKeyPath:@"operations"];
     [self.queue waitUntilAllOperationsAreFinished];
-    self.queue =nil;
 }
 
 #pragma mark - NSOperationQueue Observer

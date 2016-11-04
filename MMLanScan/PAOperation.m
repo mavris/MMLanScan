@@ -82,8 +82,12 @@
 
 - (void)start {
     
+    if (self.isCancelled) {
+        [self finish];
+        return;
+    }
+    
     if (!self.isExecuting) {
-        
         self.ready = NO;
         self.executing = YES;
         self.finished = NO;

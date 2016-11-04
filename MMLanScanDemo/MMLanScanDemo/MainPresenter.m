@@ -26,15 +26,14 @@
     if (self) {
     
         self.delegate=delegate;
+        self.lanScanner = [[MMLANScanner alloc] initWithDelegate:self];
     }
     
     return self;
 }
 
 -(void)startNetworkScan {
-    self.connectedDevices=nil;
     [self.lanScanner stop];
-    self.lanScanner = [[MMLANScanner alloc] initWithDelegate:self];
     self.connectedDevices = [[NSMutableArray alloc] init];
     [self.lanScanner start];
 
