@@ -32,7 +32,7 @@
 
 -(NSString*)brand {
 
-    if(_brand==nil|| _brand == NULL || _brand==(id)[NSNull null]){
+    if(_brand==nil || _brand == NULL || _brand==(id)[NSNull null]){
         
         return @"";
     }

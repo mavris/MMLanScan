@@ -7,20 +7,17 @@
 //
 
 #import "MainVC.h"
-#import "Device.h"
+#import "MainPresenter.h"
 #import "DeviceCell.h"
-#import "LANProperties.h"
-#import "MMLANScanner.h"
-#import "OUIParser.h"
+#import "Device.h"
+//#import "OUIParser.h"
+@interface MainVC () <UITableViewDataSource,UITableViewDelegate,MainPresenterDelegate>
 
-@interface MainVC () <UITableViewDataSource,UITableViewDelegate,MMLANScannerDelegate>
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationBarTitle;
 @property (weak, nonatomic) IBOutlet UITableView *tableV;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableVTopContraint;
-
-@property NSMutableArray *connectedDevices;
-@property(nonatomic,strong)MMLANScanner *lanScanner;
+@property (strong, nonatomic) MainPresenter *presenter;
 @end
 
 @implementation MainVC {
@@ -31,13 +28,15 @@
    
     [super viewDidLoad];
     
-    //This is not a production code. Run this command only if you have a new OUI.txt file to parse. After parsing the default location of data.plist will be on DocumentsDirectory. Then you can add the new data.plist to your project and build it. 
+    self.presenter = [[MainPresenter alloc]initWithDelegate:self];
+    
+    //This is not a production code. Run this command only if you have a new OUI.txt file to parse. After parsing the default location of data.plist will be on DocumentsDirectory. Then you can add the new data.plist to your project and build it.
     //[OUIParser parseOUIWithSourceFilePath:nil andOutputFilePath:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     
-    [self.navigationBarTitle setTitle:[NSString stringWithFormat:@"SSID: %@",[LANProperties fetchSSIDInfo]]];
+    [self.navigationBarTitle setTitle:[self.presenter ssidName]];
 }
 
 - (IBAction)refresh:(id)sender {
@@ -49,15 +48,12 @@
 
     [self showProgressBar];
     
-    [self.navigationBarTitle setTitle:[NSString stringWithFormat:@"SSID: %@",[LANProperties fetchSSIDInfo]]];
+    [self.navigationBarTitle setTitle:[self.presenter ssidName]];
     
-    [self.lanScanner stop];
-    self.lanScanner = [[MMLANScanner alloc] initWithDelegate:self];
-    self.connectedDevices = [[NSMutableArray alloc] init];
+    [self.presenter startNetworkScan];
     
     [self.tableV reloadData];
     
-    [self.lanScanner start];
 }
 
 -(void)showProgressBar {
@@ -80,36 +76,27 @@
     }];
 }
 
-#pragma mark LAN Scanner delegate method
--(void)lanScanDidFindNewDevice:(Device*)device{
-        
-    //Check if the Device is already added
-    if (![self.connectedDevices containsObject:device]) {
-       
-        [self.connectedDevices addObject:device];
-    }
-    
+#pragma mark - Presenter Delegates
+-(void)mainPresenterIPArrayChanged{
+
     [self.tableV reloadData];
-}
+};
 
--(void)lanScanDidFinishScanning{
+-(void)mainPresenterIPSearchFinished {
     
+    [[[UIAlertView alloc] initWithTitle:@"Scan Finished" message:[NSString stringWithFormat:@"Number of devices connected to the Local Area Network : %lu", (unsigned long)self.presenter.connectedDevices.count] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     [self hideProgressBar];
-   
-    [[[UIAlertView alloc] initWithTitle:@"Scan Finished" message:[NSString stringWithFormat:@"Number of devices connected to the Local Area Network : %lu", (unsigned long)self.connectedDevices.count] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-}
+};
 
--(void)lanScanProgressPinged:(NSInteger)pingedHosts from:(NSInteger)overallHosts {
+-(void)mainPresenterUpdateProgressBarWithValue:(float)progressValue {
+
+    [self.progressView setProgress:progressValue];
+};
+
+-(void)mainPresenterIPSearchFailed {
     
-    [self.progressView setProgress:(float)pingedHosts/overallHosts];
-}
-
--(void)lanScanDidFailedToScan {
-
-    [self hideProgressBar];
-
     [[[UIAlertView alloc] initWithTitle:@"Failed to scan" message:[NSString stringWithFormat:@"Please make sure that you are connected to a WiFi before starting LAN Scan"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-}
+};
 
 #pragma mark - UITableView Delegates
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -117,12 +104,10 @@
     return 1;
 }
 
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
    
-    return [self.connectedDevices count];
+    return [self.presenter.connectedDevices count];
 }
-
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -134,14 +119,14 @@
         cell = [[DeviceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
     }
     
-    Device *nd = [self.connectedDevices objectAtIndex:indexPath.row];
+    Device *nd = [self.presenter.connectedDevices objectAtIndex:indexPath.row];
     
     cell.ipLabel.text = nd.ipAddress;
     cell.macAddressLabel.text = nd.macAddress;
     cell.brandLabel.text = nd.brand;
     cell.hostnameLabel.text= nd.hostname;
+    
     return cell;
 }
-
 
 @end

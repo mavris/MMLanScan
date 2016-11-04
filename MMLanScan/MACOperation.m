@@ -6,9 +6,9 @@
 //
 
 #import "MACOperation.h"
-#import "Device.h"
 #import "LANProperties.h"
 #import "MacFinder.h"
+#import "Device.h"
 
 @interface MACOperation ()
 @property (nonatomic,strong) NSString *ipStr;

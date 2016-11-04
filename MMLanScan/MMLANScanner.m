@@ -20,7 +20,10 @@
 @property (nonatomic,strong) NSOperationQueue *queue;
 @end
 
-@implementation MMLANScanner
+@implementation MMLANScanner {
+
+    BOOL isRunning;
+}
 
 #pragma mark - Initialization method
 -(instancetype)initWithDelegate:(id<MMLANScannerDelegate>)delegate {
@@ -28,7 +31,7 @@
     self =[super init];
     
     if (self) {
-        
+        isRunning=NO;
         //Setting the delegate
         self.delegate=delegate;
         
@@ -49,6 +52,9 @@
 
 #pragma mark - Start/Stop ping
 -(void)start {
+    //Avoiding restart run in case of alreay running
+    isRunning=YES;
+    
     //Getting the local IP
     self.device = [LANProperties localIPAddress];
     
@@ -71,18 +77,21 @@
     for (NSString *ipStr in self.ipsToPing) {
         
         //Making a strong reference in the weakSelf to make sure that it won't be nil at the time of the execution of the block
-        MMLANScanner* __strong strongSelf = weakSelf;
+       // MMLANScanner* __weak strongSelf = weakSelf;
         
         //The ping operation
         PingOperation *pingOperation = [[PingOperation alloc]initWithIPToPing:ipStr andCompletionHandler:^(NSError  * _Nullable error, NSString  * _Nonnull ip) {
-            
+            if (!weakSelf) {
+                NSLog(@"Self weak deallocated");
+                return;
+            }
             //Since the first half of the operation is completed we will update our proggress by 0.5
             self.currentHost = self.currentHost + 0.5;
 
             //Letting now the delegate the process
             dispatch_async (dispatch_get_main_queue(), ^{
-                if ([strongSelf.delegate respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
-                    [strongSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
+                if ([weakSelf.delegate respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
+                    [weakSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
                 }
             });
             
@@ -94,22 +103,27 @@
             //Since the second half of the operation is completed we will update our proggress by 0.5
             self.currentHost = self.currentHost + 0.5;
             
+            if (!weakSelf) {
+                NSLog(@"Self weak deallocated");
+                return;
+            }
+            
             if (!error) {
                 //Retrieving brand for the specific MAC Address
-                device.brand = [strongSelf.brandDictionary objectForKey:[[device.macAddress substringWithRange:NSMakeRange(0, 8)] stringByReplacingOccurrencesOfString:@":" withString:@"-"]];
+                device.brand = [weakSelf.brandDictionary objectForKey:[[device.macAddress substringWithRange:NSMakeRange(0, 8)] stringByReplacingOccurrencesOfString:@":" withString:@"-"]];
                 
                 //Letting know the delegate that found a new device (on Main Thread)
                 dispatch_async (dispatch_get_main_queue(), ^{
-                    if ([strongSelf.delegate respondsToSelector:@selector(lanScanDidFindNewDevice:)]) {
-                        [strongSelf.delegate lanScanDidFindNewDevice:device];
+                    if ([weakSelf.delegate respondsToSelector:@selector(lanScanDidFindNewDevice:)]) {
+                        [weakSelf.delegate lanScanDidFindNewDevice:device];
                     }
                 });
             }
             
             //Letting now the delegate the process
             dispatch_async (dispatch_get_main_queue(), ^{
-                if ([strongSelf.delegate respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
-                    [strongSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
+                if ([weakSelf.delegate respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
+                    [weakSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
                 }
             });
         }];
@@ -126,6 +140,9 @@
 
 -(void)stop {
     [self.queue cancelAllOperations];
+    [self.queue removeObserver:self forKeyPath:@"operations"];
+    [self.queue waitUntilAllOperationsAreFinished];
+    self.queue =nil;
 }
 
 #pragma mark - NSOperationQueue Observer
@@ -144,7 +161,7 @@
 }
 #pragma mark - Dealloc
 -(void)dealloc {
-    
+    NSLog(@"Dealloc MMLANSCAN");
     //Removing the observer on dealloc
     [self.queue removeObserver:self forKeyPath:@"operations"];
 }

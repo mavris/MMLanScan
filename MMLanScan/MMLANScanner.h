@@ -59,7 +59,7 @@
  }
  @endcode
  */
-- (void)lanScanProgressPinged:(NSInteger)pingedHosts from:(NSInteger)overallHosts;
+- (void)lanScanProgressPinged:(float)pingedHosts from:(NSInteger)overallHosts;
 
 @end
 
