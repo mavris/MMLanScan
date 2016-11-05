@@ -20,6 +20,10 @@ static const float PING_TIMEOUT = 1;
 @property (nonatomic, copy) void (^result)(NSError  * _Nullable error, NSString  * _Nonnull ip);
 @end
 
+@interface PingOperation()
+- (void)finish;
+@end
+
 @implementation PingOperation {
     BOOL _stopRunLoop;
     NSTimer *_keepAliveTimer;
@@ -32,12 +36,14 @@ static const float PING_TIMEOUT = 1;
     self = [super init];
     
     if (self) {
-        
         self.name = ip;
         self.ipStr= ip;
         self.simplePing = [SimplePing simplePingWithHostName:ip];
         self.simplePing.delegate = self;
         self.result = result;
+        _isExecuting = NO;
+        _isFinished = NO;
+
     }
     
     return self;
@@ -45,8 +51,20 @@ static const float PING_TIMEOUT = 1;
 
 -(void)start {
 
-    [super start];
+    
+    if ([self isCancelled]) {
+        [self willChangeValueForKey:@"isFinished"];
+        _isFinished = YES;
+        [self didChangeValueForKey:@"isFinished"];
+        return;
+    }
+    
 
+    [self willChangeValueForKey:@"isExecuting"];
+    _isExecuting = YES;
+    [self didChangeValueForKey:@"isExecuting"];
+    
+    
     NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
     
     // Run loops don't run if they don't have input sources or timers on them.  So we add a timer that we never intend to fire.
@@ -70,13 +88,6 @@ static const float PING_TIMEOUT = 1;
 }
 - (void)finishedPing {
     
-    //Removes timer from the NSRunLoop
-    [_keepAliveTimer invalidate];
-    _keepAliveTimer = nil;
-    
-    //Kill the while loop in the start method
-    _stopRunLoop = YES;
-    
     //Calling the completion block
     if (self.result) {
         self.result(errorMessage,self.name);
@@ -92,25 +103,42 @@ static const float PING_TIMEOUT = 1;
     [self finishedPing];
 }
 
--(void)cancel {
-    
+-(void)finish {
+
+    //Removes timer from the NSRunLoop
     [_keepAliveTimer invalidate];
     _keepAliveTimer = nil;
     
     //Kill the while loop in the start method
     _stopRunLoop = YES;
     
-    [pingTimer invalidate];
-
+    [self willChangeValueForKey:@"isExecuting"];
+    [self willChangeValueForKey:@"isFinished"];
     
-    [super cancel];
-    [self finish];
+    _isExecuting = NO;
+    _isFinished = YES;
+    
+    [self didChangeValueForKey:@"isExecuting"];
+    [self didChangeValueForKey:@"isFinished"];
+    
 }
 
+- (BOOL)isExecuting {
+    return _isExecuting;
+}
+
+- (BOOL)isFinished {
+    return _isFinished;
+}
 #pragma mark - Pinger delegate
 
 // When the pinger starts, send the ping immediately
 - (void)simplePing:(SimplePing *)pinger didStartWithAddress:(NSData *)address {
+    
+    if (self.isCancelled) {
+        [self finish];
+        return;
+    }
     
     [pinger sendPingWithData:nil];
     //NSLog(@"start");

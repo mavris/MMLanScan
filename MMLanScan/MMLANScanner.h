@@ -5,6 +5,12 @@
 //  Copyright © 2016 Miksoft. All rights reserved.
 //
 
+typedef enum {
+    MMLanScannerStatusFinished,
+    MMLanScannerStatusCancelled
+}
+MMLanScannerStatus;
+
 #import <Foundation/Foundation.h>
 
 @class Device;
@@ -40,7 +46,7 @@
  }
  @endcode
  */
-- (void)lanScanDidFinishScanning;
+- (void)lanScanDidFinishScanningWithStatus:(MMLanScannerStatus)status;
 
 /*!
  @brief This delegate is called in case the LAN scan has failed
@@ -67,8 +73,25 @@
 @interface MMLANScanner : NSObject
 
 @property(nonatomic,weak) id<MMLANScannerDelegate> delegate;
-
+/*!
+ @brief Custom init method. Always use this method to initialize MMLANScanner
+ @param delegate The object that will receive the messages from MMLANScanner
+ @code
+ self.lanScanner = [[MMLANScanner alloc] initWithDelegate:self];
+ @endcode
+ */
 -(instancetype)initWithDelegate:(id <MMLANScannerDelegate>)delegate;
+/*!
+ @brief A bool property that lets you know when the MMLANScanner is scanning. KVO compliant
+ */
+@property(nonatomic,assign,readonly)BOOL isScanning;
+
+/*!
+ @brief Starts the scanning
+ */
 - (void)start;
+/*!
+ @brief Stops the scanning
+ */
 - (void)stop;
 @end

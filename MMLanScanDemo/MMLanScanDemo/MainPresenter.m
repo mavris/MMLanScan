@@ -7,69 +7,113 @@
 //
 
 #import "MainPresenter.h"
-#import "Device.h"
 #import "LANProperties.h"
 #import "MMLANScanner.h"
+#import "Device.h"
 
 @interface MainPresenter()<MMLANScannerDelegate>
 
 @property (nonatomic,weak)id <MainPresenterDelegate> delegate;
 @property(nonatomic,strong)MMLANScanner *lanScanner;
+@property(nonatomic,assign,readwrite)BOOL isScanRunning;
+@property(nonatomic,assign,readwrite)float progressValue;
 @end
 
-@implementation MainPresenter
+@implementation MainPresenter {
+    NSMutableArray *connectedDevicesMutable;
+}
 
+#pragma mark - Init method
 -(instancetype)initWithDelegate:(id <MainPresenterDelegate>)delegate {
 
     self = [super init];
     
     if (self) {
-    
+        
+        self.isScanRunning=NO;
+       
         self.delegate=delegate;
+        
         self.lanScanner = [[MMLANScanner alloc] initWithDelegate:self];
     }
     
     return self;
 }
 
+#pragma mark - Button Actions
+-(void)scanButtonClicked {
+    
+    //Checks if is already scanning
+    if (self.isScanRunning) {
+        
+        [self stopNetworkScan];
+    }
+    else {
+        
+        [self startNetworkScan];
+    }
+    
+}
 -(void)startNetworkScan {
-    [self.lanScanner stop];
-    self.connectedDevices = [[NSMutableArray alloc] init];
+    
+    self.isScanRunning=YES;
+    
+    connectedDevicesMutable = [[NSMutableArray alloc] init];
+    
     [self.lanScanner start];
-
 };
 
+-(void)stopNetworkScan {
+    
+    [self.lanScanner stop];
+    
+    self.isScanRunning=NO;
+}
+
+#pragma mark - SSID
 -(NSString*)ssidName {
 
     return [NSString stringWithFormat:@"SSID: %@",[LANProperties fetchSSIDInfo]];
 };
 
-#pragma mark LAN Scanner delegate method
+#pragma mark - MMLANScannerDelegate methods
 -(void)lanScanDidFindNewDevice:(Device*)device{
     
     //Check if the Device is already added
-    if (![self.connectedDevices containsObject:device]) {
+    if (![connectedDevicesMutable containsObject:device]) {
 
-        [self.connectedDevices addObject:device];
+        [connectedDevicesMutable addObject:device];
     }
     
-    [self.delegate mainPresenterIPArrayChanged];
+    //Updating the array that holds the data. MainVC will be notified by KVO
+    self.connectedDevices = [NSArray arrayWithArray:connectedDevicesMutable];
 }
 
--(void)lanScanDidFinishScanning{
+-(void)lanScanDidFinishScanningWithStatus:(MMLanScannerStatus)status{
+   
+    self.isScanRunning=NO;
     
-    [self.delegate mainPresenterIPSearchFinished];
-    
+    //Checks the status of finished. Then call the appropriate method
+    if (status == MMLanScannerStatusFinished) {
+        
+        [self.delegate mainPresenterIPSearchFinished];
+    }
+    else if (status==MMLanScannerStatusCancelled) {
+       
+        [self.delegate mainPresenterIPSearchCancelled];
+    }
 }
 
 -(void)lanScanProgressPinged:(float)pingedHosts from:(NSInteger)overallHosts {
     
-    [self.delegate mainPresenterUpdateProgressBarWithValue:pingedHosts/overallHosts];
-    
+    //Updating the progress value. MainVC will be notified by KVO
+    self.progressValue=pingedHosts/overallHosts;
 }
 
 -(void)lanScanDidFailedToScan {
-    
+   
+    self.isScanRunning=NO;
+
     [self.delegate mainPresenterIPSearchFailed];
 }
 

@@ -9,15 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @protocol  MainPresenterDelegate
--(void)mainPresenterIPArrayChanged;
 -(void)mainPresenterIPSearchFinished;
+-(void)mainPresenterIPSearchCancelled;
 -(void)mainPresenterIPSearchFailed;
--(void)mainPresenterUpdateProgressBarWithValue:(float)progressValue;
 @end
 
 @interface MainPresenter : NSObject
+@property(nonatomic,strong)NSArray *connectedDevices;
+@property(nonatomic,assign,readonly)float progressValue;
+@property(nonatomic,assign,readonly)BOOL isScanRunning;
 -(instancetype)initWithDelegate:(id <MainPresenterDelegate>)delegate;
--(void)startNetworkScan;
+-(void)scanButtonClicked;
 -(NSString*)ssidName;
-@property NSMutableArray *connectedDevices;
 @end

@@ -26,7 +26,6 @@
 		82194E9D1DCC7F49003F2BA1 /* MainPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 82194E9C1DCC7F49003F2BA1 /* MainPresenter.m */; };
 		8224B5B81DCB7AAC00AE606F /* MACOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8224B5B51DCB7AAC00AE606F /* MACOperation.m */; };
 		8224B5B91DCB7AAC00AE606F /* PingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8224B5B71DCB7AAC00AE606F /* PingOperation.m */; };
-		8224B5BC1DCB7CE900AE606F /* PAOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8224B5BB1DCB7CE900AE606F /* PAOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,8 +68,6 @@
 		8224B5B51DCB7AAC00AE606F /* MACOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MACOperation.m; path = ../../MMLanScan/MACOperation.m; sourceTree = "<group>"; };
 		8224B5B61DCB7AAC00AE606F /* PingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PingOperation.h; path = ../../MMLanScan/PingOperation.h; sourceTree = "<group>"; };
 		8224B5B71DCB7AAC00AE606F /* PingOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PingOperation.m; path = ../../MMLanScan/PingOperation.m; sourceTree = "<group>"; };
-		8224B5BA1DCB7CE900AE606F /* PAOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAOperation.h; path = ../../MMLanScan/PAOperation.h; sourceTree = "<group>"; };
-		8224B5BB1DCB7CE900AE606F /* PAOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAOperation.m; path = ../../MMLanScan/PAOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,8 +196,6 @@
 		27F479D41DCBF19D00672012 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				8224B5BA1DCB7CE900AE606F /* PAOperation.h */,
-				8224B5BB1DCB7CE900AE606F /* PAOperation.m */,
 				8224B5B41DCB7AAC00AE606F /* MACOperation.h */,
 				8224B5B51DCB7AAC00AE606F /* MACOperation.m */,
 				8224B5B61DCB7AAC00AE606F /* PingOperation.h */,
@@ -275,7 +270,7 @@
 				TargetAttributes = {
 					279335C11D5D1CB9001DFE84 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = JXBR3H32QW;
+						DevelopmentTeam = JSY962FCU8;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -318,7 +313,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8224B5BC1DCB7CE900AE606F /* PAOperation.m in Sources */,
 				279335DE1D5D1CE5001DFE84 /* MainVC.m in Sources */,
 				279335CA1D5D1CB9001DFE84 /* AppDelegate.m in Sources */,
 				279335F61D5D2129001DFE84 /* Device.m in Sources */,
@@ -449,7 +443,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JXBR3H32QW;
+				DEVELOPMENT_TEAM = JSY962FCU8;
 				INFOPLIST_FILE = "$(SRCROOT)/MMLanScanDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -463,7 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JXBR3H32QW;
+				DEVELOPMENT_TEAM = JSY962FCU8;
 				INFOPLIST_FILE = "$(SRCROOT)/MMLanScanDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

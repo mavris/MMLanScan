@@ -14,6 +14,11 @@
 @property (nonatomic,strong) NSString *ipStr;
 @property (nonatomic, copy) void (^result)(NSError  * _Nullable error, NSString  * _Nonnull ip,Device * _Nonnull device);
 @property(nonnull,strong)Device *device;
+@property(nonnull,strong)NSDictionary *brandDictionary;
+@end
+
+@interface MACOperation()
+- (void)finish;
 @end
 
 @implementation MACOperation {
@@ -21,7 +26,7 @@
     NSError *errorMessage;
 }
 
--(instancetype)initWithIPToRetrieveMAC:(NSString*)ip andCompletionHandler:(nullable void (^)(NSError  * _Nullable error, NSString  * _Nonnull ip,Device * _Nonnull device))result;{
+-(instancetype)initWithIPToRetrieveMAC:(NSString*)ip andBrandDictionary:(NSDictionary*)brandDictionary andCompletionHandler:(nullable void (^)(NSError  * _Nullable error, NSString  * _Nonnull ip,Device * _Nonnull device))result;{
 
     self = [super init];
     
@@ -31,6 +36,10 @@
         self.name = ip;
         self.ipStr= ip;
         self.result = result;
+        self.brandDictionary=brandDictionary;
+        _isExecuting = NO;
+        _isFinished = NO;
+
     }
     
     return self;
@@ -38,23 +47,55 @@
 
 -(void)start {
 
-    [super start];
+    if ([self isCancelled]) {
+        [self willChangeValueForKey:@"isFinished"];
+        _isFinished = YES;
+        [self didChangeValueForKey:@"isFinished"];
+        return;
+    }
+    
+    
+    [self willChangeValueForKey:@"isExecuting"];
+    _isExecuting = YES;
+    [self didChangeValueForKey:@"isExecuting"];
+
     [self getMACDetails];
 }
 -(void)finishMAC {
    
+    if (self.isCancelled) {
+        [self finish];
+        return;
+    }
+    
     if (self.result) {
         self.result(errorMessage,self.name,self.device);
     }
 
     [self finish];
 }
--(void)cancel{
+
+-(void)finish {
     
-    [super cancel];
-    [self finish];
+    [self willChangeValueForKey:@"isExecuting"];
+    [self willChangeValueForKey:@"isFinished"];
+    
+    _isExecuting = NO;
+    _isFinished = YES;
+    
+    [self didChangeValueForKey:@"isExecuting"];
+    [self didChangeValueForKey:@"isFinished"];
+    
 }
-    
+
+- (BOOL)isExecuting {
+    return _isExecuting;
+}
+
+- (BOOL)isFinished {
+    return _isFinished;
+}
+
 #pragma mark - Ping Result callback
 -(void)getMACDetails{
     
@@ -65,6 +106,10 @@
     if (!self.device.macAddress) {
  
         errorMessage = [NSError errorWithDomain:@"MAC Address Not Exist" code:10 userInfo:nil];
+    }
+    else {
+        //Retrieving brand for the specific MAC Address
+        self.device.brand = [self.brandDictionary objectForKey:[[self.device.macAddress substringWithRange:NSMakeRange(0, 8)] stringByReplacingOccurrencesOfString:@":" withString:@"-"]];
     }
 
     [self finishMAC];
