@@ -1,7 +1,6 @@
 
 # Xcode
 #
-# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 ## Build generated
 build/
@@ -9,6 +8,7 @@ DerivedData/
 
 ##MacOSX Generated
 **/.DS_Store
+.DS_Store
 
 ## Various settings
 *.pbxuser
@@ -53,3 +53,10 @@ Carthage/Build
 
 fastlane/report.xml
 fastlane/screenshots
+.DS_Store
+
+MMLanScanDemo/.DS_Store
+
+MMLanScanDemo/.DS_Store
+
+.DS_Store
