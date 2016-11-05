@@ -8,7 +8,7 @@ build/
 DerivedData/
 
 ##MacOSX Generated
-.DS_Store
+**/.DS_Store
 
 ## Various settings
 *.pbxuser
