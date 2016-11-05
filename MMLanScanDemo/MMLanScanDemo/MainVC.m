@@ -30,14 +30,18 @@
     
     //Initializing the presenter
     self.presenter = [[MainPresenter alloc]initWithDelegate:self];
-    
+   
     //Adding observers to presenter (in order to update the UI)
+    [self addObserversForKVO];
+   
+    //This is not a production code. Run this command only if you have a new OUI.txt file to parse. After parsing the default location of data.plist will be on DocumentsDirectory. Then you can add the new data.plist to your project and build it.
+    //[OUIParser parseOUIWithSourceFilePath:nil andOutputFilePath:nil];
+}
+-(void)addObserversForKVO {
+    
     [self.presenter addObserver:self forKeyPath:@"connectedDevices" options:NSKeyValueObservingOptionNew context:nil];
     [self.presenter addObserver:self forKeyPath:@"progressValue" options:NSKeyValueObservingOptionNew context:nil];
     [self.presenter addObserver:self forKeyPath:@"isScanRunning" options:NSKeyValueObservingOptionNew context:nil];
-
-    //This is not a production code. Run this command only if you have a new OUI.txt file to parse. After parsing the default location of data.plist will be on DocumentsDirectory. Then you can add the new data.plist to your project and build it.
-    //[OUIParser parseOUIWithSourceFilePath:nil andOutputFilePath:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -153,10 +157,16 @@
             
             BOOL isScanRunning= [[change valueForKey:NSKeyValueChangeNewKey] boolValue];
     
-            [self.scanButton setImage:isScanRunning ? [UIImage imageNamed:@"stopBarButton"] :[UIImage imageNamed:@"refreshBarButton"]];
-            
+            [self.scanButton setImage: isScanRunning ? [UIImage imageNamed:@"stopBarButton"] : [UIImage imageNamed:@"refreshBarButton"]];
         }
     }
+}
+
+-(void)dealloc {
+    
+    [self.presenter removeObserver:self forKeyPath:@"connectedDevices"];
+    [self.presenter removeObserver:self forKeyPath:@"progressValue"];
+    [self.presenter removeObserver:self forKeyPath:@"isScanRunning"];
 }
 
 @end
