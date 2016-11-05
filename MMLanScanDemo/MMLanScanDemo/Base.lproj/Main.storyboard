@@ -42,7 +42,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nDz-jn-o1z" id="Xmf-Jn-nu3">
-                                            <frame key="frameInset" width="375" height="60"/>
+                                            <frame key="frameInset" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="192.168.111.200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7Y-Yh-Vjx">
@@ -202,9 +202,9 @@
                                 <exclude reference="hAg-I0-HZX"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="R7H-xB-i2S"/>
                                 <exclude reference="PJR-2O-K7c"/>
                                 <exclude reference="mCo-kO-ixd"/>
-                                <exclude reference="R7H-xB-i2S"/>
                                 <exclude reference="6zf-fi-peW"/>
                                 <exclude reference="IMh-wN-xAo"/>
                                 <exclude reference="OsR-ik-NLx"/>
@@ -217,9 +217,9 @@
                                 <include reference="hAg-I0-HZX"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="R7H-xB-i2S"/>
                                 <include reference="PJR-2O-K7c"/>
                                 <include reference="mCo-kO-ixd"/>
-                                <include reference="R7H-xB-i2S"/>
                                 <include reference="6zf-fi-peW"/>
                                 <include reference="IMh-wN-xAo"/>
                                 <include reference="OsR-ik-NLx"/>
@@ -228,7 +228,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="2XS-0u-aEc">
-                        <barButtonItem key="rightBarButtonItem" image="refreshBarButton" style="plain" id="6Ed-kZ-4ZF">
+                        <barButtonItem key="rightBarButtonItem" image="refreshBarButton" id="6Ed-kZ-4ZF">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="refresh:" destination="BYZ-38-t0r" id="3p3-mW-WsL"/>

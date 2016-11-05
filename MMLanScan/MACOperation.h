@@ -6,8 +6,11 @@
 //
 
 #import "SimplePing.h"
+
 @class Device;
-@interface MACOperation: NSOperation{
+
+@interface MACOperation: NSOperation {
+    
     BOOL _isFinished;
     BOOL _isExecuting;
 }

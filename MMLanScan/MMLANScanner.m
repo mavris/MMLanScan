@@ -117,7 +117,7 @@
                 });
             }
             
-            //Letting now the delegate the process
+            //Letting now the delegate the process  (on Main Thread)
             dispatch_async (dispatch_get_main_queue(), ^{
                 if ([weakSelf.delegate respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
                     [weakSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
@@ -136,11 +136,11 @@
 }
 
 -(void)stop {
+    
     isCancelled = YES;
     [self.queue cancelAllOperations];
     [self.queue waitUntilAllOperationsAreFinished];
     self.isScanning = NO;
-
 }
 
 #pragma mark - NSOperationQueue Observer

@@ -165,9 +165,9 @@
 			isa = PBXGroup;
 			children = (
 				27F479D61DCBF1D500672012 /* LAN Scan Libs */,
+				27F479D41DCBF19D00672012 /* Operations */,
 				27F479D51DCBF1BA00672012 /* External Libs */,
 				279336011D5D2177001DFE84 /* Headers */,
-				27F479D41DCBF19D00672012 /* Operations */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";

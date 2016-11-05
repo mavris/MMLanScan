@@ -13,8 +13,8 @@
 @interface MACOperation ()
 @property (nonatomic,strong) NSString *ipStr;
 @property (nonatomic, copy) void (^result)(NSError  * _Nullable error, NSString  * _Nonnull ip,Device * _Nonnull device);
-@property(nonnull,strong)Device *device;
-@property(nonnull,strong)NSDictionary *brandDictionary;
+@property(nonatomic,strong)Device *device;
+@property(nonatomic,weak)NSDictionary *brandDictionary;
 @end
 
 @interface MACOperation()
