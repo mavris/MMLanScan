@@ -1,14 +1,13 @@
 //
 //  MMLANScan-Bridging-Header.h
-//  MMLanScanDemo
+//  MMLanScanSwiftDemo
 //
-//  Created by Michael Mavris on 04/11/2016.
+//  Created by Michalis Mavris on 06/11/2016.
 //  Copyright © 2016 Miksoft. All rights reserved.
 //
 
 #ifndef MMLANScan_Bridging_Header_h
 #define MMLANScan_Bridging_Header_h
-
 #import "MMLANScanner.h"
 #import "LANProperties.h"
 #import "PingOperation.h"
@@ -16,5 +15,4 @@
 #import "MACOperation.h"
 #import "MacFinder.h"
 #import "Device.h"
-
 #endif /* MMLANScan_Bridging_Header_h */

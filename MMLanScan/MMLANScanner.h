@@ -56,8 +56,8 @@ MMLanScannerStatus;
 @optional
 /*!
  @brief This delegate is called each time a new host is pinged
- @param pingedHost The number of hosts pinged so far
- @param overalHosts The number of all available hosts to ping
+ @param pingedHosts The number of hosts pinged so far
+ @param overallHosts The number of all available hosts to ping
  @code
  - (void)lanScanProgressPinged:(NSInteger)pingedHosts from:(NSInteger)overallHosts {
  

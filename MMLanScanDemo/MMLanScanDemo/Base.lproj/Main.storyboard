@@ -189,7 +189,7 @@
                             <constraint firstItem="hAg-I0-HZX" firstAttribute="top" secondItem="MNB-Sm-KTC" secondAttribute="bottom" constant="21" id="6zf-fi-peW"/>
                             <constraint firstAttribute="trailing" secondItem="hAg-I0-HZX" secondAttribute="trailing" id="IMh-wN-xAo"/>
                             <constraint firstItem="hAg-I0-HZX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="OsR-ik-NLx">
-                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
                             </constraint>
                             <constraint firstAttribute="trailing" secondItem="MNB-Sm-KTC" secondAttribute="trailing" constant="8" id="PJR-2O-K7c"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hAg-I0-HZX" secondAttribute="bottom" id="R7H-xB-i2S"/>

@@ -19,7 +19,7 @@ MMLanScan is an open source project for iOS that helps you scan your network and
 ###Installation
 - Drag n Drop the MMLanScan folder in your project.
 
-###How to use it
+###How to use it (Objective C)
 
 Import MMLANScanner in your controller
 ```
@@ -53,6 +53,9 @@ Implement the delegates methods to receive events
 - (void)lanScanProgressPinged:(NSInteger)pingedHosts from:(NSInteger)overallHosts;
 - (void)lanScanDidFailedToScan;
 ```
+
+###How to use it (Swift)
+
 
 ###How it works
 MMLanScan works like the classic network scanner. It first ping every host in the network in order to built the ARP table and then is trying to get the MAC Address for each host. If a MAC Address is found then it's considered that the host exist in the network.
