@@ -95,7 +95,7 @@ Implement the delegates methods to receive events
 func lanScanDidFindNewDevice(_ device: Device!)
 func lanScanDidFinishScanning(with status: MMLanScannerStatus)
 func lanScanProgressPinged(_ pingedHosts: Float, from overallHosts: Int)
-func lanScanDidFailedToScan() {
+func lanScanDidFailedToScan()
 ```
 
 ###Project Demo
