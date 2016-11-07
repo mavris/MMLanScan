@@ -5,38 +5,50 @@
 //  Copyright © 2016 Miksoft. All rights reserved.
 //
 
-#import "MMLANScanner.h"
-#import "Device.h"
 #import "LANProperties.h"
-#import "SimplePingHelper.h"
+#import "PingOperation.h"
+#import "MMLANScanner.h"
+#import "MACOperation.h"
 #import "MacFinder.h"
-#import "PingResult.h"
-
+#import "Device.h"
 
 @interface MMLANScanner ()
-@property (nonatomic,strong) Device *dv;
+@property (nonatomic,strong) Device *device;
 @property (nonatomic,strong) NSArray *ipsToPing;
-@property (nonatomic,assign) NSInteger numOfHostsToPing;
-@property (nonatomic,assign) NSInteger currentHost;
-@property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic,assign) float currentHost;
 @property (nonatomic,strong) NSDictionary *brandDictionary;
+@property (nonatomic,strong) NSOperationQueue *queue;
+@property(nonatomic,assign,readwrite)BOOL isScanning;
 @end
 
-//Ping interval
-const float interval = 0.1;
-
-@implementation MMLANScanner
+@implementation MMLANScanner {
+    BOOL isFinished;
+    BOOL isCancelled;
+}
 
 #pragma mark - Initialization method
 -(instancetype)initWithDelegate:(id<MMLANScannerDelegate>)delegate {
 
-    self =[super init];
+    self = [super init];
     
     if (self) {
-        
+        //Setting the delegate
         self.delegate=delegate;
+        
+        //Initializing the dictionary that holds the Brands name for each MAC Address
         self.brandDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"]];
-
+        
+        //Initializing the NSOperationQueue
+        self.queue = [[NSOperationQueue alloc] init];
+        //Setting the concurrent operations to 50
+        [self.queue setMaxConcurrentOperationCount:50];
+        
+        //Add observer to notify the delegate when queue is empty.
+        [self.queue addObserver:self forKeyPath:@"operations" options:0 context:nil];
+        
+        isFinished = NO;
+        isCancelled = NO;
+        self.isScanning = NO;
     }
     
     return self;
@@ -44,68 +56,118 @@ const float interval = 0.1;
 
 #pragma mark - Start/Stop ping
 -(void)start {
-
-    self.dv = [LANProperties localIPAddress];
     
-    if (!self.dv) {
-        
+    //In case the developer call start when is already running
+    if (self.queue.operationCount!=0) {
+        [self stop];
+    }
+
+    isFinished = NO;
+    isCancelled = NO;
+    self.isScanning = YES;
+
+    //Getting the local IP
+    self.device = [LANProperties localIPAddress];
+    
+    //If IP is null then return
+    if (!self.device) {
         [self.delegate lanScanDidFailedToScan];
         return;
     }
     
-    self.ipsToPing = [LANProperties getAllHostsForIP:self.dv.ipAddress andSubnet:self.dv.subnetMask];
-    self.numOfHostsToPing = [self.ipsToPing count];
-    self.currentHost=-1;
+    //Getting the available IPs to ping based on our network subnet.
+    self.ipsToPing = [LANProperties getAllHostsForIP:self.device.ipAddress andSubnet:self.device.subnetMask];
+
+    //The counter of how much pings have been made
+    self.currentHost=0;
+
+    //Making a weak reference to self in order to use it from the completionBlocks in operation.
+    MMLANScanner * __weak weakSelf = self;
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(pingAddress) userInfo:nil repeats:YES];
+    //Looping through IPs array
+    for (NSString *ipStr in self.ipsToPing) {
+        
+        //The ping operation
+        PingOperation *pingOperation = [[PingOperation alloc]initWithIPToPing:ipStr andCompletionHandler:^(NSError  * _Nullable error, NSString  * _Nonnull ip) {
+            if (!weakSelf) {
+                return;
+            }
+            //Since the first half of the operation is completed we will update our proggress by 0.5
+            weakSelf.currentHost = weakSelf.currentHost + 0.5;
+            
+        }];
+        
+        //The Find MAC Address for each operation
+        MACOperation *macOperation = [[MACOperation alloc] initWithIPToRetrieveMAC:ipStr andBrandDictionary:self.brandDictionary andCompletionHandler:^(NSError * _Nullable error, NSString * _Nonnull ip, Device * _Nonnull device) {
+            
+            if (!weakSelf) {
+                return;
+            }
+            
+            //Since the second half of the operation is completed we will update our proggress by 0.5
+            weakSelf.currentHost = weakSelf.currentHost + 0.5;
+
+            if (!error) {
+                
+                //Letting know the delegate that found a new device (on Main Thread)
+                dispatch_async (dispatch_get_main_queue(), ^{
+                    if ([weakSelf.delegate respondsToSelector:@selector(lanScanDidFindNewDevice:)]) {
+                        [weakSelf.delegate lanScanDidFindNewDevice:device];
+                    }
+                });
+            }
+            
+            //Letting now the delegate the process  (on Main Thread)
+            dispatch_async (dispatch_get_main_queue(), ^{
+                if ([weakSelf.delegate respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
+                    [weakSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
+                }
+            });
+        }];
+
+        //Adding dependancy on macOperation. For each IP there 2 operations (macOperation and pingOperation). The dependancy makes sure that macOperation will run after pingOperation
+        [macOperation addDependency:pingOperation];
+        //Adding the operations in the queue
+        [self.queue addOperation:pingOperation];
+        [self.queue addOperation:macOperation];
+        
+    }
+
 }
 
 -(void)stop {
-    if (self.timer) {
-        [self.timer invalidate];
-    }
+    
+    isCancelled = YES;
+    [self.queue cancelAllOperations];
+    [self.queue waitUntilAllOperationsAreFinished];
+    self.isScanning = NO;
 }
 
-#pragma mark - Ping method
--(void)pingAddress{
-    
-    self.currentHost++;
+#pragma mark - NSOperationQueue Observer
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
    
-    [self.delegate lanScanProgressPinged:self.currentHost+1 from:self.numOfHostsToPing];
-    
-    NSString *address = self.ipsToPing[self.currentHost];
- 
-    [SimplePingHelper ping:address target:self sel:@selector(pingResult:) andCount:self.currentHost];
-    
-    if (self.currentHost==self.numOfHostsToPing-1) {
+    //Observing the NSOperationQueue and as soon as it finished we send a message to delegate
+    if ([keyPath isEqualToString:@"operations"]) {
         
-        [self.timer invalidate];
-    }
-}
-
-#pragma mark - Ping Result callback
-- (void)pingResult:(PingResult*)pr {
-    
-    
-    Device *curDevice = [[Device alloc]init];
-    curDevice.ipAddress=pr.ipAddress;
-    curDevice.macAddress =[[MacFinder ip2mac:curDevice.ipAddress] uppercaseString];
-    curDevice.hostname = [LANProperties getHostFromIPAddress:pr.ipAddress];
-    
-    if (curDevice.macAddress || pr.success) {
-        
-        if (curDevice.macAddress) {
-
-            curDevice.brand = [self.brandDictionary objectForKey:[[curDevice.macAddress substringWithRange:NSMakeRange(0, 8)] stringByReplacingOccurrencesOfString:@":" withString:@"-"]];
+        if (self.queue.operationCount == 0 && isFinished == NO) {
+            
+            isFinished=YES;
+            self.isScanning = NO;
+            //Checks if is cancelled to sent the appropriate message to delegate
+            MMLanScannerStatus currentStatus = isCancelled ? MMLanScannerStatusCancelled : MMLanScannerStatusFinished;
+            
+            //Letting know the delegate that the request is finished
+            dispatch_async (dispatch_get_main_queue(), ^{
+                if ([self.delegate respondsToSelector:@selector(lanScanDidFinishScanningWithStatus:)]) {
+                    [self.delegate lanScanDidFinishScanningWithStatus:currentStatus];
+                }
+            });
         }
-        
-        [self.delegate lanScanDidFindNewDevice:curDevice];
-    }
-    
-    if (pr.ipCount==self.numOfHostsToPing-1) {
-        
-        [self.delegate lanScanDidFinishScanning];
     }
 }
-
+#pragma mark - Dealloc
+-(void)dealloc {
+    //Removing the observer on dealloc
+    [self.queue removeObserver:self forKeyPath:@"operations"];
+}
 @end

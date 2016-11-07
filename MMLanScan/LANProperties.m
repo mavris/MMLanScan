@@ -5,13 +5,13 @@
 //  Copyright © 2016 Miksoft. All rights reserved.
 //
 
+#import <SystemConfiguration/CaptiveNetwork.h>
+#import "NetworkCalculator.h"
 #import "LANProperties.h"
 #import "Device.h"
 #import <ifaddrs.h>
 #import <arpa/inet.h>
 #include <netdb.h>
-#import <SystemConfiguration/CaptiveNetwork.h>
-#import "NetworkCalculator.h"
 
 @implementation LANProperties
 

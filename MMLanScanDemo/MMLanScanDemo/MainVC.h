@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MainVC : UIViewController
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *scanButton;
 
 @end
