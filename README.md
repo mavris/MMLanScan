@@ -100,7 +100,7 @@ func lanScanDidFailedToScan()
 
 ###Project Demo
 You can find project demos available in Swift or Objective-C. Feel free to copy/use them for your product.
-Note: Project demos are written using software design patterns MVVM
+Note: Project demos are written using software design pattern [MVVM](https://www.objc.io/issues/13-architecture/mvvm/)
 
 ###How it works
 MMLanScan works like the classic network scanner. It first ping every host in the network in order to built the ARP table and then is trying to get the MAC Address for each host. If a MAC Address is found then it's considered that the host exist in the network.
