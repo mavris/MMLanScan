@@ -66,26 +66,36 @@ After Drag n Drop the MMLanScan folder in your Swift project Xcode will ask you 
 #import "Device.h"
 ```
 Add the MMLANSCannerDelegate (Protocol) to your controller
-```class MyVC: NSObject, MMLANScannerDelegate {```
+```
+class MyVC: NSObject, MMLANScannerDelegate 
+```
 
 Declare the variable for the MMLanScanner
-```var lanScanner : MMLANScanner!```
+```
+var lanScanner : MMLANScanner!
+```
 
 Initialise the MMLanScanner (after self is initialised)
-```self.lanScanner = MMLANScanner(delegate:self)```
+```
+self.lanScanner = MMLANScanner(delegate:self)
+```
 
 And finally start the scan:
-```self.lanScanner.start()```
+```
+self.lanScanner.start()
+```
 
 Or stop the scan
-```self.lanScanner.stop()```
+```
+self.lanScanner.stop()
+```
 
 Implement the delegates methods to receive events
 ```
 func lanScanDidFindNewDevice(_ device: Device!)
-func lanScanDidFailedToScan() {
 func lanScanDidFinishScanning(with status: MMLanScannerStatus)
 func lanScanProgressPinged(_ pingedHosts: Float, from overallHosts: Int)
+func lanScanDidFailedToScan() {
 ```
 
 ###Project Demo
