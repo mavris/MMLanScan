@@ -112,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				82194E9A1DCC7F22003F2BA1 /* MainVC */,
-				2701AA311D61FD9D0058128B /* OUI */,
 				279336021D5D2182001DFE84 /* Objects */,
 				279336001D5D2171001DFE84 /* Libraries */,
 				279335E11D5D1F27001DFE84 /* Cells */,
@@ -126,6 +125,7 @@
 		279335C51D5D1CB9001DFE84 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2701AA311D61FD9D0058128B /* OUI */,
 				279335D11D5D1CB9001DFE84 /* Assets.xcassets */,
 				279335D61D5D1CB9001DFE84 /* Info.plist */,
 				279335C61D5D1CB9001DFE84 /* main.m */,

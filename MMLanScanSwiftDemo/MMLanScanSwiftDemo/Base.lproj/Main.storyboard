@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vfp-nB-Lgh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vfp-nB-Lgh">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,6 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ly9-nl-u3z">
+                                <rect key="frame" x="8" y="41" width="359" height="2"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="DIc-nO-dpS"/>
                                 </constraints>
@@ -36,16 +40,18 @@
                                 </variation>
                             </progressView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aY9-Rc-ucR">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DeviceCell" rowHeight="60" id="rWf-1Y-9q1" customClass="DeviceCell" customModule="MMLanScanSwiftDemo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rWf-1Y-9q1" id="2Bc-wE-xPO">
-                                            <frame key="frameInset" width="375" height="59"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="192.168.111.200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOB-Vq-LGA">
+                                                    <rect key="frame" x="8" y="8" width="166" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="PYm-Qg-3qZ"/>
                                                         <constraint firstAttribute="width" constant="166" id="ptS-g0-Mv5"/>
@@ -67,11 +73,13 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A1:B2:C3:D4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vse-sS-eGY">
+                                                    <rect key="frame" x="8" y="30" width="166" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brand" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TbX-Hz-6Cy">
+                                                    <rect key="frame" x="182" y="3" width="185" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="g5O-Ul-qSx"/>
                                                     </constraints>
@@ -90,6 +98,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dvc-gl-jtW">
+                                                    <rect key="frame" x="182" y="38" width="185" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Fmb-eC-VvR"/>
                                                     </constraints>
@@ -131,19 +140,19 @@
                                                     <exclude reference="dvc-gl-jtW"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="FFc-KA-niO"/>
-                                                    <exclude reference="Y92-7p-fkb"/>
-                                                    <exclude reference="a8Z-BW-GfC"/>
+                                                    <exclude reference="IPF-wv-pYt"/>
+                                                    <exclude reference="qDr-Ok-UAo"/>
+                                                    <exclude reference="wdJ-Sr-CkB"/>
                                                     <exclude reference="SV5-OQ-rxF"/>
                                                     <exclude reference="pxW-1V-nCp"/>
                                                     <exclude reference="smk-pm-zOt"/>
                                                     <exclude reference="xrf-uy-Gb2"/>
+                                                    <exclude reference="FFc-KA-niO"/>
+                                                    <exclude reference="Y92-7p-fkb"/>
+                                                    <exclude reference="a8Z-BW-GfC"/>
                                                     <exclude reference="5gv-OV-9Hq"/>
                                                     <exclude reference="8Ne-6g-WGu"/>
                                                     <exclude reference="gSt-xy-uue"/>
-                                                    <exclude reference="IPF-wv-pYt"/>
-                                                    <exclude reference="qDr-Ok-UAo"/>
-                                                    <exclude reference="wdJ-Sr-CkB"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -154,19 +163,19 @@
                                                     <include reference="dvc-gl-jtW"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="FFc-KA-niO"/>
-                                                    <include reference="Y92-7p-fkb"/>
-                                                    <include reference="a8Z-BW-GfC"/>
+                                                    <include reference="IPF-wv-pYt"/>
+                                                    <include reference="qDr-Ok-UAo"/>
+                                                    <exclude reference="wdJ-Sr-CkB"/>
                                                     <include reference="SV5-OQ-rxF"/>
                                                     <include reference="pxW-1V-nCp"/>
                                                     <include reference="smk-pm-zOt"/>
                                                     <include reference="xrf-uy-Gb2"/>
+                                                    <include reference="FFc-KA-niO"/>
+                                                    <include reference="Y92-7p-fkb"/>
+                                                    <include reference="a8Z-BW-GfC"/>
                                                     <include reference="5gv-OV-9Hq"/>
                                                     <include reference="8Ne-6g-WGu"/>
                                                     <include reference="gSt-xy-uue"/>
-                                                    <include reference="IPF-wv-pYt"/>
-                                                    <include reference="qDr-Ok-UAo"/>
-                                                    <exclude reference="wdJ-Sr-CkB"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -178,6 +187,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="OSa-Z6-Wcq"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="hGa-PK-iRP"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -195,11 +208,14 @@
                     <navigationItem key="navigationItem" id="y3S-Zg-gej">
                         <barButtonItem key="rightBarButtonItem" image="refreshBarButton" id="hfc-qv-Dk0">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="refresh:" destination="BYZ-38-t0r" id="EmL-zk-umc"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="navigationBarTitle" destination="y3S-Zg-gej" id="gRj-ML-WZl"/>
+                        <outlet property="navigationBarTitle" destination="y3S-Zg-gej" id="yRJ-Li-z4o"/>
                         <outlet property="progressView" destination="Ly9-nl-u3z" id="ab9-Fj-3m1"/>
                         <outlet property="scanButton" destination="hfc-qv-Dk0" id="PAt-cz-5Mj"/>
                         <outlet property="tableV" destination="aY9-Rc-ucR" id="hJc-4h-nhv"/>

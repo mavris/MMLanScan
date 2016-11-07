@@ -55,7 +55,42 @@ Implement the delegates methods to receive events
 ```
 
 ###How to use it (Swift)
+After Drag n Drop the MMLanScan folder in your Swift project Xcode will ask you to create a bridging header. Create the bridging header and copy paste the following between `#define` and `#endif`:
+```
+#import "MMLANScanner.h"
+#import "LANProperties.h"
+#import "PingOperation.h"
+#import "MMLANScanner.h"
+#import "MACOperation.h"
+#import "MacFinder.h"
+#import "Device.h"
+```
+Add the MMLANSCannerDelegate (Protocol) to your controller
+```class MyVC: NSObject, MMLANScannerDelegate {```
 
+Declare the variable for the MMLanScanner
+```var lanScanner : MMLANScanner!```
+
+Initialise the MMLanScanner (after self is initialised)
+```self.lanScanner = MMLANScanner(delegate:self)```
+
+And finally start the scan:
+```self.lanScanner.start()```
+
+Or stop the scan
+```self.lanScanner.stop()```
+
+Implement the delegates methods to receive events
+```
+func lanScanDidFindNewDevice(_ device: Device!)
+func lanScanDidFailedToScan() {
+func lanScanDidFinishScanning(with status: MMLanScannerStatus)
+func lanScanProgressPinged(_ pingedHosts: Float, from overallHosts: Int)
+```
+
+###Project Demo
+You can find project demos available in Swift or Objective-C. Feel free to copy/use them for your product.
+Note: Project demos are written using software design patterns MVVM
 
 ###How it works
 MMLanScan works like the classic network scanner. It first ping every host in the network in order to built the ARP table and then is trying to get the MAC Address for each host. If a MAC Address is found then it's considered that the host exist in the network.

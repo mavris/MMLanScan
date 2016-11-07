@@ -89,16 +89,14 @@
 		274DE76B1DCF2C6C00C6E09A /* MMLanScanSwiftDemo */ = {
 			isa = PBXGroup;
 			children = (
-				274DE7EE1DCFE45F00C6E09A /* Cells */,
-				274DE7AD1DCF3C6D00C6E09A /* MMLANScan-Bridging-Header.h */,
-				274DE7A81DCF2E2700C6E09A /* Storyboards */,
 				274DE79D1DCF2D3800C6E09A /* MainVC */,
-				274DE79F1DCF2D5000C6E09A /* Libraries */,
 				274DE79E1DCF2D3E00C6E09A /* Objects */,
-				274DE79C1DCF2D0A00C6E09A /* OUI */,
+				274DE79F1DCF2D5000C6E09A /* Libraries */,
+				820A7F6C1DD08A2300EF11EA /* Bridging Header */,
+				274DE7EE1DCFE45F00C6E09A /* Cells */,
+				274DE7A81DCF2E2700C6E09A /* Storyboards */,
+				820A7F6D1DD08A5E00EF11EA /* Supporting Files */,
 				274DE76C1DCF2C6C00C6E09A /* AppDelegate.swift */,
-				274DE7731DCF2C6C00C6E09A /* Assets.xcassets */,
-				274DE7781DCF2C6C00C6E09A /* Info.plist */,
 			);
 			path = MMLanScanSwiftDemo;
 			sourceTree = "<group>";
@@ -203,6 +201,24 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		820A7F6C1DD08A2300EF11EA /* Bridging Header */ = {
+			isa = PBXGroup;
+			children = (
+				274DE7AD1DCF3C6D00C6E09A /* MMLANScan-Bridging-Header.h */,
+			);
+			name = "Bridging Header";
+			sourceTree = "<group>";
+		};
+		820A7F6D1DD08A5E00EF11EA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				274DE79C1DCF2D0A00C6E09A /* OUI */,
+				274DE7731DCF2C6C00C6E09A /* Assets.xcassets */,
+				274DE7781DCF2C6C00C6E09A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -230,7 +246,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Miksoft;
 				TargetAttributes = {
 					274DE7681DCF2C6C00C6E09A = {
@@ -333,6 +349,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -382,6 +399,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

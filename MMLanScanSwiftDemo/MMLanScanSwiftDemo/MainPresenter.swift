@@ -17,9 +17,9 @@ protocol MainPresenterDelegate {
 
 class MainPresenter: NSObject, MMLANScannerDelegate {
     
-    var connectedDevices : [Device]!
-    var progressValue : Float = 0.0
-    var isScanRunning : BooleanLiteralType = false
+    dynamic var connectedDevices : [Device]!
+    dynamic var progressValue : Float = 0.0
+    dynamic var isScanRunning : BooleanLiteralType = false
     var lanScanner : MMLANScanner!
     var delegate : MainPresenterDelegate?
     
@@ -30,32 +30,46 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
         
         self.delegate = delegate!
         
-        isScanRunning = false
+        self.connectedDevices = [Device]()
         
-        lanScanner = MMLANScanner(delegate:self)
+        self.isScanRunning = false
+        
+        self.lanScanner = MMLANScanner(delegate:self)
     }
     
     //MARK: - Button Actions
     func scanButtonClicked()-> Void {
     
+        if (self.isScanRunning) {
+           
+            self.stopNetWorkScan()
+        }
+        else {
+            
+            self.startNetWorkScan()
+        }
     }
     
     func startNetWorkScan() ->Void{
        
-        if (isScanRunning) {
+        if (self.isScanRunning) {
             
-            isScanRunning = true
-            lanScanner.start()
+            self.stopNetWorkScan()
+        }
+        else {
+            
+            self.isScanRunning = true
+            self.lanScanner.start()
         }
     }
   
     func stopNetWorkScan() ->Void{
         
-        lanScanner.stop()
-        isScanRunning = false
+        self.lanScanner.stop()
+        self.isScanRunning = false
     }
     
-    
+    //MARK: - SSID Info
     func ssidName() -> String {
         
         return LANProperties.fetchSSIDInfo()
@@ -63,21 +77,33 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
     
      // MARK: - MMLANScanner Delegates
     func lanScanDidFindNewDevice(_ device: Device!) {
-       
-        connectedDevices?.append(device)
-        
+
+        self.connectedDevices?.append(device)
     }
     
     func lanScanDidFailedToScan() {
-        isScanRunning = false
+
+        self.isScanRunning = false
+        self.delegate?.mainPresenterIPSearchFailed()
     }
     
     func lanScanDidFinishScanning(with status: MMLanScannerStatus) {
+       
+        self.isScanRunning = false
         
+        if (status == MMLanScannerStatusFinished) {
+        
+            self.delegate?.mainPresenterIPSearchFinished()
+        }
+        else if (status == MMLanScannerStatusCancelled) {
+            
+            self.delegate?.mainPresenterIPSearchCancelled()
+        }
     }
     
     func lanScanProgressPinged(_ pingedHosts: Float, from overallHosts: Int) {
         
+        self.progressValue = pingedHosts / Float(overallHosts)
     }
 
 }

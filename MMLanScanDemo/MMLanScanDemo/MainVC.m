@@ -87,10 +87,6 @@
 }
 
 #pragma mark - Presenter Delegates
--(void)mainPresenterIPArrayChanged{
-
-    [self.tableV reloadData];
-};
 
 -(void)mainPresenterIPSearchFinished {
     
