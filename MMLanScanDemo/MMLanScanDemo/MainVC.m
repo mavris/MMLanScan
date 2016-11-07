@@ -28,20 +28,14 @@
    
     [super viewDidLoad];
     
-    //Initializing the presenter
+    //Init presenter. Presenter is responsible for providing the business logic of the MainVC (MVVM)
     self.presenter = [[MainPresenter alloc]initWithDelegate:self];
    
-    //Adding observers to presenter (in order to update the UI)
+    //Add observers to monitor specific values on presenter. On change of those values MainVC UI will be updated
     [self addObserversForKVO];
    
     //This is not a production code. Run this command only if you have a new OUI.txt file to parse. After parsing the default location of data.plist will be on DocumentsDirectory. Then you can add the new data.plist to your project and build it.
     //[OUIParser parseOUIWithSourceFilePath:nil andOutputFilePath:nil];
-}
--(void)addObserversForKVO {
-    
-    [self.presenter addObserver:self forKeyPath:@"connectedDevices" options:NSKeyValueObservingOptionNew context:nil];
-    [self.presenter addObserver:self forKeyPath:@"progressValue" options:NSKeyValueObservingOptionNew context:nil];
-    [self.presenter addObserver:self forKeyPath:@"isScanRunning" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -49,6 +43,20 @@
     [self.navigationBarTitle setTitle:[self.presenter ssidName]];
 }
 
+#pragma mark - KVO Observers
+-(void)addObserversForKVO {
+    
+    [self.presenter addObserver:self forKeyPath:@"connectedDevices" options:NSKeyValueObservingOptionNew context:nil];
+    [self.presenter addObserver:self forKeyPath:@"progressValue" options:NSKeyValueObservingOptionNew context:nil];
+    [self.presenter addObserver:self forKeyPath:@"isScanRunning" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+-(void)removeObserversForKVO {
+    
+    [self.presenter removeObserver:self forKeyPath:@"connectedDevices"];
+    [self.presenter removeObserver:self forKeyPath:@"progressValue"];
+    [self.presenter removeObserver:self forKeyPath:@"isScanRunning"];
+}
 #pragma mark - Refresh button pressed
 - (IBAction)refresh:(id)sender {
     
@@ -56,7 +64,7 @@
 }
 
 -(void)scanButtonClicked {
-
+    //Shows the progress bar and start the scan. It's also setting the SSID name of the WiFi as navigation bar title
     [self showProgressBar];
     
     [self.navigationBarTitle setTitle:[self.presenter ssidName]];
@@ -87,7 +95,7 @@
 }
 
 #pragma mark - Presenter Delegates
-
+//The delegates methods from Presenters.These methods help the MainPresenter to notify the MainVC for any kind of changes
 -(void)mainPresenterIPSearchFinished {
     
     [[[UIAlertView alloc] initWithTitle:@"Scan Finished" message:[NSString stringWithFormat:@"Number of devices connected to the Local Area Network : %lu", (unsigned long)self.presenter.connectedDevices.count] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
@@ -137,7 +145,8 @@
 }
 
 #pragma mark - KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+//This is the KVO function that handles changes on MainPresenter
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
     if (object == self.presenter){
        
@@ -158,11 +167,10 @@
     }
 }
 
+#pragma mark - Dealloc
 -(void)dealloc {
     
-    [self.presenter removeObserver:self forKeyPath:@"connectedDevices"];
-    [self.presenter removeObserver:self forKeyPath:@"progressValue"];
-    [self.presenter removeObserver:self forKeyPath:@"isScanRunning"];
+    [self removeObserversForKVO];
 }
 
 @end

@@ -20,10 +20,12 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
     dynamic var connectedDevices : [Device]!
     dynamic var progressValue : Float = 0.0
     dynamic var isScanRunning : BooleanLiteralType = false
+    
     var lanScanner : MMLANScanner!
     var delegate : MainPresenterDelegate?
     
     //MARK: - Custom init method
+    //Initialization with delegate
     init(delegate:MainPresenterDelegate?){
       
         super.init()
@@ -38,6 +40,7 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
     }
     
     //MARK: - Button Actions
+    //This method is responsible for handling the tap button action on MainVC. In case the scan is running and the button is tapped it will stop the scan
     func scanButtonClicked()-> Void {
     
         if (self.isScanRunning) {
@@ -70,19 +73,21 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
     }
     
     //MARK: - SSID Info
+    //Getting the SSID string using LANProperties
     func ssidName() -> String {
         
         return LANProperties.fetchSSIDInfo()
     }
     
      // MARK: - MMLANScanner Delegates
+     //The delegate methods of MMLANScanner
     func lanScanDidFindNewDevice(_ device: Device!) {
-
+        //Adding the found device in the array
         self.connectedDevices?.append(device)
     }
     
     func lanScanDidFailedToScan() {
-
+        
         self.isScanRunning = false
         self.delegate?.mainPresenterIPSearchFailed()
     }
@@ -91,6 +96,7 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
        
         self.isScanRunning = false
         
+        //Checks the status of finished. Then call the appropriate method
         if (status == MMLanScannerStatusFinished) {
         
             self.delegate?.mainPresenterIPSearchFinished()
@@ -102,7 +108,8 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
     }
     
     func lanScanProgressPinged(_ pingedHosts: Float, from overallHosts: Int) {
-        
+       
+        //Updating the progress value. MainVC will be notified by KVO
         self.progressValue = pingedHosts / Float(overallHosts)
     }
 

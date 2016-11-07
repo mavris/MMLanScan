@@ -22,25 +22,45 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
     
     //MARK: - On Load Methods
     override func viewDidLoad() {
+       
         super.viewDidLoad()
 
+        //Init presenter. Presenter is responsible for providing the business logic of the MainVC (MVVM)
         self.presenter = MainPresenter(delegate:self)
         
-        self.presenter.addObserver(self, forKeyPath: "connectedDevices", options: .new, context:&myContext)
-        self.presenter.addObserver(self, forKeyPath: "progressValue", options: .new, context:&myContext)
-        self.presenter.addObserver(self, forKeyPath: "isScanRunning", options: .new, context:&myContext)
-    
-        self.navigationBarTitle.title = self.presenter.ssidName()
+        //Add observers to monitor specific values on presenter. On change of those values MainVC UI will be updated
+        self.addObserversForKVO()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        
+        //Setting the title of the navigation bar with the SSID of the WiFi
+        self.navigationBarTitle.title = self.presenter.ssidName()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: - KVO Observers
+    func addObserversForKVO ()->Void {
+        
+        self.presenter.addObserver(self, forKeyPath: "connectedDevices", options: .new, context:&myContext)
+        self.presenter.addObserver(self, forKeyPath: "progressValue", options: .new, context:&myContext)
+        self.presenter.addObserver(self, forKeyPath: "isScanRunning", options: .new, context:&myContext)
+    }
+  
+    func removeObserversForKVO ()->Void {
+        
+        self.presenter.removeObserver(self, forKeyPath: "connectedDevices")
+        self.presenter.removeObserver(self, forKeyPath: "progressValue")
+        self.presenter.removeObserver(self, forKeyPath: "isScanRunning")
+    }
+    
     //MARK: - Button Action
     @IBAction func refresh(_ sender: Any) {
-
+        //Shows the progress bar and start the scan. It's also setting the SSID name of the WiFi as navigation bar title
         self.showProgressBar()
         self.navigationBarTitle.title = self.presenter.ssidName()
         self.presenter.scanButtonClicked()
@@ -57,7 +77,7 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
-    
+
         
     func hideProgressBar()->Void {
             
@@ -70,6 +90,7 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
     }
     
     //MARK: - Presenter Delegates
+    //The delegates methods from Presenters.These methods help the MainPresenter to notify the MainVC for any kind of changes
     func mainPresenterIPSearchFinished() {
         
         self.hideProgressBar()
@@ -89,17 +110,15 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
     }
     
     //MARK: - Alert Controller
-    
     func showAlert(title:String, message: String) {
     
         let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
      
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-            print("OK")
-        }
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in}
         
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     //MARK: - UITableView Delegates
@@ -129,35 +148,30 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
     }
     
     //MARK: - KVO
+    //This is the KVO function that handles changes on MainPresenter
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 
-        
         if (context == &myContext) {
         
-            if (keyPath == "connectedDevices") {
-                
+            switch keyPath! {
+            case "connectedDevices":
                 self.tableV.reloadData()
-            }
-            else if (keyPath == "progressValue") {
-                
+            case "progressValue":
                 self.progressView.progress = self.presenter.progressValue
-            }
-            else if (keyPath == "isScanRunning") {
-                
+            case "isScanRunning":
                 let isScanRunning = change?[.newKey] as! BooleanLiteralType
                 self.scanButton.image = isScanRunning ? #imageLiteral(resourceName: "stopBarButton") : #imageLiteral(resourceName: "refreshBarButton")
-
+            default:
+                print("Not valid key for observing")
             }
-        
+            
         }
     }
     
     //MARK: - Deinit
     deinit {
         
-        self.presenter.removeObserver(self, forKeyPath: "connectedDevices")
-        self.presenter.removeObserver(self, forKeyPath: "progressValue")
-        self.presenter.removeObserver(self, forKeyPath: "isScanRunning")
+        self.removeObserversForKVO()
     }
     
     /*

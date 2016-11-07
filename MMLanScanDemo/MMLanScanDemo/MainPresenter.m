@@ -24,6 +24,7 @@
 }
 
 #pragma mark - Init method
+//Initialization with delegate
 -(instancetype)initWithDelegate:(id <MainPresenterDelegate>)delegate {
 
     self = [super init];
@@ -41,6 +42,7 @@
 }
 
 #pragma mark - Button Actions
+//This method is responsible for handling the tap button action on MainVC. In case the scan is running and the button is tapped it will stop the scan
 -(void)scanButtonClicked {
     
     //Checks if is already scanning
@@ -71,12 +73,14 @@
 }
 
 #pragma mark - SSID
+//Getting the SSID string using LANProperties
 -(NSString*)ssidName {
 
     return [NSString stringWithFormat:@"SSID: %@",[LANProperties fetchSSIDInfo]];
 };
 
 #pragma mark - MMLANScannerDelegate methods
+//The delegate methods of MMLANScanner
 -(void)lanScanDidFindNewDevice:(Device*)device{
     
     //Check if the Device is already added
