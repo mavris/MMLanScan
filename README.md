@@ -2,7 +2,7 @@
 MMLanScan
 ======
 
-MMLanScan is an open source project for iOS that helps you scan your network and shows the available devices and their MAC Address.
+MMLanScan is an open source project for iOS that helps you scan your network and shows the available devices and their MAC Address, hostname and Brand name.
 
 ### Screenshot
 ![image](LanScan.gif)
