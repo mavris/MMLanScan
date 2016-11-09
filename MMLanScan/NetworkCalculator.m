@@ -106,10 +106,7 @@
         }
     }
     
-    
-    
     return [self binaryToIP:ipArr];
-    
 }
 
 //Increasing by one the IP on binary representation and returns the IP on NSArray (Binarry)
@@ -135,8 +132,6 @@
             }
         }
     }
-    
-    
     
     return ipArr;
 }
@@ -164,6 +159,7 @@
 
 //This function convert decimals to binary
 +(NSString *)print01:(int)int11{
+    
     int n =128;
     char array12[8];
     NSString *str;

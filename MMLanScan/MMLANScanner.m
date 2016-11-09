@@ -84,7 +84,7 @@
     //Making a weak reference to self in order to use it from the completionBlocks in operation.
     MMLANScanner * __weak weakSelf = self;
     
-    //Looping through IPs array
+    //Looping through IPs array and adding the operations to the queue
     for (NSString *ipStr in self.ipsToPing) {
         
         //The ping operation
