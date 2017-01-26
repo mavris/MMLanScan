@@ -4,6 +4,8 @@ MMLanScan
 
 MMLanScan is an open source project for iOS that helps you scan your network and shows the available devices and their MAC Address, hostname and Brand name.
 
+### Note
+Issue for MAC Addresses on iOS 10.2 has been resolved thanks to [@mochasoft] (https://github.com/mochasoft)
 ### Screenshot
 ![image](LanScan.gif)
 
