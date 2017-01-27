@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2701AA341D62000B0058128B /* OUIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2701AA331D62000B0058128B /* OUIParser.m */; };
-		2701AA361D62004D0058128B /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2701AA351D62004D0058128B /* data.plist */; };
 		273FF3891D61D5130077E0E0 /* oui.txt in Resources */ = {isa = PBXBuildFile; fileRef = 273FF3881D61D5130077E0E0 /* oui.txt */; };
+		27603A671E3A99B500F17DB5 /* MacFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 27603A661E3A99B500F17DB5 /* MacFinder.m */; };
+		27603A691E3AAE4C00F17DB5 /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27603A681E3AAE4C00F17DB5 /* data.plist */; };
 		279335C71D5D1CB9001DFE84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335C61D5D1CB9001DFE84 /* main.m */; };
 		279335CA1D5D1CB9001DFE84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335C91D5D1CB9001DFE84 /* AppDelegate.m */; };
 		279335D01D5D1CB9001DFE84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 279335CE1D5D1CB9001DFE84 /* Main.storyboard */; };
@@ -20,7 +21,6 @@
 		279335F61D5D2129001DFE84 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335E91D5D2129001DFE84 /* Device.m */; };
 		279335F71D5D2129001DFE84 /* LANProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335EB1D5D2129001DFE84 /* LANProperties.m */; };
 		279335F81D5D2129001DFE84 /* MMLANScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335ED1D5D2129001DFE84 /* MMLANScanner.m */; };
-		279335F91D5D2129001DFE84 /* MacFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335EF1D5D2129001DFE84 /* MacFinder.m */; };
 		279335FB1D5D2129001DFE84 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335F31D5D2129001DFE84 /* SimplePing.m */; };
 		279336081D5D2BDC001DFE84 /* NetworkCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 279336071D5D2BDC001DFE84 /* NetworkCalculator.m */; };
 		82194E9D1DCC7F49003F2BA1 /* MainPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 82194E9C1DCC7F49003F2BA1 /* MainPresenter.m */; };
@@ -31,8 +31,10 @@
 /* Begin PBXFileReference section */
 		2701AA321D62000B0058128B /* OUIParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OUIParser.h; sourceTree = "<group>"; };
 		2701AA331D62000B0058128B /* OUIParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OUIParser.m; sourceTree = "<group>"; };
-		2701AA351D62004D0058128B /* data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
 		273FF3881D61D5130077E0E0 /* oui.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = oui.txt; sourceTree = "<group>"; };
+		27603A651E3A99B500F17DB5 /* MacFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacFinder.h; sourceTree = "<group>"; };
+		27603A661E3A99B500F17DB5 /* MacFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacFinder.m; sourceTree = "<group>"; };
+		27603A681E3AAE4C00F17DB5 /* data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = data.plist; path = ../../MMLanScan/data.plist; sourceTree = "<group>"; };
 		279335C21D5D1CB9001DFE84 /* MMLanScanDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMLanScanDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		279335C61D5D1CB9001DFE84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		279335C81D5D1CB9001DFE84 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,13 +53,10 @@
 		279335EB1D5D2129001DFE84 /* LANProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LANProperties.m; path = ../../MMLanScan/LANProperties.m; sourceTree = "<group>"; };
 		279335EC1D5D2129001DFE84 /* MMLANScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMLANScanner.h; path = ../../MMLanScan/MMLANScanner.h; sourceTree = "<group>"; };
 		279335ED1D5D2129001DFE84 /* MMLANScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMLANScanner.m; path = ../../MMLanScan/MMLANScanner.m; sourceTree = "<group>"; };
-		279335EE1D5D2129001DFE84 /* MacFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacFinder.h; path = ../../MMLanScan/MacFinder.h; sourceTree = "<group>"; };
-		279335EF1D5D2129001DFE84 /* MacFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MacFinder.m; path = ../../MMLanScan/MacFinder.m; sourceTree = "<group>"; };
 		279335F21D5D2129001DFE84 /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimplePing.h; path = ../../MMLanScan/SimplePing.h; sourceTree = "<group>"; };
 		279335F31D5D2129001DFE84 /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimplePing.m; path = ../../MMLanScan/SimplePing.m; sourceTree = "<group>"; };
 		279335FD1D5D216E001DFE84 /* if_arp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = if_arp.h; path = ../../MMLanScan/if_arp.h; sourceTree = "<group>"; };
 		279335FE1D5D216E001DFE84 /* if_ether.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = if_ether.h; path = ../../MMLanScan/if_ether.h; sourceTree = "<group>"; };
-		279335FF1D5D216E001DFE84 /* if_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = if_types.h; path = ../../MMLanScan/if_types.h; sourceTree = "<group>"; };
 		279336031D5D24BB001DFE84 /* route.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = route.h; path = ../../MMLanScan/route.h; sourceTree = "<group>"; };
 		279336061D5D2BDC001DFE84 /* NetworkCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkCalculator.h; path = ../../MMLanScan/NetworkCalculator.h; sourceTree = "<group>"; };
 		279336071D5D2BDC001DFE84 /* NetworkCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkCalculator.m; path = ../../MMLanScan/NetworkCalculator.m; sourceTree = "<group>"; };
@@ -84,10 +83,10 @@
 		2701AA311D61FD9D0058128B /* OUI */ = {
 			isa = PBXGroup;
 			children = (
+				27603A681E3AAE4C00F17DB5 /* data.plist */,
 				2701AA321D62000B0058128B /* OUIParser.h */,
 				2701AA331D62000B0058128B /* OUIParser.m */,
 				273FF3881D61D5130077E0E0 /* oui.txt */,
-				2701AA351D62004D0058128B /* data.plist */,
 			);
 			name = OUI;
 			sourceTree = "<group>";
@@ -178,7 +177,6 @@
 				279336031D5D24BB001DFE84 /* route.h */,
 				279335FD1D5D216E001DFE84 /* if_arp.h */,
 				279335FE1D5D216E001DFE84 /* if_ether.h */,
-				279335FF1D5D216E001DFE84 /* if_types.h */,
 				82194E5B1DCC6F40003F2BA1 /* MMLANScan-Bridging-Header.h */,
 			);
 			name = Headers;
@@ -207,8 +205,8 @@
 		27F479D51DCBF1BA00672012 /* External Libs */ = {
 			isa = PBXGroup;
 			children = (
-				279335EE1D5D2129001DFE84 /* MacFinder.h */,
-				279335EF1D5D2129001DFE84 /* MacFinder.m */,
+				27603A651E3A99B500F17DB5 /* MacFinder.h */,
+				27603A661E3A99B500F17DB5 /* MacFinder.m */,
 				279335F21D5D2129001DFE84 /* SimplePing.h */,
 				279335F31D5D2129001DFE84 /* SimplePing.m */,
 			);
@@ -301,7 +299,7 @@
 				279335D51D5D1CB9001DFE84 /* LaunchScreen.storyboard in Resources */,
 				279335D21D5D1CB9001DFE84 /* Assets.xcassets in Resources */,
 				273FF3891D61D5130077E0E0 /* oui.txt in Resources */,
-				2701AA361D62004D0058128B /* data.plist in Resources */,
+				27603A691E3AAE4C00F17DB5 /* data.plist in Resources */,
 				279335D01D5D1CB9001DFE84 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,9 +316,9 @@
 				279335F61D5D2129001DFE84 /* Device.m in Sources */,
 				82194E9D1DCC7F49003F2BA1 /* MainPresenter.m in Sources */,
 				8224B5B81DCB7AAC00AE606F /* MACOperation.m in Sources */,
-				279335F91D5D2129001DFE84 /* MacFinder.m in Sources */,
 				279336081D5D2BDC001DFE84 /* NetworkCalculator.m in Sources */,
 				2701AA341D62000B0058128B /* OUIParser.m in Sources */,
+				27603A671E3A99B500F17DB5 /* MacFinder.m in Sources */,
 				279335F81D5D2129001DFE84 /* MMLANScanner.m in Sources */,
 				279335FB1D5D2129001DFE84 /* SimplePing.m in Sources */,
 				279335C71D5D1CB9001DFE84 /* main.m in Sources */,
