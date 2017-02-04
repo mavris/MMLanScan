@@ -18,9 +18,15 @@ Issue for MAC Addresses on iOS 10.2 has been resolved thanks to [@mochasoft] (ht
 + Scan any subnet (not only /24)
 + Gives you the ability to update the OUI (MAC-Brand mappings) plist file. Check in MainPresenter.m for more details
 
-###Installation
+### Manual Installation
 - Drag n Drop the MMLanScan folder in your project.
 
+### CocoaPods Installation
+To install using CocoaPods, simply add the following line to your Podfile:
+
+```ruby
+pod 'MMLanScan'
+```
 ###How to use it (Objective C)
 
 Import MMLANScanner in your controller
