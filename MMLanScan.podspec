@@ -17,7 +17,6 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage         = 'https://github.com/mavris/MMLanScan'
-  s.screenshots  = [ "https://raw.githubusercontent.com/mavris/MMLanScan/blob/master/LanScan.gif"]
   s.license          = { :type => 'MIT', :file => 'LICENSE.txt' }
   s.author           = { 'Michael Mavris' => 'info@miksoft.net' }
   s.source           = { :git => 'https://github.com/mavris/MMLanScan.git', :tag => s.version.to_s }
