@@ -5,7 +5,8 @@ MMLanScan
 MMLanScan is an open source project for iOS that helps you scan your network and shows the available devices and their MAC Address, hostname and Brand name.
 
 ### Note
-Issue for MAC Addresses on iOS 10.2 has been resolved thanks to [@mochasoft] (https://github.com/mochasoft)
+You can find a NativeScript wrapper of MMLanScan [here!](https://www.npmjs.com/package/nativescript-lan-scan)
+
 ### Screenshot
 ![image](LanScan.gif)
 
@@ -134,8 +135,11 @@ Visit my [article] (https://medium.com/rocknnull/ios-a-new-lan-network-scanner-l
 ###Authors
 * Michael Mavris
 
-###License
+### Credits
+ + Issue for MAC Addresses on iOS 10.2 has been resolved thanks to [@mochasoft] (https://github.com/mochasoft)
+ + Wrapper for [NativeScript] (https://www.npmjs.com/package/nativescript-lan-scan) developed by [@toddanglin](https://github.com/toddanglin)
 
-Copyright Miksoft 2016
+###License
+Copyright Miksoft 2017
 
 Licensed under the MIT License
