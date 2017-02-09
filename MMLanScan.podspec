@@ -22,4 +22,5 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/mavris/MMLanScan.git', :tag => s.version.to_s }
   s.ios.deployment_target = '8.0'
   s.source_files = 'MMLanScan/**/*.{h,m}'
+  spec.resources = 'MMLanScan/Data/data.plist'
 end
