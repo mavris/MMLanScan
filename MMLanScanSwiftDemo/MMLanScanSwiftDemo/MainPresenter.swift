@@ -17,7 +17,7 @@ protocol MainPresenterDelegate {
 
 class MainPresenter: NSObject, MMLANScannerDelegate {
     
-    dynamic var connectedDevices : [Device]!
+    dynamic var connectedDevices : [MMDevice]!
     dynamic var progressValue : Float = 0.0
     dynamic var isScanRunning : BooleanLiteralType = false
     
@@ -32,7 +32,7 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
         
         self.delegate = delegate!
         
-        self.connectedDevices = [Device]()
+        self.connectedDevices = [MMDevice]()
         
         self.isScanRunning = false
         
@@ -81,7 +81,7 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
     
      // MARK: - MMLANScanner Delegates
      //The delegate methods of MMLANScanner
-    func lanScanDidFindNewDevice(_ device: Device!) {
+    func lanScanDidFindNewDevice(_ device: MMDevice!) {
         //Adding the found device in the array
         self.connectedDevices?.append(device)
     }

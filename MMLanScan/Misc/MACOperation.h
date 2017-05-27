@@ -7,7 +7,7 @@
 
 #import "SimplePing.h"
 
-@class Device;
+@class MMDevice;
 
 @interface MACOperation: NSOperation {
     
@@ -15,5 +15,5 @@
     BOOL _isExecuting;
 }
 
--(nullable instancetype)initWithIPToRetrieveMAC:(nonnull NSString*)ip andBrandDictionary:(nullable NSDictionary*)brandDictionary andCompletionHandler:(nullable void (^)(NSError  * _Nullable error, NSString  * _Nonnull ip,Device * _Nonnull device))result;
+-(nullable instancetype)initWithIPToRetrieveMAC:(nonnull NSString*)ip andBrandDictionary:(nullable NSDictionary*)brandDictionary andCompletionHandler:(nullable void (^)(NSError  * _Nullable error, NSString  * _Nonnull ip,MMDevice * _Nonnull device))result;
 @end

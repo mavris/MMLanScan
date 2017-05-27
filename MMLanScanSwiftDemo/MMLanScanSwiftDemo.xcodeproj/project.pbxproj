@@ -11,7 +11,7 @@
 		274DE7721DCF2C6C00C6E09A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 274DE7701DCF2C6C00C6E09A /* Main.storyboard */; };
 		274DE7741DCF2C6C00C6E09A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 274DE7731DCF2C6C00C6E09A /* Assets.xcassets */; };
 		274DE7771DCF2C6C00C6E09A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 274DE7751DCF2C6C00C6E09A /* LaunchScreen.storyboard */; };
-		274DE7941DCF2CD900C6E09A /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 274DE7801DCF2CD900C6E09A /* Device.m */; };
+		274DE7941DCF2CD900C6E09A /* MMDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 274DE7801DCF2CD900C6E09A /* MMDevice.m */; };
 		274DE7951DCF2CD900C6E09A /* LANProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 274DE7851DCF2CD900C6E09A /* LANProperties.m */; };
 		274DE7961DCF2CD900C6E09A /* MacFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 274DE7871DCF2CD900C6E09A /* MacFinder.m */; };
 		274DE7971DCF2CD900C6E09A /* MACOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 274DE7891DCF2CD900C6E09A /* MACOperation.m */; };
@@ -35,8 +35,8 @@
 		274DE7731DCF2C6C00C6E09A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		274DE7761DCF2C6C00C6E09A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		274DE7781DCF2C6C00C6E09A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		274DE77F1DCF2CD900C6E09A /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
-		274DE7801DCF2CD900C6E09A /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
+		274DE77F1DCF2CD900C6E09A /* MMDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDevice.h; sourceTree = "<group>"; };
+		274DE7801DCF2CD900C6E09A /* MMDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDevice.m; sourceTree = "<group>"; };
 		274DE7841DCF2CD900C6E09A /* LANProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LANProperties.h; path = ../../MMLanScan/Misc/LANProperties.h; sourceTree = "<group>"; };
 		274DE7851DCF2CD900C6E09A /* LANProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LANProperties.m; path = ../../MMLanScan/Misc/LANProperties.m; sourceTree = "<group>"; };
 		274DE7861DCF2CD900C6E09A /* MacFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacFinder.h; path = "../MMLanScan/External Libs/MacFinder/MacFinder.h"; sourceTree = SOURCE_ROOT; };
@@ -159,8 +159,8 @@
 		274DE79E1DCF2D3E00C6E09A /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				274DE77F1DCF2CD900C6E09A /* Device.h */,
-				274DE7801DCF2CD900C6E09A /* Device.m */,
+				274DE77F1DCF2CD900C6E09A /* MMDevice.h */,
+				274DE7801DCF2CD900C6E09A /* MMDevice.m */,
 			);
 			name = Objects;
 			path = ../MMLanScan/Objects;
@@ -320,7 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				274DE7941DCF2CD900C6E09A /* Device.m in Sources */,
+				274DE7941DCF2CD900C6E09A /* MMDevice.m in Sources */,
 				274DE7A51DCF2DE200C6E09A /* MainVC.swift in Sources */,
 				274DE7991DCF2CDA00C6E09A /* NetworkCalculator.m in Sources */,
 				274DE79B1DCF2CDA00C6E09A /* SimplePing.m in Sources */,
