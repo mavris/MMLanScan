@@ -9,7 +9,7 @@
 #import "MainPresenter.h"
 #import "LANProperties.h"
 #import "MMLANScanner.h"
-#import "Device.h"
+#import "MMDevice.h"
 
 @interface MainPresenter()<MMLANScannerDelegate>
 
@@ -81,9 +81,9 @@
 
 #pragma mark - MMLANScannerDelegate methods
 //The delegate methods of MMLANScanner
--(void)lanScanDidFindNewDevice:(Device*)device{
+-(void)lanScanDidFindNewDevice:(MMDevice*)device{
     
-    //Check if the Device is already added
+    //Check if the MMDevice is already added
     if (![connectedDevicesMutable containsObject:device]) {
 
         [connectedDevicesMutable addObject:device];

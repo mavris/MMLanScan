@@ -10,10 +10,10 @@
 #import "MMLANScanner.h"
 #import "MACOperation.h"
 #import "MacFinder.h"
-#import "Device.h"
+#import "MMDevice.h"
 
 @interface MMLANScanner ()
-@property (nonatomic,strong) Device *device;
+@property (nonatomic,strong) MMDevice *device;
 @property (nonatomic,strong) NSArray *ipsToPing;
 @property (nonatomic,assign) float currentHost;
 @property (nonatomic,strong) NSDictionary *brandDictionary;
@@ -98,7 +98,7 @@
         }];
         
         //The Find MAC Address for each operation
-        MACOperation *macOperation = [[MACOperation alloc] initWithIPToRetrieveMAC:ipStr andBrandDictionary:self.brandDictionary andCompletionHandler:^(NSError * _Nullable error, NSString * _Nonnull ip, Device * _Nonnull device) {
+        MACOperation *macOperation = [[MACOperation alloc] initWithIPToRetrieveMAC:ipStr andBrandDictionary:self.brandDictionary andCompletionHandler:^(NSError * _Nullable error, NSString * _Nonnull ip, MMDevice * _Nonnull device) {
             
             if (!weakSelf) {
                 return;
