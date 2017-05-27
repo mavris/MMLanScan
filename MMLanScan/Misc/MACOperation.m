@@ -8,12 +8,12 @@
 #import "MACOperation.h"
 #import "LANProperties.h"
 #import "MacFinder.h"
-#import "Device.h"
+#import "MMDevice.h"
 
 @interface MACOperation ()
 @property (nonatomic,strong) NSString *ipStr;
-@property (nonatomic, copy) void (^result)(NSError  * _Nullable error, NSString  * _Nonnull ip,Device * _Nonnull device);
-@property(nonatomic,strong)Device *device;
+@property (nonatomic, copy) void (^result)(NSError  * _Nullable error, NSString  * _Nonnull ip,MMDevice * _Nonnull device);
+@property(nonatomic,strong)MMDevice *device;
 @property(nonatomic,weak)NSDictionary *brandDictionary;
 @end
 
@@ -26,13 +26,13 @@
     NSError *errorMessage;
 }
 
--(instancetype)initWithIPToRetrieveMAC:(NSString*)ip andBrandDictionary:(NSDictionary*)brandDictionary andCompletionHandler:(nullable void (^)(NSError  * _Nullable error, NSString  * _Nonnull ip,Device * _Nonnull device))result;{
+-(instancetype)initWithIPToRetrieveMAC:(NSString*)ip andBrandDictionary:(NSDictionary*)brandDictionary andCompletionHandler:(nullable void (^)(NSError  * _Nullable error, NSString  * _Nonnull ip,MMDevice * _Nonnull device))result;{
 
     self = [super init];
     
     if (self) {
         
-        self.device = [[Device alloc]init];
+        self.device = [[MMDevice alloc]init];
         self.name = ip;
         self.ipStr= ip;
         self.result = result;
