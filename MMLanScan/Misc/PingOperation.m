@@ -38,7 +38,7 @@ static const float PING_TIMEOUT = 1;
     if (self) {
         self.name = ip;
         self.ipStr= ip;
-        self.simplePing = [SimplePing simplePingWithHostName:ip];
+        self.simplePing = [SimplePing simplePingWithHostAddress:self.addrDataFromIp];
         self.simplePing.delegate = self;
         self.result = result;
         _isExecuting = NO;
@@ -47,6 +47,17 @@ static const float PING_TIMEOUT = 1;
     }
     
     return self;
+};
+
+- (NSData *)addrDataFromIp {
+    struct sockaddr_in remoteAddr;
+    remoteAddr.sin_len = sizeof(remoteAddr);
+    remoteAddr.sin_family = AF_INET;
+    remoteAddr.sin_port = htons(161);
+    const char *ipCStr = [self.ipStr UTF8String];
+    inet_pton(AF_INET, ipCStr, &remoteAddr.sin_addr);
+
+    return [NSData dataWithBytes:&remoteAddr length:remoteAddr.sin_len];
 };
 
 -(void)start {
