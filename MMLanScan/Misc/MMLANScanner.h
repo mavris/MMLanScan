@@ -91,6 +91,11 @@ MMLanScannerStatus;
  */
 - (void)start;
 /*!
+ @brief Starts scanning of specified subrange
+ */
+- (void) startPingAllHostsForIP:(NSString*)ipAddress subnet:(NSString*)subnetMask;
+
+/*!
  @brief Stops the scanning
  */
 - (void)stop;
