@@ -10,7 +10,7 @@ You can find a NativeScript wrapper of MMLanScan [here!](https://www.npmjs.com/p
 ### Screenshot
 ![image](LanScan.gif)
 
-###Features
+### Features
 + Scans and finds available hosts in your network
 + Shows IP Address
 + Shows MAC Address
@@ -115,8 +115,8 @@ Note: Project demos are written using software design pattern [MVVM](https://www
 MMLanScan works like the classic network scanner. It first ping every host in the network in order to built the ARP table and then is trying to get the MAC Address for each host. If a MAC Address is found then it's considered that the host exist in the network.
 
 ### Libraries used to built MMLanScan
-- Apples [SimplePing] (https://developer.apple.com/library/mac/samplecode/SimplePing/Introduction/Intro.html) 
-- My [MacFinder] (https://github.com/mavris/MacFinder)
+- Apples [SimplePing](https://developer.apple.com/library/mac/samplecode/SimplePing/Introduction/Intro.html) 
+- My [MacFinder](https://github.com/mavris/MacFinder)
 
 ### Technical Stuff
 MMLanScan V2.0 is now using NSOperation and NSOperationQueueManager. Scanning time, and UI interactions are improved compared to V1.0. Also V1.0 was ignoring hosts that didn't replied to pings. V2.0 is not and the result is now accurate.
@@ -130,15 +130,15 @@ If anyone would like to help:
 
 ### More Details
 
-Visit my [article] (https://medium.com/rocknnull/ios-a-new-lan-network-scanner-library-has-been-born-f218f1a416a5#.sryxaq3b1) for MMLanScan for more details
+Visit my [article](https://medium.com/rocknnull/ios-a-new-lan-network-scanner-library-has-been-born-f218f1a416a5#.sryxaq3b1) for MMLanScan for more details
 
 ### Authors
 * Michael Mavris
 
 ### Credits
- + Thanks [@jpalten] (https://github.com/jpalten) for several tweeks and features
+ + Thanks [@jpalten](https://github.com/jpalten) for several tweeks and features
  + Issue for MAC Addresses on iOS 10.2 has been resolved thanks to [@mochasoft] (https://github.com/mochasoft)
- + Wrapper for [NativeScript] (https://www.npmjs.com/package/nativescript-lan-scan) developed by [@toddanglin](https://github.com/toddanglin)
+ + Wrapper for [NativeScript](https://www.npmjs.com/package/nativescript-lan-scan) developed by [@toddanglin](https://github.com/toddanglin)
 
 ### License
 Copyright Miksoft 2017
