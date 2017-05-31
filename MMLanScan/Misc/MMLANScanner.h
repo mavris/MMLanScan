@@ -13,7 +13,7 @@ MMLanScannerStatus;
 
 #import <Foundation/Foundation.h>
 
-@class Device;
+@class MMDevice;
 @protocol MMLANScannerDelegate;
 #pragma mark - MMLANScanner Protocol
 //The delegate protocol for MMLanScanner
@@ -23,9 +23,9 @@ MMLanScannerStatus;
  @brief This delegate is called each time that MMLANSCanner discovers a new IP
  @param device The device object that contains the IP Address, MAC Address and hostname
  @code
- -(void)lanScanDidFindNewDevice:(Device*)device{
+ -(void)lanScanDidFindNewDevice:(MMDevice*)device{
  
- //Check if the Device is already added
+ //Check if the MMDevice is already added
  if (![self.connectedDevices containsObject:device]) {
  
  [self.connectedDevices addObject:device];
@@ -33,7 +33,7 @@ MMLanScannerStatus;
  }
  @endcode
  */
-- (void)lanScanDidFindNewDevice:(Device*)device;
+- (void)lanScanDidFindNewDevice:(MMDevice*)device;
 
 /*!
  @brief This delegate is called when the scan has finished
@@ -90,6 +90,11 @@ MMLanScannerStatus;
  @brief Starts the scanning
  */
 - (void)start;
+/*!
+ @brief Starts scanning of specified subrange
+ */
+- (void) startPingAllHostsForIP:(NSString*)ipAddress subnet:(NSString*)subnetMask;
+
 /*!
  @brief Stops the scanning
  */

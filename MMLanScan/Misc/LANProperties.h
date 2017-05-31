@@ -7,18 +7,18 @@
 
 #import <Foundation/Foundation.h>
 
-@class Device;
+@class MMDevice;
 
 @interface LANProperties : NSObject
 
 /*!
- @brief This method returns the Local IP Address and MAC Address as Device object
+ @brief This method returns the Local IP Address and MAC Address as MMDevice object
  @return The device object
  @code
- Device *newDevice = [LANProperties localIPAddress];
+ MMDevice *newDevice = [LANProperties localIPAddress];
  @endcode
  */
-+(Device*)localIPAddress;
++(MMDevice*)localIPAddress;
 
 /*!
  @brief This method returns the hostname of a specific IP Address

@@ -9,7 +9,8 @@
 #import "MainPresenter.h"
 #import "LANProperties.h"
 #import "MMLANScanner.h"
-#import "Device.h"
+#import "MMDevice.h"
+#include <arpa/inet.h>
 
 @interface MainPresenter()<MMLANScannerDelegate>
 
@@ -60,7 +61,7 @@
     
     self.isScanRunning=YES;
     
-    connectedDevicesMutable = [[NSMutableArray alloc] init];
+    connectedDevicesMutable = [[NSMutableDictionary alloc] init];
     
     [self.lanScanner start];
 };
@@ -81,16 +82,35 @@
 
 #pragma mark - MMLANScannerDelegate methods
 //The delegate methods of MMLANScanner
--(void)lanScanDidFindNewDevice:(Device*)device{
-    
-    //Check if the Device is already added
-    if (![connectedDevicesMutable containsObject:device]) {
+-(void)lanScanDidFindNewDevice:(MMDevice*)device{
 
-        [connectedDevicesMutable addObject:device];
-    }
-    
+    connectedDevicesMutable[device.ipAddress] = device;
+
     //Updating the array that holds the data. MainVC will be notified by KVO
-    self.connectedDevices = [NSArray arrayWithArray:connectedDevicesMutable];
+    self.connectedDevices = [[NSArray arrayWithArray:connectedDevicesMutable.allValues] sortedArrayUsingComparator:^NSComparisonResult(MMDevice*  _Nonnull obj1, MMDevice*  _Nonnull obj2) {
+
+        return [self compareIP:obj1.ipAddress withIP:obj2.ipAddress];
+    }];
+}
+
+- (NSComparisonResult) compareIP:(NSString*) ip1 withIP:(NSString*) ip2 {
+
+    struct	in_addr sin_addr1;
+    struct	in_addr sin_addr2;
+
+    const char *ipCStr = [ip1 UTF8String];
+    inet_pton(AF_INET, ipCStr, &sin_addr1);
+
+    ipCStr = [ip2 UTF8String];
+    inet_pton(AF_INET, ipCStr, &sin_addr2);
+
+    if (sin_addr1.s_addr < sin_addr2.s_addr) {
+        return NSOrderedAscending;
+    } else if (sin_addr1.s_addr > sin_addr2.s_addr) {
+        return NSOrderedDescending;
+    } else {
+        return NSOrderedSame;
+    }
 }
 
 -(void)lanScanDidFinishScanningWithStatus:(MMLanScannerStatus)status{
