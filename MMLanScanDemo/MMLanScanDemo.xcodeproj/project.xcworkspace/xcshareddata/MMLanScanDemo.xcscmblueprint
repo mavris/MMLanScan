@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2F8EE4670A46936183FA5C30123302A6625965C2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2F8EE4670A46936183FA5C30123302A6625965C2" : 9223372036854775807,
+    "CC736D227A29F609AE61B55FA3D72159FB828F32" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7BF72662-0D74-4237-A423-EB82225ECAC4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2F8EE4670A46936183FA5C30123302A6625965C2" : "MMLanScanPod\/",
+    "CC736D227A29F609AE61B55FA3D72159FB828F32" : "MMLanScan\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MMLanScanDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MMLanScanDemo\/MMLanScanDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mavris\/MMLanScanPod.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2F8EE4670A46936183FA5C30123302A6625965C2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mavris\/MMLanScan.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CC736D227A29F609AE61B55FA3D72159FB828F32"
+    }
+  ]
+}
