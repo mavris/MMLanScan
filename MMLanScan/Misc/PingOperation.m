@@ -38,7 +38,7 @@ static const float PING_TIMEOUT = 1;
     if (self) {
         self.name = ip;
         self.ipStr= ip;
-        self.simplePing = [SimplePing simplePingWithHostAddress:self.addrDataFromIp];
+        self.simplePing = [[SimplePing alloc] initWithHostName:ip];
         self.simplePing.delegate = self;
         self.result = result;
         _isExecuting = NO;
@@ -47,17 +47,6 @@ static const float PING_TIMEOUT = 1;
     }
     
     return self;
-};
-
-- (NSData *)addrDataFromIp {
-    struct sockaddr_in remoteAddr;
-    remoteAddr.sin_len = sizeof(remoteAddr);
-    remoteAddr.sin_family = AF_INET;
-    remoteAddr.sin_port = htons(161);
-    const char *ipCStr = [self.ipStr UTF8String];
-    inet_pton(AF_INET, ipCStr, &remoteAddr.sin_addr);
-
-    return [NSData dataWithBytes:&remoteAddr length:remoteAddr.sin_len];
 };
 
 -(void)start {
@@ -163,7 +152,7 @@ static const float PING_TIMEOUT = 1;
     [self finishedPing];
 }
 
-- (void)simplePing:(SimplePing *)pinger didFailToSendPacket:(NSData *)packet error:(NSError *)error {
+-(void)simplePing:(SimplePing *)pinger didFailToSendPacket:(NSData *)packet sequenceNumber:(uint16_t)sequenceNumber error:(NSError *)error {
     
     //NSLog(@"failed");
     [pingTimer invalidate];
@@ -171,14 +160,14 @@ static const float PING_TIMEOUT = 1;
     [self finishedPing];
 }
 
-- (void)simplePing:(SimplePing *)pinger didReceivePingResponsePacket:(NSData *)packet {
+-(void)simplePing:(SimplePing *)pinger didReceivePingResponsePacket:(NSData *)packet sequenceNumber:(uint16_t)sequenceNumber {
    
     //NSLog(@"success");
     [pingTimer invalidate];
     [self finishedPing];
 }
 
-- (void)simplePing:(SimplePing *)pinger didSendPacket:(NSData *)packet {
+-(void)simplePing:(SimplePing *)pinger didSendPacket:(NSData *)packet sequenceNumber:(uint16_t)sequenceNumber {
     //This timer will fired pingTimeOut in case the SimplePing don't answer in the specific time
     pingTimer = [NSTimer scheduledTimerWithTimeInterval:PING_TIMEOUT target:self selector:@selector(pingTimeOut:) userInfo:nil repeats:NO];
 }
