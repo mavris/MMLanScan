@@ -21,7 +21,7 @@
 @end
 
 @implementation MainPresenter {
-    NSMutableArray *connectedDevicesMutable;
+    NSMutableDictionary *connectedDevicesMutable;
 }
 
 #pragma mark - Init method
