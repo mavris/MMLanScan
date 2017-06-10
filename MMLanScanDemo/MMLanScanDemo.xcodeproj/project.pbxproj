@@ -23,6 +23,7 @@
 		279335FB1D5D2129001DFE84 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335F31D5D2129001DFE84 /* SimplePing.m */; };
 		279336081D5D2BDC001DFE84 /* NetworkCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 279336071D5D2BDC001DFE84 /* NetworkCalculator.m */; };
 		27DBF0001E45FEF100685616 /* MacFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DBEFFF1E45FEF100685616 /* MacFinder.m */; };
+		60E138DF1EEBF547007A0FA5 /* SimplePing_withoutHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E138DE1EEBF547007A0FA5 /* SimplePing_withoutHost.m */; };
 		82194E9D1DCC7F49003F2BA1 /* MainPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 82194E9C1DCC7F49003F2BA1 /* MainPresenter.m */; };
 		8224B5B81DCB7AAC00AE606F /* MACOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8224B5B51DCB7AAC00AE606F /* MACOperation.m */; };
 		8224B5B91DCB7AAC00AE606F /* PingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8224B5B71DCB7AAC00AE606F /* PingOperation.m */; };
@@ -60,6 +61,8 @@
 		27DBF0021E45FF4B00685616 /* if_arp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = if_arp.h; sourceTree = "<group>"; };
 		27DBF0031E45FF4B00685616 /* if_ether.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = if_ether.h; sourceTree = "<group>"; };
 		27DBF0041E45FF4B00685616 /* route.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = route.h; sourceTree = "<group>"; };
+		60E138DD1EEBF547007A0FA5 /* SimplePing_withoutHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimplePing_withoutHost.h; path = ../../MMLanScan/Misc/SimplePing_withoutHost.h; sourceTree = "<group>"; };
+		60E138DE1EEBF547007A0FA5 /* SimplePing_withoutHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimplePing_withoutHost.m; path = ../../MMLanScan/Misc/SimplePing_withoutHost.m; sourceTree = "<group>"; };
 		82194E9B1DCC7F49003F2BA1 /* MainPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPresenter.h; sourceTree = "<group>"; };
 		82194E9C1DCC7F49003F2BA1 /* MainPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPresenter.m; sourceTree = "<group>"; };
 		8224B5B41DCB7AAC00AE606F /* MACOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MACOperation.h; path = ../../MMLanScan/Misc/MACOperation.h; sourceTree = "<group>"; };
@@ -180,6 +183,7 @@
 		279336001D5D2171001DFE84 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				60E138DC1EEBF511007A0FA5 /* Categories */,
 				270DDA011E4655C50041A61B /* Data */,
 				27F479D61DCBF1D500672012 /* LAN Scan Libs */,
 				27F479D41DCBF19D00672012 /* Operations */,
@@ -251,6 +255,15 @@
 				279336071D5D2BDC001DFE84 /* NetworkCalculator.m */,
 			);
 			name = "LAN Scan Libs";
+			sourceTree = "<group>";
+		};
+		60E138DC1EEBF511007A0FA5 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				60E138DD1EEBF547007A0FA5 /* SimplePing_withoutHost.h */,
+				60E138DE1EEBF547007A0FA5 /* SimplePing_withoutHost.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		82194E9A1DCC7F22003F2BA1 /* MainVC */ = {
@@ -347,6 +360,7 @@
 				27DBF0001E45FEF100685616 /* MacFinder.m in Sources */,
 				279335F81D5D2129001DFE84 /* MMLANScanner.m in Sources */,
 				279335FB1D5D2129001DFE84 /* SimplePing.m in Sources */,
+				60E138DF1EEBF547007A0FA5 /* SimplePing_withoutHost.m in Sources */,
 				279335C71D5D1CB9001DFE84 /* main.m in Sources */,
 				279335F71D5D2129001DFE84 /* LANProperties.m in Sources */,
 				8224B5B91DCB7AAC00AE606F /* PingOperation.m in Sources */,

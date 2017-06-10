@@ -10,6 +10,7 @@
 #import "MMDevice.h"
 #import "LANProperties.h"
 #import "MacFinder.h"
+#import "SimplePing_withoutHost.h"
 
 static const float PING_TIMEOUT = 1;
 
@@ -38,7 +39,7 @@ static const float PING_TIMEOUT = 1;
     if (self) {
         self.name = ip;
         self.ipStr= ip;
-        self.simplePing = [[SimplePing alloc] initWithHostName:ip];
+        self.simplePing = [SimplePing simplePingWithIPAddress:self.ipStr];
         self.simplePing.delegate = self;
         self.result = result;
         _isExecuting = NO;
@@ -84,7 +85,7 @@ static const float PING_TIMEOUT = 1;
 }
 -(void)ping {
 
-    [self.simplePing start];
+    [self.simplePing sendPingWithoutHostResolving];
 }
 - (void)finishedPing {
     
