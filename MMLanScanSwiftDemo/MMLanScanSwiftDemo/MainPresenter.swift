@@ -58,9 +58,10 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
         if (self.isScanRunning) {
             
             self.stopNetWorkScan()
+            self.connectedDevices.removeAll()
         }
         else {
-            
+            self.connectedDevices.removeAll()
             self.isScanRunning = true
             self.lanScanner.start()
         }
@@ -83,7 +84,12 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
      //The delegate methods of MMLANScanner
     func lanScanDidFindNewDevice(_ device: MMDevice!) {
         //Adding the found device in the array
-        self.connectedDevices?.append(device)
+        if(!self.connectedDevices .contains(device)) {
+            self.connectedDevices?.append(device)
+        }
+
+        let ipSortDescriptor = NSSortDescriptor(key: "ipAddress", ascending: true)
+        self.connectedDevices = (self.connectedDevices as NSArray).sortedArray(using: [ipSortDescriptor]) as! Array
     }
     
     func lanScanDidFailedToScan() {

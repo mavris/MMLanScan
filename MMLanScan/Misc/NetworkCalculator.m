@@ -15,7 +15,6 @@
     
     //Check if valid IP
     if (![self isValidIPAddress:ipAddress] || ![self isValidIPAddress:subnetMask]) {
-        
         return nil;
     }
     

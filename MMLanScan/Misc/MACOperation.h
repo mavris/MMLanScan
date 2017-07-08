@@ -10,7 +10,6 @@
 @class MMDevice;
 
 @interface MACOperation: NSOperation {
-    
     BOOL _isFinished;
     BOOL _isExecuting;
 }

@@ -31,15 +31,13 @@
     self = [super init];
     
     if (self) {
-        
-        self.device = [[MMDevice alloc]init];
-        self.name = ip;
-        self.ipStr= ip;
-        self.result = result;
-        self.brandDictionary=brandDictionary;
+        _device = [[MMDevice alloc]init];
+         self.name = ip;
+        _ipStr= ip;
+        _result = result;
+        _brandDictionary=brandDictionary;
         _isExecuting = NO;
         _isFinished = NO;
-
     }
     
     return self;
@@ -53,7 +51,6 @@
         [self didChangeValueForKey:@"isFinished"];
         return;
     }
-    
     
     [self willChangeValueForKey:@"isExecuting"];
     _isExecuting = YES;

@@ -38,13 +38,12 @@ static const float PING_TIMEOUT = 1;
     
     if (self) {
         self.name = ip;
-        self.ipStr= ip;
-        self.simplePing = [SimplePing simplePingWithIPAddress:self.ipStr];
-        self.simplePing.delegate = self;
-        self.result = result;
+        _ipStr= ip;
+        _simplePing = [SimplePing simplePingWithIPAddress:ip];
+        _simplePing.delegate = self;
+        _result = result;
         _isExecuting = NO;
         _isFinished = NO;
-
     }
     
     return self;
@@ -52,7 +51,6 @@ static const float PING_TIMEOUT = 1;
 
 -(void)start {
 
-    
     if ([self isCancelled]) {
         [self willChangeValueForKey:@"isFinished"];
         _isFinished = YES;
@@ -60,7 +58,6 @@ static const float PING_TIMEOUT = 1;
         return;
     }
     
-
     [self willChangeValueForKey:@"isExecuting"];
     _isExecuting = YES;
     [self didChangeValueForKey:@"isExecuting"];
@@ -142,12 +139,10 @@ static const float PING_TIMEOUT = 1;
     }
     
     [pinger sendPingWithData:nil];
-    //NSLog(@"start");
 }
 
 - (void)simplePing:(SimplePing *)pinger didFailWithError:(NSError *)error {
   
-    //  NSLog(@"failed");
     [pingTimer invalidate];
     errorMessage = error;
     [self finishedPing];
@@ -155,7 +150,6 @@ static const float PING_TIMEOUT = 1;
 
 -(void)simplePing:(SimplePing *)pinger didFailToSendPacket:(NSData *)packet sequenceNumber:(uint16_t)sequenceNumber error:(NSError *)error {
     
-    //NSLog(@"failed");
     [pingTimer invalidate];
     errorMessage = error;
     [self finishedPing];
@@ -163,7 +157,6 @@ static const float PING_TIMEOUT = 1;
 
 -(void)simplePing:(SimplePing *)pinger didReceivePingResponsePacket:(NSData *)packet sequenceNumber:(uint16_t)sequenceNumber {
    
-    //NSLog(@"success");
     [pingTimer invalidate];
     [self finishedPing];
 }
@@ -174,7 +167,6 @@ static const float PING_TIMEOUT = 1;
 }
 
 - (void)pingTimeOut:(NSTimer *)timer {
-    //NSLog(@"Ping timeout occurred, host not reachable");
     // Move to next host
     errorMessage = [NSError errorWithDomain:@"Ping timeout" code:11 userInfo:nil];
     [self finishedPing];

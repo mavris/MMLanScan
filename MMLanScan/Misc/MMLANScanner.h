@@ -23,9 +23,9 @@ MMLanScannerStatus;
  @brief This delegate is called each time that MMLANSCanner discovers a new IP
  @param device The device object that contains the IP Address, MAC Address and hostname
  @code
- -(void)lanScanDidFindNewDevice:(MMDevice*)device{
+ -(void)lanScanDidFindNewDevice:(Device*)device{
  
- //Check if the MMDevice is already added
+ //Check if the Device is already added
  if (![self.connectedDevices containsObject:device]) {
  
  [self.connectedDevices addObject:device];
@@ -90,11 +90,6 @@ MMLanScannerStatus;
  @brief Starts the scanning
  */
 - (void)start;
-/*!
- @brief Starts scanning of specified subrange
- */
-- (void) startPingAllHostsForIP:(NSString*)ipAddress subnet:(NSString*)subnetMask;
-
 /*!
  @brief Stops the scanning
  */

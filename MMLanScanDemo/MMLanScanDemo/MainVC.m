@@ -138,7 +138,7 @@
     
     cell.ipLabel.text = nd.ipAddress;
     cell.macAddressLabel.text = nd.macAddress;
-    cell.brandLabel.text = nd.brand;
+    cell.brandLabel.text = nd.isLocalDevice ? @"Your device" : nd.brand;
     cell.hostnameLabel.text= nd.hostname;
     
     return cell;

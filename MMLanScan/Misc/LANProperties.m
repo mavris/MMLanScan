@@ -54,10 +54,12 @@
     
     //In case we failed to fetch IP address
     if ([localDevice.ipAddress isEqualToString:@"error"]) {
-        
         return nil;
     }
     
+    //Mark the device as the local IP
+    localDevice.isLocalDevice = YES;
+
     return localDevice;
 }
 

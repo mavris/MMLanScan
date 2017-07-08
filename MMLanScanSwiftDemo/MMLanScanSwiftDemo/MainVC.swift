@@ -142,7 +142,7 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
         cell.ipLabel.text = device.ipAddress
         cell.macAddressLabel.text = device.macAddress
         cell.hostnameLabel.text = device.hostname
-        cell.brandLabel.text = device.brand
+        cell.brandLabel.text = device.isLocalDevice ? "Your device" : device.brand
         
         return cell
     }

@@ -12,10 +12,10 @@
 @interface LANProperties : NSObject
 
 /*!
- @brief This method returns the Local IP Address and MAC Address as MMDevice object
+ @brief This method returns the Local IP Address and MAC Address as Device object
  @return The device object
  @code
- MMDevice *newDevice = [LANProperties localIPAddress];
+ Device *newDevice = [LANProperties localIPAddress];
  @endcode
  */
 +(MMDevice*)localIPAddress;

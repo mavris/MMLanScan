@@ -1,8 +1,9 @@
 //
 //  MMDevice.h
+//  MMLanScanDemo
 //
-//  Created by Michalis Mavris on 06/08/16.
-//  Copyright © 2016 Miksoft. All rights reserved.
+//  Created by Michalis Mavris on 08/07/2017.
+//  Copyright © 2017 Miksoft. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,6 +15,6 @@
 @property (nonatomic,strong) NSString *macAddress;
 @property (nonatomic,strong) NSString *subnetMask;
 @property (nonatomic,strong) NSString *brand;
-
+@property (nonatomic,assign) BOOL isLocalDevice;
 -(NSString*)macAddressLabel;
 @end
