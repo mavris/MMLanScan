@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name             = 'MMLanScan'
   s.version          = '2.2.0'
-  s.summary          = 'MMLanScan is an open source project for iOS that helps you scan your network and shows the available devices. For those updating from 2.1.2 please note that "Device" class has been renamed to "MMDevice"'
+  s.summary          = 'MMLanScan is an open source project for iOS that helps you scan your network and shows the available devices.'
   
   s.description  = <<-DESC
-  MMLanScan is an open source project for iOS that helps you scan your network and shows the available devices and their MAC Address, hostname and Brand name.
+  MMLanScan is an open source project for iOS that helps you scan your network and shows the available devices and their MAC Address, hostname and Brand name. For those updating from 2.1.2 please note that "Device" class has been renamed to "MMDevice".
 
   Features
 + Scans and finds available hosts in your network
