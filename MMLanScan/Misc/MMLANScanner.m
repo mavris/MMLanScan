@@ -33,22 +33,22 @@
     
     if (self) {
         //Setting the delegate
-        self.delegate=delegate;
+        _delegate=delegate;
         
         //Initializing the dictionary that holds the Brands name for each MAC Address
-        self.brandDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"]];
+        _brandDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"]];
         
         //Initializing the NSOperationQueue
-        self.queue = [[NSOperationQueue alloc] init];
+        _queue = [[NSOperationQueue alloc] init];
         //Setting the concurrent operations to 50
-        [self.queue setMaxConcurrentOperationCount:50];
+        [_queue setMaxConcurrentOperationCount:50];
         
         //Add observer to notify the delegate when queue is empty.
-        [self.queue addObserver:self forKeyPath:@"operations" options:0 context:nil];
+        [_queue addObserver:self forKeyPath:@"operations" options:0 context:nil];
         
         isFinished = NO;
         isCancelled = NO;
-        self.isScanning = NO;
+        _isScanning = NO;
     }
     
     return self;
@@ -73,6 +73,10 @@
     if (!self.device) {
         [self.delegate lanScanDidFailedToScan];
         return;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(lanScanDidFindNewDevice:)]) {
+        [self.delegate lanScanDidFindNewDevice:self.device];
     }
     
     //Getting the available IPs to ping based on our network subnet.
@@ -108,7 +112,6 @@
             weakSelf.currentHost = weakSelf.currentHost + 0.5;
 
             if (!error) {
-                
                 //Letting know the delegate that found a new device (on Main Thread)
                 dispatch_async (dispatch_get_main_queue(), ^{
                     if ([weakSelf.delegate respondsToSelector:@selector(lanScanDidFindNewDevice:)]) {
@@ -136,7 +139,6 @@
 }
 
 -(void)stop {
-    
     isCancelled = YES;
     [self.queue cancelAllOperations];
     [self.queue waitUntilAllOperationsAreFinished];
