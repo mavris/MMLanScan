@@ -13,7 +13,7 @@ MMLanScannerStatus;
 
 #import <Foundation/Foundation.h>
 
-@class Device;
+@class MMDevice;
 @protocol MMLANScannerDelegate;
 #pragma mark - MMLANScanner Protocol
 //The delegate protocol for MMLanScanner
