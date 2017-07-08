@@ -1,17 +1,17 @@
 //
-//  MMDevice.m
+//  Device.m
 //
 //  Created by Michalis Mavris on 06/08/16.
 //  Copyright © 2016 Miksoft. All rights reserved.
 //
 
-#import "MMDevice.h"
+#import "Device.h"
 
-@implementation MMDevice
+@implementation Device
 
 -(BOOL)isEqual:(id)object {
     
-    return ([object isKindOfClass:[MMDevice class]] && [[object ipAddress] isEqualToString:_ipAddress]);
+    return ([object isKindOfClass:[Device class]] && [[object ipAddress] isEqualToString:_ipAddress]);
 }
 
 

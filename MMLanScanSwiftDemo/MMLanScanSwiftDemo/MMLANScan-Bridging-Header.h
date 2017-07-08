@@ -14,5 +14,5 @@
 #import "MMLANScanner.h"
 #import "MACOperation.h"
 #import "MacFinder.h"
-#import "MMDevice.h"
+#import "Device.h"
 #endif /* MMLANScan_Bridging_Header_h */

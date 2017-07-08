@@ -9,7 +9,7 @@
 #import "MainPresenter.h"
 #import "LANProperties.h"
 #import "MMLANScanner.h"
-#import "MMDevice.h"
+#import "Device.h"
 
 @interface MainPresenter()<MMLANScannerDelegate>
 
@@ -26,13 +26,13 @@
 #pragma mark - Init method
 //Initialization with delegate
 -(instancetype)initWithDelegate:(id <MainPresenterDelegate>)delegate {
-    
+
     self = [super init];
     
     if (self) {
         
         self.isScanRunning=NO;
-        
+       
         self.delegate=delegate;
         
         self.lanScanner = [[MMLANScanner alloc] initWithDelegate:self];
@@ -75,28 +75,26 @@
 #pragma mark - SSID
 //Getting the SSID string using LANProperties
 -(NSString*)ssidName {
-    
+
     return [NSString stringWithFormat:@"SSID: %@",[LANProperties fetchSSIDInfo]];
 };
 
 #pragma mark - MMLANScannerDelegate methods
 //The delegate methods of MMLANScanner
--(void)lanScanDidFindNewDevice:(MMDevice*)device{
+-(void)lanScanDidFindNewDevice:(Device*)device{
     
     //Check if the Device is already added
     if (![connectedDevicesMutable containsObject:device]) {
-        
+
         [connectedDevicesMutable addObject:device];
     }
     
-    NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"ipAddress" ascending:YES];
-    
     //Updating the array that holds the data. MainVC will be notified by KVO
-    self.connectedDevices = [connectedDevicesMutable sortedArrayUsingDescriptors:@[valueDescriptor]];
+    self.connectedDevices = [NSArray arrayWithArray:connectedDevicesMutable];
 }
 
 -(void)lanScanDidFinishScanningWithStatus:(MMLanScannerStatus)status{
-    
+   
     self.isScanRunning=NO;
     
     //Checks the status of finished. Then call the appropriate method
@@ -105,7 +103,7 @@
         [self.delegate mainPresenterIPSearchFinished];
     }
     else if (status==MMLanScannerStatusCancelled) {
-        
+       
         [self.delegate mainPresenterIPSearchCancelled];
     }
 }
@@ -117,9 +115,9 @@
 }
 
 -(void)lanScanDidFailedToScan {
-    
+   
     self.isScanRunning=NO;
-    
+
     [self.delegate mainPresenterIPSearchFailed];
 }
 

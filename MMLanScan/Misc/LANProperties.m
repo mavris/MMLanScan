@@ -8,7 +8,7 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "NetworkCalculator.h"
 #import "LANProperties.h"
-#import "MMDevice.h"
+#import "Device.h"
 #import <ifaddrs.h>
 #import <arpa/inet.h>
 #include <netdb.h>
@@ -16,9 +16,9 @@
 @implementation LANProperties
 
 #pragma mark - Public methods
-+(MMDevice*)localIPAddress {
++(Device*)localIPAddress {
     
-    MMDevice *localDevice = [[MMDevice alloc]init];
+    Device *localDevice = [[Device alloc]init];
     
     localDevice.ipAddress = @"error";
     

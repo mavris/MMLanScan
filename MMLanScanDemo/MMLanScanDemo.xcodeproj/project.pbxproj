@@ -17,7 +17,7 @@
 		279335D51D5D1CB9001DFE84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 279335D31D5D1CB9001DFE84 /* LaunchScreen.storyboard */; };
 		279335DE1D5D1CE5001DFE84 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335DD1D5D1CE5001DFE84 /* MainVC.m */; };
 		279335E71D5D2066001DFE84 /* DeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335E61D5D2066001DFE84 /* DeviceCell.m */; };
-		279335F61D5D2129001DFE84 /* MMDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335E91D5D2129001DFE84 /* MMDevice.m */; };
+		279335F61D5D2129001DFE84 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335E91D5D2129001DFE84 /* Device.m */; };
 		279335F71D5D2129001DFE84 /* LANProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335EB1D5D2129001DFE84 /* LANProperties.m */; };
 		279335F81D5D2129001DFE84 /* MMLANScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335ED1D5D2129001DFE84 /* MMLANScanner.m */; };
 		279335FB1D5D2129001DFE84 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 279335F31D5D2129001DFE84 /* SimplePing.m */; };
@@ -45,8 +45,8 @@
 		279335DD1D5D1CE5001DFE84 /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainVC.m; sourceTree = "<group>"; };
 		279335E51D5D2066001DFE84 /* DeviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCell.h; sourceTree = "<group>"; };
 		279335E61D5D2066001DFE84 /* DeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCell.m; sourceTree = "<group>"; };
-		279335E81D5D2129001DFE84 /* MMDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDevice.h; sourceTree = "<group>"; };
-		279335E91D5D2129001DFE84 /* MMDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDevice.m; sourceTree = "<group>"; };
+		279335E81D5D2129001DFE84 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		279335E91D5D2129001DFE84 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		279335EA1D5D2129001DFE84 /* LANProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LANProperties.h; path = ../../MMLanScan/Misc/LANProperties.h; sourceTree = "<group>"; };
 		279335EB1D5D2129001DFE84 /* LANProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LANProperties.m; path = ../../MMLanScan/Misc/LANProperties.m; sourceTree = "<group>"; };
 		279335EC1D5D2129001DFE84 /* MMLANScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMLANScanner.h; path = ../../MMLanScan/Misc/MMLANScanner.h; sourceTree = "<group>"; };
@@ -191,8 +191,8 @@
 		279336021D5D2182001DFE84 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				279335E81D5D2129001DFE84 /* MMDevice.h */,
-				279335E91D5D2129001DFE84 /* MMDevice.m */,
+				279335E81D5D2129001DFE84 /* Device.h */,
+				279335E91D5D2129001DFE84 /* Device.m */,
 			);
 			name = Objects;
 			path = ../MMLanScan/Objects;
@@ -340,7 +340,7 @@
 			files = (
 				279335DE1D5D1CE5001DFE84 /* MainVC.m in Sources */,
 				279335CA1D5D1CB9001DFE84 /* AppDelegate.m in Sources */,
-				279335F61D5D2129001DFE84 /* MMDevice.m in Sources */,
+				279335F61D5D2129001DFE84 /* Device.m in Sources */,
 				82194E9D1DCC7F49003F2BA1 /* MainPresenter.m in Sources */,
 				8224B5B81DCB7AAC00AE606F /* MACOperation.m in Sources */,
 				279336081D5D2BDC001DFE84 /* NetworkCalculator.m in Sources */,
@@ -474,7 +474,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.miksoft.MMLanScanDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -489,7 +488,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.miksoft.MMLanScanDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
