@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Device;
+@class MMDevice;
 
 @interface LANProperties : NSObject
 
@@ -18,7 +18,7 @@
  Device *newDevice = [LANProperties localIPAddress];
  @endcode
  */
-+(Device*)localIPAddress;
++(MMDevice*)localIPAddress;
 
 /*!
  @brief This method returns the hostname of a specific IP Address

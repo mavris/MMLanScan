@@ -33,7 +33,7 @@ MMLanScannerStatus;
  }
  @endcode
  */
-- (void)lanScanDidFindNewDevice:(Device*)device;
+- (void)lanScanDidFindNewDevice:(MMDevice*)device;
 
 /*!
  @brief This delegate is called when the scan has finished

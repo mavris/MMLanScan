@@ -9,7 +9,7 @@
 #import "MainPresenter.h"
 #import "LANProperties.h"
 #import "MMLANScanner.h"
-#import "Device.h"
+#import "MMDevice.h"
 
 @interface MainPresenter()<MMLANScannerDelegate>
 
@@ -81,7 +81,7 @@
 
 #pragma mark - MMLANScannerDelegate methods
 //The delegate methods of MMLANScanner
--(void)lanScanDidFindNewDevice:(Device*)device{
+-(void)lanScanDidFindNewDevice:(MMDevice*)device{
     
     //Check if the Device is already added
     if (![connectedDevicesMutable containsObject:device]) {
@@ -89,8 +89,10 @@
         [connectedDevicesMutable addObject:device];
     }
     
+    NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"ipAddress" ascending:YES];
+    
     //Updating the array that holds the data. MainVC will be notified by KVO
-    self.connectedDevices = [NSArray arrayWithArray:connectedDevicesMutable];
+    self.connectedDevices = [connectedDevicesMutable sortedArrayUsingDescriptors:@[valueDescriptor]];
 }
 
 -(void)lanScanDidFinishScanningWithStatus:(MMLanScannerStatus)status{
