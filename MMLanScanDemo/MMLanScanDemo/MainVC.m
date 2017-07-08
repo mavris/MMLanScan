@@ -9,7 +9,7 @@
 #import "MainVC.h"
 #import "MainPresenter.h"
 #import "DeviceCell.h"
-#import "Device.h"
+#import "MMDevice.h"
 //#import "OUIParser.h"
 
 @interface MainVC () <UITableViewDataSource,UITableViewDelegate,MainPresenterDelegate>
@@ -134,11 +134,11 @@
         cell = [[DeviceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
     }
     
-    Device *nd = [self.presenter.connectedDevices objectAtIndex:indexPath.row];
+    MMDevice *nd = [self.presenter.connectedDevices objectAtIndex:indexPath.row];
     
     cell.ipLabel.text = nd.ipAddress;
     cell.macAddressLabel.text = nd.macAddress;
-    cell.brandLabel.text = nd.brand;
+    cell.brandLabel.text = nd.isLocalDevice ? @"Your device" : nd.brand;
     cell.hostnameLabel.text= nd.hostname;
     
     return cell;

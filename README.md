@@ -10,7 +10,7 @@ You can find a NativeScript wrapper of MMLanScan [here!](https://www.npmjs.com/p
 ### Screenshot
 ![image](LanScan.gif)
 
-###Features
+### Features
 + Scans and finds available hosts in your network
 + Shows IP Address
 + Shows MAC Address
@@ -28,7 +28,7 @@ To install using CocoaPods, simply add the following line to your Podfile:
 ```ruby
 pod 'MMLanScan'
 ```
-###How to use it (Objective C)
+### How to use it (Objective C)
 
 Import MMLANScanner in your controller
 ```
@@ -57,13 +57,13 @@ Start the scan
 
 Implement the delegates methods to receive events
 ```
-- (void)lanScanDidFindNewDevice:(Device*)device;
+- (void)lanScanDidFindNewDevice:(MMDevice*)device;
 - (void)lanScanDidFinishScanningWithStatus:(MMLanScannerStatus)status;
 - (void)lanScanProgressPinged:(NSInteger)pingedHosts from:(NSInteger)overallHosts;
 - (void)lanScanDidFailedToScan;
 ```
 
-###How to use it (Swift)
+### How to use it (Swift)
 After Drag n Drop the MMLanScan folder in your Swift project Xcode will ask you to create a bridging header. Create the bridging header and copy paste the following between `#define` and `#endif`:
 ```
 #import "MMLANScanner.h"
@@ -72,7 +72,7 @@ After Drag n Drop the MMLanScan folder in your Swift project Xcode will ask you 
 #import "MMLANScanner.h"
 #import "MACOperation.h"
 #import "MacFinder.h"
-#import "Device.h"
+#import "MMDevice.h"
 ```
 Add the MMLANSCannerDelegate (Protocol) to your controller
 ```
@@ -101,45 +101,46 @@ self.lanScanner.stop()
 
 Implement the delegates methods to receive events
 ```
-func lanScanDidFindNewDevice(_ device: Device!)
+func lanScanDidFindNewDevice(_ device: MMDevice!)
 func lanScanDidFinishScanning(with status: MMLanScannerStatus)
 func lanScanProgressPinged(_ pingedHosts: Float, from overallHosts: Int)
 func lanScanDidFailedToScan()
 ```
 
-###Project Demo
+### Project Demo
 You can find project demos available in Swift or Objective-C. Feel free to copy/use them for your product.
 Note: Project demos are written using software design pattern [MVVM](https://www.objc.io/issues/13-architecture/mvvm/)
 
-###How it works
+### How it works
 MMLanScan works like the classic network scanner. It first ping every host in the network in order to built the ARP table and then is trying to get the MAC Address for each host. If a MAC Address is found then it's considered that the host exist in the network.
 
-###Libraries used to built MMLanScan
-- Apples [SimplePing] (https://developer.apple.com/library/mac/samplecode/SimplePing/Introduction/Intro.html) 
-- My [MacFinder] (https://github.com/mavris/MacFinder)
+### Libraries used to built MMLanScan
+- Apples [SimplePing](https://developer.apple.com/library/mac/samplecode/SimplePing/Introduction/Intro.html) 
+- My [MacFinder](https://github.com/mavris/MacFinder)
 
-###Technical Stuff
+### Technical Stuff
 MMLanScan V2.0 is now using NSOperation and NSOperationQueueManager. Scanning time, and UI interactions are improved compared to V1.0. Also V1.0 was ignoring hosts that didn't replied to pings. V2.0 is not and the result is now accurate.
 
-###TODO
+### TODO
 If anyone would like to help:
 - ~~Convert the [OUI]~~ (https://standards.ieee.org/develop/regauth/oui/oui.txt) ~~text in a dictionary so we can map MAC Address with vendor (Hint: The Regex to catch the first line with MAC Address and vendor: ```[A-F0-9]{2}-[A-F0-9]{2}-[A-F0-9]{2}\s*\(hex\)\s*[A-Za-z\.\, \-]+```)~~
 - ~~Make it work in a background thread. Apple's SimplePing has issues when it comes to GCD (it's built on C libraries and it seems their callbacks won't work with GCD)~~
 - ~~Get hostname from IP address method is not working~~
 - Anything that you feel that will improve this library.
 
-###More Details
+### More Details
 
-Visit my [article] (https://medium.com/rocknnull/ios-a-new-lan-network-scanner-library-has-been-born-f218f1a416a5#.sryxaq3b1) for MMLanScan for more details
+Visit my [article](https://medium.com/rocknnull/ios-a-new-lan-network-scanner-library-has-been-born-f218f1a416a5#.sryxaq3b1) for MMLanScan for more details
 
-###Authors
+### Authors
 * Michael Mavris
 
 ### Credits
+ + Thanks [@jpalten](https://github.com/jpalten) for several tweeks and features
  + Issue for MAC Addresses on iOS 10.2 has been resolved thanks to [@mochasoft] (https://github.com/mochasoft)
- + Wrapper for [NativeScript] (https://www.npmjs.com/package/nativescript-lan-scan) developed by [@toddanglin](https://github.com/toddanglin)
+ + Wrapper for [NativeScript](https://www.npmjs.com/package/nativescript-lan-scan) developed by [@toddanglin](https://github.com/toddanglin)
 
-###License
+### License
 Copyright Miksoft 2017
 
 Licensed under the MIT License

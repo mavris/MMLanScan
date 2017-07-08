@@ -8,7 +8,7 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "NetworkCalculator.h"
 #import "LANProperties.h"
-#import "Device.h"
+#import "MMDevice.h"
 #import <ifaddrs.h>
 #import <arpa/inet.h>
 #include <netdb.h>
@@ -16,9 +16,9 @@
 @implementation LANProperties
 
 #pragma mark - Public methods
-+(Device*)localIPAddress {
++(MMDevice*)localIPAddress {
     
-    Device *localDevice = [[Device alloc]init];
+    MMDevice *localDevice = [[MMDevice alloc]init];
     
     localDevice.ipAddress = @"error";
     
@@ -54,10 +54,12 @@
     
     //In case we failed to fetch IP address
     if ([localDevice.ipAddress isEqualToString:@"error"]) {
-        
         return nil;
     }
     
+    //Mark the device as the local IP
+    localDevice.isLocalDevice = YES;
+
     return localDevice;
 }
 

@@ -10,10 +10,10 @@
 #import "MMLANScanner.h"
 #import "MACOperation.h"
 #import "MacFinder.h"
-#import "Device.h"
+#import "MMDevice.h"
 
 @interface MMLANScanner ()
-@property (nonatomic,strong) Device *device;
+@property (nonatomic,strong) MMDevice *device;
 @property (nonatomic,strong) NSArray *ipsToPing;
 @property (nonatomic,assign) float currentHost;
 @property (nonatomic,strong) NSDictionary *brandDictionary;
@@ -33,22 +33,22 @@
     
     if (self) {
         //Setting the delegate
-        self.delegate=delegate;
+        _delegate=delegate;
         
         //Initializing the dictionary that holds the Brands name for each MAC Address
-        self.brandDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"]];
+        _brandDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"]];
         
         //Initializing the NSOperationQueue
-        self.queue = [[NSOperationQueue alloc] init];
+        _queue = [[NSOperationQueue alloc] init];
         //Setting the concurrent operations to 50
-        [self.queue setMaxConcurrentOperationCount:50];
+        [_queue setMaxConcurrentOperationCount:50];
         
         //Add observer to notify the delegate when queue is empty.
-        [self.queue addObserver:self forKeyPath:@"operations" options:0 context:nil];
+        [_queue addObserver:self forKeyPath:@"operations" options:0 context:nil];
         
         isFinished = NO;
         isCancelled = NO;
-        self.isScanning = NO;
+        _isScanning = NO;
     }
     
     return self;
@@ -75,6 +75,10 @@
         return;
     }
     
+    if ([self.delegate respondsToSelector:@selector(lanScanDidFindNewDevice:)]) {
+        [self.delegate lanScanDidFindNewDevice:self.device];
+    }
+    
     //Getting the available IPs to ping based on our network subnet.
     self.ipsToPing = [LANProperties getAllHostsForIP:self.device.ipAddress andSubnet:self.device.subnetMask];
 
@@ -98,7 +102,7 @@
         }];
         
         //The Find MAC Address for each operation
-        MACOperation *macOperation = [[MACOperation alloc] initWithIPToRetrieveMAC:ipStr andBrandDictionary:self.brandDictionary andCompletionHandler:^(NSError * _Nullable error, NSString * _Nonnull ip, Device * _Nonnull device) {
+        MACOperation *macOperation = [[MACOperation alloc] initWithIPToRetrieveMAC:ipStr andBrandDictionary:self.brandDictionary andCompletionHandler:^(NSError * _Nullable error, NSString * _Nonnull ip, MMDevice * _Nonnull device) {
             
             if (!weakSelf) {
                 return;
@@ -108,7 +112,6 @@
             weakSelf.currentHost = weakSelf.currentHost + 0.5;
 
             if (!error) {
-                
                 //Letting know the delegate that found a new device (on Main Thread)
                 dispatch_async (dispatch_get_main_queue(), ^{
                     if ([weakSelf.delegate respondsToSelector:@selector(lanScanDidFindNewDevice:)]) {
@@ -136,7 +139,6 @@
 }
 
 -(void)stop {
-    
     isCancelled = YES;
     [self.queue cancelAllOperations];
     [self.queue waitUntilAllOperationsAreFinished];

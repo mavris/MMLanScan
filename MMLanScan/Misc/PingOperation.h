@@ -8,7 +8,6 @@
 #import "SimplePing.h"
 
 @interface PingOperation : NSOperation <SimplePingDelegate> {
-
     BOOL _isFinished;
     BOOL _isExecuting;
 }
