@@ -611,7 +611,6 @@ static void HostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
 {
     if (self->_socket != NULL) {
         CFSocketInvalidate(self->_socket);
-        CFRelease(self->_socket);
         self->_socket = NULL;
     }
 }
