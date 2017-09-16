@@ -10,6 +10,7 @@
 #import "MMDevice.h"
 #import "LANProperties.h"
 #import "MacFinder.h"
+#import "SimplePing_withoutHost.h"
 
 static const float PING_TIMEOUT = 1;
 
@@ -38,7 +39,7 @@ static const float PING_TIMEOUT = 1;
     if (self) {
         self.name = ip;
         _ipStr= ip;
-        _simplePing = [SimplePing simplePingWithHostName:ip];
+        _simplePing = [SimplePing simplePingWithIPAddress:ip];
         _simplePing.delegate = self;
         _result = result;
         _isExecuting = NO;
@@ -80,7 +81,8 @@ static const float PING_TIMEOUT = 1;
 
 }
 -(void)ping {
-    [self.simplePing start];
+
+    [self.simplePing sendPingWithoutHostResolving];
 }
 - (void)finishedPing {
     
@@ -146,20 +148,20 @@ static const float PING_TIMEOUT = 1;
     [self finishedPing];
 }
 
-- (void)simplePing:(SimplePing *)pinger didFailToSendPacket:(NSData *)packet error:(NSError *)error {
+-(void)simplePing:(SimplePing *)pinger didFailToSendPacket:(NSData *)packet sequenceNumber:(uint16_t)sequenceNumber error:(NSError *)error {
     
     [pingTimer invalidate];
     errorMessage = error;
     [self finishedPing];
 }
 
-- (void)simplePing:(SimplePing *)pinger didReceivePingResponsePacket:(NSData *)packet {
+-(void)simplePing:(SimplePing *)pinger didReceivePingResponsePacket:(NSData *)packet sequenceNumber:(uint16_t)sequenceNumber {
    
     [pingTimer invalidate];
     [self finishedPing];
 }
 
-- (void)simplePing:(SimplePing *)pinger didSendPacket:(NSData *)packet {
+-(void)simplePing:(SimplePing *)pinger didSendPacket:(NSData *)packet sequenceNumber:(uint16_t)sequenceNumber {
     //This timer will fired pingTimeOut in case the SimplePing don't answer in the specific time
     pingTimer = [NSTimer scheduledTimerWithTimeInterval:PING_TIMEOUT target:self selector:@selector(pingTimeOut:) userInfo:nil repeats:NO];
 }
