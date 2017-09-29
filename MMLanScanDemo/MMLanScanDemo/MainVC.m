@@ -137,9 +137,11 @@
     MMDevice *nd = [self.presenter.connectedDevices objectAtIndex:indexPath.row];
     
     cell.ipLabel.text = nd.ipAddress;
-    cell.macAddressLabel.text = nd.macAddress;
     cell.brandLabel.text = nd.isLocalDevice ? @"Your device" : nd.brand;
-    cell.hostnameLabel.text= nd.hostname;
+    
+    //Won't work on iOS 11
+    //cell.macAddressLabel.text = nd.macAddress;
+    //cell.hostnameLabel.text= nd.hostname;
     
     return cell;
 }

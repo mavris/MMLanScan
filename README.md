@@ -4,6 +4,11 @@ MMLanScan
 
 MMLanScan is an open source project for iOS that helps you scan your network and shows the available devices and their MAC Address, hostname and Brand name.
 
+
+### Important for iOS 11
+iOS 11 is breaking the MAC address retrieval from ARP table so MAC Addresses and Brands won't work on MMLanScan with iOS 11.
+We still using MacFinder since it's helpful in order to discover online devices that won't reply to pings.
+
 ### Note
 You can find a NativeScript wrapper of MMLanScan [here!](https://www.npmjs.com/package/nativescript-lan-scan)
 
@@ -13,8 +18,8 @@ You can find a NativeScript wrapper of MMLanScan [here!](https://www.npmjs.com/p
 ### Features
 + Scans and finds available hosts in your network
 + Shows IP Address
-+ Shows MAC Address
-+ Shows Brand of device based on MAC Address
++ Shows MAC Address (iOS 10 and below)
++ Shows Brand of device based on MAC Address (iOS 10 and below)
 + Shows hostname (if available)
 + Scan any subnet (not only /24)
 + Gives you the ability to update the OUI (MAC-Brand mappings) plist file. Check in MainPresenter.m for more details

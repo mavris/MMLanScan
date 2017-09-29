@@ -140,9 +140,11 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
         let device = self.presenter.connectedDevices[indexPath.row] 
         
         cell.ipLabel.text = device.ipAddress
-        cell.macAddressLabel.text = device.macAddress
         cell.hostnameLabel.text = device.hostname
-        cell.brandLabel.text = device.isLocalDevice ? "Your device" : device.brand
+        
+        //Wont work for iOS 11
+        //cell.macAddressLabel.text = device.macAddress
+        //cell.brandLabel.text = device.isLocalDevice ? "Your device" : device.brand
         
         return cell
     }
