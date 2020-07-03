@@ -35,7 +35,7 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
     override func viewDidAppear(_ animated: Bool) {
         
         //Setting the title of the navigation bar with the SSID of the WiFi
-        self.navigationBarTitle.title = self.presenter.ssidName()
+        self.navigationBarTitle.title = self.presenter.ssidName
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,14 +44,14 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
     }
     
     //MARK: - KVO Observers
-    func addObserversForKVO ()->Void {
+    func addObserversForKVO() -> Void {
         
         self.presenter.addObserver(self, forKeyPath: "connectedDevices", options: .new, context:&myContext)
         self.presenter.addObserver(self, forKeyPath: "progressValue", options: .new, context:&myContext)
         self.presenter.addObserver(self, forKeyPath: "isScanRunning", options: .new, context:&myContext)
     }
   
-    func removeObserversForKVO ()->Void {
+    func removeObserversForKVO() -> Void {
         
         self.presenter.removeObserver(self, forKeyPath: "connectedDevices")
         self.presenter.removeObserver(self, forKeyPath: "progressValue")
@@ -62,12 +62,12 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
     @IBAction func refresh(_ sender: Any) {
         //Shows the progress bar and start the scan. It's also setting the SSID name of the WiFi as navigation bar title
         self.showProgressBar()
-        self.navigationBarTitle.title = self.presenter.ssidName()
+        self.navigationBarTitle.title = self.presenter.ssidName
         self.presenter.scanButtonClicked()
     }
     
     //MARK: - Show/Hide Progress Bar
-    func showProgressBar()->Void {
+    func showProgressBar() -> Void {
         
         self.progressView.progress = 0
         
@@ -79,7 +79,7 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
     }
 
         
-    func hideProgressBar()->Void {
+    func hideProgressBar() -> Void {
             
         UIView.animate(withDuration: 0.5, animations: {
             
@@ -112,9 +112,9 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
     //MARK: - Alert Controller
     func showAlert(title:String, message: String) {
     
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
      
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in}
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in }
         
         alertController.addAction(okAction)
         

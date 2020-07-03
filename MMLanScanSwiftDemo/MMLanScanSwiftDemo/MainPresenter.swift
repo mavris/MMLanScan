@@ -17,16 +17,21 @@ protocol MainPresenterDelegate {
 
 class MainPresenter: NSObject, MMLANScannerDelegate {
     
-    dynamic var connectedDevices : [MMDevice]!
-    dynamic var progressValue : Float = 0.0
-    dynamic var isScanRunning : BooleanLiteralType = false
+    @objc dynamic var connectedDevices : [MMDevice]!
+    @objc dynamic var progressValue : Float = 0.0
+    @objc dynamic var isScanRunning : BooleanLiteralType = false
     
     var lanScanner : MMLANScanner!
     var delegate : MainPresenterDelegate?
+
+    //Getting the SSID string using LANProperties
+    var ssidName: String {
+        LANProperties.fetchSSIDInfo()
+    }
     
     //MARK: - Custom init method
     //Initialization with delegate
-    init(delegate:MainPresenterDelegate?){
+    init(delegate:MainPresenterDelegate?) {
       
         super.init()
         
@@ -41,7 +46,7 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
     
     //MARK: - Button Actions
     //This method is responsible for handling the tap button action on MainVC. In case the scan is running and the button is tapped it will stop the scan
-    func scanButtonClicked()-> Void {
+    func scanButtonClicked() -> Void {
     
         if (self.isScanRunning) {
            
@@ -53,7 +58,7 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
         }
     }
     
-    func startNetWorkScan() ->Void{
+    func startNetWorkScan() -> Void {
        
         if (self.isScanRunning) {
             
@@ -67,17 +72,10 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
         }
     }
   
-    func stopNetWorkScan() ->Void{
+    func stopNetWorkScan() -> Void {
         
         self.lanScanner.stop()
         self.isScanRunning = false
-    }
-    
-    //MARK: - SSID Info
-    //Getting the SSID string using LANProperties
-    func ssidName() -> String {
-        
-        return LANProperties.fetchSSIDInfo()
     }
     
      // MARK: - MMLANScanner Delegates
@@ -88,8 +86,7 @@ class MainPresenter: NSObject, MMLANScannerDelegate {
             self.connectedDevices?.append(device)
         }
 
-        let ipSortDescriptor = NSSortDescriptor(key: "ipAddress", ascending: true)
-        self.connectedDevices = (self.connectedDevices as NSArray).sortedArray(using: [ipSortDescriptor]) as! Array
+        self.connectedDevices.sort { $0.ipAddress < $1.ipAddress }
     }
     
     func lanScanDidFailedToScan() {
