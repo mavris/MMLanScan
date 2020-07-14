@@ -158,30 +158,25 @@
 
 //This function convert decimals to binary
 +(NSString *)print01:(int)int11{
+    int n = 128;
+    NSMutableString *str = [[NSMutableString alloc] init];
     
-    int n =128;
-    char array12[8];
-    NSString *str;
+    if (int11 == 0)
+        return str = [NSMutableString stringWithFormat:@"00000000"];
     
-    if(int11==0)
-        return str= [NSString stringWithFormat:@"00000000"];
-    
-    for(int j=0;j<8;j++) {
-        if ((int11-n)>=0){
-            array12[j]='1';
+    for (int j = 0; j < 8; j++) {
+        if ((int11-n) >= 0) {
+            [str appendString:@"1"];
             int11-=n;
-            
         }
         else
-            array12[j]='0';
+            [str appendString:@"0"];
         
         n=n/2;
     }
     
-    str= [[NSString stringWithFormat:@"%s",array12] substringWithRange:NSMakeRange(0,8)];
-    
     return str;
-};
+}
 
 //Converts an IP NSString to binary
 +(NSArray*)ipToBinary:(NSString*)ipAddress {
