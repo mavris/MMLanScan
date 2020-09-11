@@ -112,9 +112,9 @@ class MainVC: UIViewController, MainPresenterDelegate, UITableViewDelegate, UITa
     //MARK: - Alert Controller
     func showAlert(title:String, message: String) {
     
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
      
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in}
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in}
         
         alertController.addAction(okAction)
         
